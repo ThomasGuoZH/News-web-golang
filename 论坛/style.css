@@ -27,7 +27,7 @@ h2 {
     margin-right: 50px;
 }
 
-.search {
+.nav {
     text-decoration: none;
     padding-top: 10px;
     padding-bottom: 5px;
@@ -36,14 +36,14 @@ h2 {
     height: 25px;
 }
 
-.search a {
+.nav a {
     text-decoration: none;
     color: blue;
     font-size: 20px;
     padding: 0 100px;
 }
 
-.search a:hover {
+.nav a:hover {
     text-decoration: none;
     color: black;
     font-size: 20px;
