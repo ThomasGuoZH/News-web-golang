@@ -1,0 +1,93 @@
+body {
+    background-color: #c2dff9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box1 {
+    background-color: beige;
+    /* 调背景样式 */
+    display: block;
+    height: 100px;
+}
+
+h2 {
+    color: red;
+    margin: 0px 20px -20px 20px;
+    /* 加样式 */
+}
+
+.user {
+    text-align: right;
+    margin-bottom: 20px;
+    font-size: 18px;
+    margin-right: 50px;
+}
+
+.search {
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-top: 3px solid rgb(65, 49, 20);
+    border-bottom: 2px solid rgb(66, 59, 47);
+    height: 25px;
+}
+
+.search a {
+    text-decoration: none;
+    color: blue;
+    font-size: 20px;
+    padding: 0 100px;
+}
+
+.search a:hover {
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    padding: 0 100px;
+}
+
+.box2 {
+    width: 500px;
+    height: 300px;
+    margin: 100px auto;
+}
+
+.box2 h4 {
+    text-align: center;
+    font-size: 25px;
+    margin: -80px 0px 20px 0px;
+    color: blueviolet;
+    /* 加样式 */
+}
+
+.box2 img {
+    width: 100%;
+}
+
+.头条字体 {
+    text-align: center;
+}
+
+.头条字体 a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    height: 20px;
+}
+
+.头条字体 a:hover {
+    color: black;
+    background-color: azure;
+}
+
+
+.radio {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
