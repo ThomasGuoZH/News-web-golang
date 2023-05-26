@@ -1,5 +1,5 @@
 body {
-    background-color: #ffffff;
+    background-color: rgb(229, 242, 245);
 }
 
 * {
@@ -7,7 +7,7 @@ body {
     padding: 0;
 }
 
-.box1 {
+.top {
     background-color: #333333;
     color: #ffffff;
     /* 调背景样式 */
@@ -57,13 +57,13 @@ h2 {
     color: rgb(255, 0, 0);
 }
 
-.box2 {
+.middle {
     width: 500px;
     height: 300px;
     margin: 100px auto;
 }
 
-.box2 h4 {
+.middle h4 {
     text-align: center;
     font-size: 25px;
     margin: -80px 0px 20px 0px;
@@ -71,7 +71,7 @@ h2 {
     /* 加样式 */
 }
 
-.box2 img {
+.middle img {
     width: 100%;
 }
 
@@ -98,4 +98,38 @@ h2 {
     width: 100%;
     text-align: center;
     display: inline-block;
+}
+
+.bottom1 {
+    width: 1300px;
+    height: 600px;
+    background-color: aliceblue;
+    margin: 200px auto 0 auto;
+    list-style: none;
+}
+
+.bottom1 li {
+    width: 400px;
+    height: 550px;
+    background-color: white;
+    margin: 25px 0px 0px 20px;
+    float: left;
+    text-align: center;
+}
+
+.bottom2 {
+    width: 1000px;
+    height: 600px;
+    background-color: aliceblue;
+    margin: 50px auto;
+    list-style: none;
+}
+
+.bottom2 li {
+    width: 400px;
+    height: 550px;
+    background-color: white;
+    margin: 25px 0px 0px 60px;
+    float: left;
+    text-align: center;
 }
