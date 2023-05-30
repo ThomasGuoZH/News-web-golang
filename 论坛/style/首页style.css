@@ -151,36 +151,19 @@ h3 {
     color: blueviolet;
 }
 
-.bottom1 {
+.context {
     width: 1300px;
     height: 600px;
-    background-color: aliceblue;
     margin: 20px auto;
     list-style: none;
 }
 
-.bottom1 li {
+.context li {
     width: 400px;
     height: 550px;
     background-color: white;
     margin: 25px 0px 0px 20px;
     float: left;
     text-align: center;
-}
-
-.bottom2 {
-    width: 1000px;
-    height: 600px;
-    background-color: aliceblue;
-    margin: 50px auto;
-    list-style: none;
-}
-
-.bottom2 li {
-    width: 400px;
-    height: 550px;
-    background-color: white;
-    margin: 25px 0px 0px 60px;
-    float: left;
-    text-align: center;
+    border-radius: 5%;
 }
