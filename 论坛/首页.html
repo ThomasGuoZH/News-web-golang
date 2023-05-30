@@ -13,14 +13,16 @@
 <body>
     <span class="top">
         <h2>新闻论坛</h2>
-        <div class="user">用户名：</div>
+        <!-- vue输入用户名 -->
+        <div class="user">用户名：{{user}}</div>
         <div class="nav">
             <ul>
                 <li><a href="首页.html" target="_blank">首页</a></li>
-                <li><a href="模块首页/篮球.html" target="_blank">篮球</a></li>
-                <li><a href="模块首页/足球.html" target="_blank">足球</a></li>
+                <li><a href="模块首页/体育.html" target="_blank">体育</a></li>
                 <li><a href="模块首页/科技.html" target="_blank">科技</a></li>
-                <li><a href=模块首页/游戏.html" target="_blank">游戏</a></li>
+                <li><a href="模块首页/娱乐.html" target="_blank">娱乐</a></li>
+                <li><a href="模块首页/游戏.html" target="_blank">游戏</a></li>
+                <li><a href="模块首页/健康.html" target="_blank">健康</a></li>
                 <li><a href="模块首页/其他.html" target="_blank">其他</a></li>
             </ul>
         </div>
@@ -28,7 +30,7 @@
 
     <div class="fixed">公告栏</div>
 
-    <div class="middle" id="gzh love wqr" value="1">
+    <div class="middle" id="photo" value="1">
         <h4>今日头条</h4>
         <img src="image/1.png" alt="" id="img">
         <p class="头条字体"><a href="https://fans.sports.qq.com/post.htm?id=1766742676465516666&mid=69#1_allWithElite"
@@ -44,17 +46,41 @@
         <a href="#" class="next" onclick="changenext()"> &gt; </a>
     </div>
 
-
+    <!-- vue输入文章 -->
     <h3>热点新闻</h3>
     <ul class="context">
-        <li>篮球</li>
-        <li>足球</li>
-        <li>科技</li>
+        <li>
+            <h4 style="color: #f97272;">体育</h4>
+            <a href="模块首页/体育.html">更多>></a>
+            <div>{{article}}</div>
+        </li>
+        <li>
+            <h4 style="color: #c4cb6d;">科技</h4>
+            <a href="模块首页/科技.html">更多>></a>
+            <div></div>
+        </li>
+        <li>
+            <h4 style="color: #f27fdb;">娱乐</h4>
+            <a href="模块首页/娱乐.html">更多>></a>
+            <div></div>
+        </li>
     </ul>
     <ul class="context">
-        <li>游戏</li>
-        <li>其他</li>
-        <li>其他</li>
+        <li>
+            <h4 style="color: #91dcfa;">游戏</h4>
+            <a href="模块首页/游戏.html">更多>></a>
+            <div></div>
+        </li>
+        <li>
+            <h4 style="color: #a779fb;">健康</h4>
+            <a href="模块首页/健康.html">更多>></a>
+            <div></div>
+        </li>
+        <li>
+            <h4 style="color: #9cf194;">其他</h4>
+            <a href="模块首页/其他.html">更多>></a>
+            <div></div>
+        </li>
     </ul>
 
     <script src="js/首页js.js" defer></script>

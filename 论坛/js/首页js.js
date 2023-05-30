@@ -1,6 +1,6 @@
 var im = document.getElementById("img")
 var a = document.getElementById("t1")
-var valuenode = document.getElementById("gzh love wqr")
+var valuenode = document.getElementById("photo")
 var radiolist = document.getElementsByName("select")
 function changeview(num) {
     valuenode.setAttribute("value", num)

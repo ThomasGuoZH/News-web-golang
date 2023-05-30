@@ -70,7 +70,7 @@ h2 {
 .middle {
     width: 500px;
     height: 400px;
-    margin: 100px auto;
+    margin: 150px auto;
     position: relative;
 }
 
@@ -159,11 +159,36 @@ h3 {
 }
 
 .context li {
+    float: left;
+}
+
+.context li div {
     width: 400px;
     height: 550px;
     background-color: white;
-    margin: 25px 0px 0px 20px;
-    float: left;
+    margin: 20px 0px 5px 20px;
+    margin-top: 5px;
     text-align: center;
     border-radius: 5%;
+}
+
+.context li h4 {
+    display: block;
+    width: 400px;
+    height: 30px;
+    margin-top: 25px;
+    border-radius: 5%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.context li a {
+    display: block;
+    width: 380px;
+    margin: -20px 0px 0px 30px;
+    padding-bottom: 2px;
+    border-bottom: 3px solid #785bf5;
+    text-align: right;
+    text-decoration: none;
 }
