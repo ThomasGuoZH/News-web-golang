@@ -55,3 +55,14 @@ h2 {
 .nav a:hover {
     color: blue;
 }
+
+.fixed {
+    position: fixed;
+    left: 50%;
+    margin-left: 650px;
+    top: 200px;
+    width: 100px;
+    height: 200px;
+    background-color: #b9f1f1;
+    text-align: center;
+}
