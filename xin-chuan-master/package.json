@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "SET NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "SET NODE_OPTIONS=--openssl-legacy-provider &&vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -13,6 +12,7 @@
     "element-ui": "^2.15.6",
     "node_module": "^0.0.0",
     "quill-image-resize-module": "^3.0.0",
+    "react-scripts": "^5.0.1",
     "vue": "^2.5.22",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1"
