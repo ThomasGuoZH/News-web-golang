@@ -1,9 +1,14 @@
 package models
 
+import (
+	"github.com/jinzhu/gorm"
+)
+
 // 用户基本属性
 type User struct {
+	gorm.Model
 	Name     string `json:"用户名" db:"name"`
-	Id       string `json:"账号" db:"id" grom:"primary_key"`
+	Id       string `json:"账号" db:"id"`
 	Password string `json:"密码" db:"password"`
 	Level    int    `json:"等级" db:"level"`
 	Sex      string `json:"性别" db:"sex"`
