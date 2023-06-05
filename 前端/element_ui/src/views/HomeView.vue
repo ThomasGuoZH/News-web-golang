@@ -4,7 +4,11 @@
     <span class="top">
       <h2>新闻论坛</h2>
       <!-- vue输入用户名 -->
-      <div class="user">用户名：</div>
+
+      <div class="user">
+        <login_register />
+      </div>
+
       <div class="nav">
         <ul>
           <li><a href="/home" style="font-weight: 800;">首页</a></li>
@@ -34,7 +38,7 @@
       </span>
       <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
       <a href="#" class="next" onclick="changenext()"> &gt; </a>
-          </div> -->
+                </div> -->
 
     <!-- vue输入文章 -->
     <h3>热点新闻</h3>
@@ -75,7 +79,13 @@
   </div>
 </template>
 <script>
-
+import login_register from '../components/login_register.vue'
+export default {
+  name: 'home',
+  components: {
+    login_register
+  }
+}
 
 </script>
 <style>
