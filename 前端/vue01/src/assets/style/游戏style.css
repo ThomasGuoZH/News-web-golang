@@ -107,31 +107,15 @@ body {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: center;
 }
-.el-row {
-    margin-bottom: 40px;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-.el-col {
-    border-radius: 10px;
-    width: 100px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-    width: 100px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
+.主机{
+    grid-column:1;
+}
+.单机{
+    grid-column:2;
+}
+.手游{
+    grid-column:3;
+}
+.其他{
+    grid-column:4;
+}
