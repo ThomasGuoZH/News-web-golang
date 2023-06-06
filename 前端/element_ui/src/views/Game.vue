@@ -1,9 +1,12 @@
 <template>
-    <div class="home">
+    <div class="1">
         <span class="top">
             <h2>新闻论坛</h2>
             <!-- vue输入用户名 -->
-            <div class="user">用户名：</div>
+            <div class="user">
+                <login_register />
+            </div>
+
             <div class="nav">
                 <ul>
                     <li><a href="/home">首页</a></li>
@@ -16,8 +19,20 @@
                 </ul>
             </div>
         </span>
+        <cebianlan />
     </div>
 </template>
+<script>
+import login_register from '../components/login_register.vue'
+import cebianlan from '../components/侧边栏.vue'
+export default {
+    name: '1',
+    components: {
+        login_register,
+        cebianlan
+    }
+}
+</script>
 <style>
 @import '../assets/style/游戏style.css'
 </style>
