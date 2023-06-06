@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import QS from 'qs';
-import { Toast } from 'vant';
+import { prompt_message } from '../components';
 import store from '../store/index'
 
 axios.defaults.baseURL = 'https://api.jisuapi.com/news/get?appkey=14b3d45a212c10d0&start=0&num=20';
