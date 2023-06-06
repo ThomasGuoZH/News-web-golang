@@ -21,7 +21,7 @@
         </ul>
       </div>
     </span>
-
+    
     <div class="fixed">公告栏</div>
 
   <!-- <div class="middle" id="photo" value="1">
@@ -42,6 +42,7 @@
 
     <!-- vue输入文章 -->
     <h3>热点新闻</h3>
+      <carousel :image-list="imageList"></carousel>
     <ul class="context">
       <li>
         <h4 style="color: #f97272;">体育</h4>
@@ -80,10 +81,28 @@
 </template>
 <script>
 import login_register from '../components/login_register.vue'
+import carousel from '../components/carousel.vue'
 export default {
   name: 'home',
   components: {
-    login_register
+    login_register,
+    carousel
+  },
+  data(){
+    return{
+      imageList:[
+        {
+          src:"../image/1.png",
+          alt:'',
+          index:1
+        },
+        {
+          src:"../image/2.png",
+          alt:'',
+          index:2
+        }
+      ]
+    }
   }
 }
 
