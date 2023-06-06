@@ -3,7 +3,7 @@
  */
 import axios from 'axios';
 import QS from 'qs';
-import { Toast } from 'vant';
+import { prompt_message } from '../components';
 import store from '../store/index'
 
 axios.defaults.baseURL = 'https://api.jisuapi.com/news/get?appkey=14b3d45a212c10d0&start=0&num=20';
@@ -109,7 +109,20 @@ export function getarticle(url, params) {
             })
     });
 }
-/**
+
+//version 2 另一种请求方法
+/*
+export function getarticle(params) {
+   return request({
+    method: 'GET',
+    params,
+   })
+}
+*/
+
+
+
+/*
  * post方法，对应post请求
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
