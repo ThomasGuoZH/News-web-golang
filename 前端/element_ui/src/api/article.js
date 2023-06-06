@@ -109,7 +109,20 @@ export function getarticle(url, params) {
             })
     });
 }
-/**
+
+//version 2 另一种请求方法
+/*
+export function getarticle(params) {
+   return request({
+    method: 'GET',
+    params,
+   })
+}
+*/
+
+
+
+/*
  * post方法，对应post请求
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
