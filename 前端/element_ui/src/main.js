@@ -3,10 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-import api from './api'
+// import { getarticleContent, getarticlePic, getarticleTitle } from './api/getarticle'
 
 Vue.config.productionTip = false
-Vue.prototype.$api = api
+// Vue.prototype.$api = api
 
 new Vue({
   router,
