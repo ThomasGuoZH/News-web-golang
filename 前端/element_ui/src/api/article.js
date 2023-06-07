@@ -3,7 +3,6 @@
  */
 import axios from 'axios';
 import QS from 'qs';
-import { prompt_message } from '../components';
 import store from '../store/index'
 
 axios.defaults.baseURL = 'https://api.jisuapi.com/news/get?appkey=14b3d45a212c10d0&start=0&num=20';
@@ -102,10 +101,10 @@ export function getarticle(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(url + 'channel=' + params)
             .then(res => {
-                resolve(res.list);
+                resolve(res.data);
             })
             .catch(err => {
-                reject(err.list)
+                reject(err.data)
             })
     });
 }

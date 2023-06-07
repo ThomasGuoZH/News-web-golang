@@ -18,17 +18,17 @@
                 </ul>
             </div>
         </span>
-        <cebianlan />
+        <sidebox />
     </div>
 </template>
 <script>
 import login_register from '../components/login_register.vue'
-import cebianlan from '../components/侧边栏.vue'
+import sidebox from '../components/sidebox.vue'
 export default {
     name: 'science',
     components: {
         login_register,
-        cebianlan
+        sidebox,
     }
 }
 </script>
