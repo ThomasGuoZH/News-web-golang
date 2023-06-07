@@ -22,7 +22,7 @@
       </div>
     </span>
     <h3 style="color:red">头条新闻</h3>
-    <cebianlan />
+    <sidebox />
   <!-- <div class="middle" id="photo" value="1">
       <h4>今日头条</h4>
       <img src="../assets/image/1.png" alt="" id="img">
@@ -40,10 +40,8 @@
                                             </div> -->
 
     <!-- vue输入文章 -->
-    <carousel />
-    <div>
-      <prompt_message />
-    </div>
+    <sidebox />
+
     <h3>热点新闻</h3>
     <ul class="context">
       <li>
@@ -84,15 +82,15 @@
 <script>
 import login_register from '../components/login_register.vue'
 import carousel from '../components/carousel.vue'
-import cebianlan from '../components/侧边栏.vue'
-import prompt_message from '@/components/prompt_message.vue'
+import sidebox from '../components/sidebox.vue'
+import backtotop from '../components/backtotop.vue'
 export default {
   name: 'home',
   components: {
     login_register,
-    cebianlan,
+    sidebox,
     carousel,
-    prompt_message
+    backtotop,
   }
 }
 
