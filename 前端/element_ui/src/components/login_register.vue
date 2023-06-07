@@ -1,6 +1,6 @@
 <template>
   <div class="login_register">
-    <el-link @click="dialogFormVisible = true" class="button_style" type="primary">登录</el-link>
+    <el-button @click="dialogFormVisible = true" class="button_style" type="primary">登录</el-button>
     <el-dialog :title="dTitle" :visible.sync="dialogFormVisible" center>
       <el-row class="log">
         <el-col :span="16">
