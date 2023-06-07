@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <el-link type="primary" @click="dialogFormVisible = true, change_ltitle">登录</el-link>
+  <div class="login_register">
+    <el-link @click="dialogFormVisible = true" class="button_style" type="primary">登录</el-link>
     <el-dialog :title="dTitle" :visible.sync="dialogFormVisible" center>
       <el-row class="log">
         <el-col :span="16">
@@ -89,21 +89,11 @@ export default {
         callback()
       }
     },
-    change_ltitle() {
-      console.log('l')
-      this.dTitle = '登录';
-
-    },
-    change_rtitle() {
-      console.log('r')
-      this.dTitle = '注册';
-
-    }
   }
 }
 </script>
   
-<style>
+<style >
 .log {
   position: relative;
   left: 120px;

@@ -1,6 +1,5 @@
 import article from './article'
 
-export default{
+export default {
     article,
 }
-
