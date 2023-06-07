@@ -77,7 +77,10 @@
         <div></div>
       </li>
     </ul>
+    <backtotop></backtotop>
   </div>
+  
+
 </template>
 <script>
 import login_register from '../components/login_register.vue'
@@ -85,7 +88,12 @@ import carousel from '../components/carousel.vue'
 import sidebox from '../components/sidebox.vue'
 import backtotop from '../components/backtotop.vue'
 export default {
-  name: 'home',
+  data() {
+    return {
+       name: 'home',
+      backtotopname: 'backtotop'
+    }
+  },
   components: {
     login_register,
     sidebox,
