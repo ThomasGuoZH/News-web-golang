@@ -21,9 +21,8 @@
         </ul>
       </div>
     </span>
-    
-    <div class="fixed">公告栏</div>
-
+    <h3 style="color:red">头条新闻</h3>
+    <cebianlan />
   <!-- <div class="middle" id="photo" value="1">
       <h4>今日头条</h4>
       <img src="../assets/image/1.png" alt="" id="img">
@@ -38,9 +37,13 @@
       </span>
       <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
       <a href="#" class="next" onclick="changenext()"> &gt; </a>
-                </div> -->
+                                            </div> -->
 
     <!-- vue输入文章 -->
+    <carousel />
+    <div>
+      <prompt_message />
+    </div>
     <h3>热点新闻</h3>
       <carousel :image-list="imageList"></carousel>
     <ul class="context">
@@ -82,27 +85,15 @@
 <script>
 import login_register from '../components/login_register.vue'
 import carousel from '../components/carousel.vue'
+import cebianlan from '../components/侧边栏.vue'
+import prompt_message from '@/components/prompt_message.vue'
 export default {
   name: 'home',
   components: {
     login_register,
-    carousel
-  },
-  data(){
-    return{
-      imageList:[
-        {
-          src:"../image/1.png",
-          alt:'',
-          index:1
-        },
-        {
-          src:"../image/2.png",
-          alt:'',
-          index:2
-        }
-      ]
-    }
+    cebianlan,
+    carousel,
+    prompt_message
   }
 }
 
