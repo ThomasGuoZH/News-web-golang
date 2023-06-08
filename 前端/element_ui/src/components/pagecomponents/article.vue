@@ -15,8 +15,9 @@ export default {
             articlelist: {},
         };
     },
-    mounted: function () {
-        this.articlelist = getArticleList(10, '体育')
+    mounted: async function () {
+        this.articlelist = await getArticleList(10, '体育')
+        console.log(this.articlelist)
     }
 };
 
