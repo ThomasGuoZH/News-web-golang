@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Pe from '../views/PE.vue'
+import Pe from '../views/Sports.vue'
 import Game from '../views/Game.vue'
 import Other from '../views/Other.vue'
 import Health from '../views/Health.vue'
@@ -22,8 +22,8 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/pe',
-    name: 'pe',
+    path: '/sports',
+    name: 'sports',
     component: Pe
   },
   {

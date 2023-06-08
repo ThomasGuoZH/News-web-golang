@@ -1,5 +1,5 @@
 <template>
-    <div class="science">
+    <div class="sports">
         <span class="top">
             <h2>新闻论坛</h2>
             <!-- vue输入用户名 -->
@@ -9,8 +9,8 @@
             <div class="nav">
                 <ul>
                     <li><a href="/home">首页</a></li>
-                    <li><a href="/sports">体育</a></li>
-                    <li><a href="/science" style="font-weight: 800;">科技</a></li>
+                    <li><a href="/sports" style="font-weight: 800;">体育</a></li>
+                    <li><a href="/science">科技</a></li>
                     <li><a href="/entertainment">娱乐</a></li>
                     <li><a href="/game">游戏</a></li>
                     <li><a href="/health">健康</a></li>
@@ -25,14 +25,13 @@
 import login_register from '../components/login_register.vue'
 import sidebox from '../components/sidebox.vue'
 export default {
-    name: 'science',
+    name: 'pe',
     components: {
         login_register,
         sidebox,
     }
 }
 </script>
-
 <style>
 body {
     background-color: rgb(229, 242, 245);
