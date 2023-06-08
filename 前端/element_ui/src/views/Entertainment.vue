@@ -9,25 +9,24 @@
             <div class="nav">
                 <ul>
                     <li><a href="/home">首页</a></li>
-                    <li><a href="/sports">体育</a></li>
+                    <li><a href="/politics">时政</a></li>
                     <li><a href="/science">科技</a></li>
                     <li><a href="/entertainment" style="font-weight: 800;">娱乐</a></li>
-                    <li><a href="/game">游戏</a></li>
-                    <li><a href="/health">健康</a></li>
-                    <li><a href="/other">其他</a></li>
+                    <li><a href="/sports">体育</a></li>
+                    <li><a href="/military">军事</a></li>
+                    <li><a href="/education">教育</a></li>
                 </ul>
             </div>
         </span>
         <sidebox />
-        <!-- <getarticle>1234rrr</getarticle> -->
         <articlepage />
     </div>
 </template>
 <script>
-import login_register from '../components/login_register.vue'
-import sidebox from '../components/sidebox.vue'
-import getarticle from '../components/pagecomponents/article.vue'
-import articlepage from '@/components/pagecomponents/articlepage.vue'
+import login_register from '../components/user/login_register.vue'
+import sidebox from '../components/layout/sidebox.vue'
+import getarticle from '../components/page/article.vue'
+import articlepage from '@/components/page/articlepage.vue'
 export default {
     name: 'entertainment',
     components: {

@@ -7,18 +7,19 @@
 
       <div class="user">
         <login_register />
-        <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link>
+        <!-- <is_login /> 还未修改，后面可以把登陆注册的组件一起合并了 -->
+        <!-- <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link> -->
       </div>
 
       <div class="nav">
         <ul>
           <li><a href="/home" style="font-weight: 800;">首页</a></li>
-          <li><a href="/sports">体育</a></li>
+          <li><a href="/politics">时政</a></li>
           <li><a href="/science">科技</a></li>
           <li><a href="/entertainment">娱乐</a></li>
-          <li><a href="/game">游戏</a></li>
-          <li><a href="/health">健康</a></li>
-          <li><a href="/other">其他</a></li>
+          <li><a href="/sports">体育</a></li>
+          <li><a href="/military">军事</a></li>
+          <li><a href="/education">教育</a></li>
         </ul>
       </div>
     </span>
@@ -38,7 +39,7 @@
       </span>
       <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
       <a href="#" class="next" onclick="changenext()"> &gt; </a>
-                                                            </div> -->
+                                                                                    </div> -->
 
     <!-- vue输入文章 -->
     <sidebox />
@@ -82,10 +83,11 @@
   </div>
 </template>
 <script>
-import login_register from '../components/login_register.vue'
-import carousel from '../components/carousel.vue'
-import sidebox from '../components/sidebox.vue'
-import backtotop from '../components/backtotop.vue'
+import login_register from '../components/user/login_register.vue'
+import carousel from '../components/layout/carousel.vue'
+import sidebox from '../components/layout/sidebox.vue'
+import backtotop from '../components/layout/backtotop.vue'
+import is_login from '@/components/user/is_login.vue'
 export default {
   data() {
     return {
@@ -98,6 +100,7 @@ export default {
     carousel,
     sidebox,
     backtotop,
+    is_login
   }
 }
 

@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Pe from '../views/Sports.vue'
-import Game from '../views/Game.vue'
-import Other from '../views/Other.vue'
-import Health from '../views/Health.vue'
+import Sports from '../views/Sports.vue'
+import Education from '../views/Education.vue'
+import Politics from '../views/Politics.vue'
+import Military from '../views/Military.vue'
 import Science from '../views/Science.vue'
 import Entertainment from '../views/Entertainment.vue'
-import personal_center from '../views/personal_center.vue'
+import PersonalCenter from '../views/PersonalCenter.vue'
 
 Vue.use(VueRouter)
 
@@ -22,44 +22,40 @@ const routes = [
     component: HomeView,
   },
   {
+    path: '/politics',
+    name: 'politics',
+    component: Politics,
+  },
+  {
+    path: '/military',
+    name: 'military',
+    component: Military,
+  },
+  {
+    path: '/education',
+    name: 'education',
+    component: Education,
+  },
+  {
     path: '/sports',
     name: 'sports',
-    component: Pe
-  },
-  {
-    path: '/health',
-    name: 'health',
-    component: Health
-  },
-  {
-    path: '/other',
-    name: 'other',
-    component: Other
-  },
-  {
-    path: '/game',
-    name: 'game',
-    component: Game
+    component: Sports,
   },
   {
     path: '/entertainment',
     name: 'entertainment',
-    component: Entertainment
+    component: Entertainment,
   },
   {
     path: '/science',
     name: 'science',
-    component: Science
+    component: Science,
   },
   {
-    path:'/personal_center/myMessage',
+    path: '/personal_center/myMessage',
     name: 'personal_center',
-    component: personal_center
+    component: PersonalCenter,
   },
-  {
-
-  }
-
 ]
 
 const router = new VueRouter({
