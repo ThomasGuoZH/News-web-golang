@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import { getArticleList } from '@/api/article';
+import { getNewsList } from '@/api/getNewsList.js';
 export default {
     name: "articleContent",
     data() {
@@ -16,7 +16,7 @@ export default {
         };
     },
     created: async function () {
-        this.articlelist = await getArticleList(10, '体育')
+        this.articlelist = await getNewsList(10, '体育')
         console.log(this.articlelist)
     }
 };

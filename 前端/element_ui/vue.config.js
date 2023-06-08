@@ -11,10 +11,13 @@ module.exports = {
         target: 'https://api.jisuapi.com/news/get?appkey=cc5e3b31d2129d83&start=0', //填写请求的目标地址
         changOrigin: true, //允许跨域
         pathRewrite: {
-          '^/api': 'articleapi' //请求的时候使用这个api就可以
+          '^/api': 'newsapi' //请求的时候使用这个api就可以
         }
       }
     }
   }
 }
+// cc5e3b31d2129d83
+// 14b3d45a212c10d0
+// 52c8aff9fab2d048
 

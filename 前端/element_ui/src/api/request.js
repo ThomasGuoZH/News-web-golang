@@ -8,7 +8,7 @@ const ERR_OK = 0;
  * @param {Object} params []
  */
 //请求新闻数据
-export function articleAPI(url) {
+export function newsAPI(url) {
     return async function (num, channel) {
         return axios.get(url + '&num=' + num + '&channel=' + channel)
             .then(res => {
