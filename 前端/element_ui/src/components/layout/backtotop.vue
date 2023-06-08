@@ -1,36 +1,32 @@
 <template>
-     <transition >
-     <div class="back-to-top" @click="toTop">
+  <transition>
+    <div class="back-to-top" @click="toTop">
+      <el-button type="info" round class="back-to-top" @click="toTop">回到顶端</el-button>
     </div>
-     </transition>
+  </transition>
+</template>
     
-    </template>
-    
-    <script>
-    
-    
-    export default {
-    name: "BackToTop",
-     methods: {
-        toTop() {
-          window.scrollTo({top: 0, behavior: 'smooth'})
-        }
-      }
+<script>
+
+
+export default {
+  name: "BackToTop",
+  methods: {
+    toTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    </script>
+  }
+}
+</script>
     
-    <style scoped>
-    
-    .back-to-top {
-      cursor: pointer;
-      position: fixed;
-      right: 25px;
-      top: 650px;
-      z-index: 999;
-      width: 60px;
-      height: 60px;
-      background-color: #6410d2;  
-      /* background-image: url('../assets/images/to-top04.svg');
+<style scoped>
+.back-to-top {
+  cursor: pointer;
+  position: fixed;
+  right: 10px;
+  top: 650px;
+  z-index: 999;
+  /* background-image: url('../assets/images/to-top04.svg');
 
         /* height: 100px;
         width: 100px;
@@ -39,10 +35,9 @@
         text-align: center;
         line-height: 40px;
         color: #1989fa; */
-    }
-    
-    .animate__animated{
-      animation-duration: 1.5s !important;
-    }
-    
-    </style>
+}
+
+.animate__animated {
+  animation-duration: 1.5s !important;
+}
+</style>

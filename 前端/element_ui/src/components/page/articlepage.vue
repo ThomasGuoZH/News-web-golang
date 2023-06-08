@@ -1,12 +1,11 @@
 <template>
   <div class="news">
     <h1>{{ article.title }}</h1>
-    <p>{{ article.date }}</p>
-    <p>{{ article.src }}</p>
+    <p>{{ article.date }} {{ article.src }}</p>
     <div class="picture">
-      <img :src="article.pic" alt="image">
+      <img :src="article.pic" alt="image" style="text-align:center;">
     </div>
-    <div class="content">{{ article.content }}</div>
+    <div class="content" v-html="article.content"></div>
   </div>
 </template>
   
@@ -34,25 +33,35 @@ export default {
 <style scoped>
 .news {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 h1 {
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 p {
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   color: #888;
+  text-align: center;
+}
+
+img {
+  width: 60%;
+  display: block;
+  margin: 20px auto 30px auto;
 }
 
 .content {
   font-size: 16px;
   line-height: 1.6;
+  text-indent: 2em;
+  font-weight: 500px;
 }
 </style>
   

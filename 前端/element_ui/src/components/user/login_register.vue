@@ -22,11 +22,10 @@
               <el-radio-group v-model="form.sex">
                 <el-radio label="man">男</el-radio>
                 <el-radio label="woman">女</el-radio>
-                <el-radio label="secret">保密</el-radio>
               </el-radio-group>
             </el-form-item>
             <el-form-item v-show="!isLogin" label="电话号码" prop="phone">
-              <el-input v-model="form.phoner"></el-input>
+              <el-input v-model="form.phone"></el-input>
             </el-form-item>
             <el-form-item>
               <el-checkbox v-model="form.remember">记住密码</el-checkbox>
@@ -55,8 +54,8 @@ export default {
         password: '',
         confirmPassword: '',
         email: '',
-        sex:'',
-        phone:'',
+        sex: '',
+        phone: '',
         remember: false
       },
       rules: {

@@ -39,7 +39,7 @@
       </span>
       <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
       <a href="#" class="next" onclick="changenext()"> &gt; </a>
-                                                                                    </div> -->
+                                                                                          </div> -->
 
     <!-- vue输入文章 -->
     <sidebox />
@@ -47,35 +47,35 @@
     <h3>热点新闻</h3>
     <ul class="context">
       <li>
-        <h4 style="color: #f97272;">体育</h4>
-        <a href="体育.html" target="_blank">更多>></a>
+        <h4 style="color: #f97272;">时政</h4>
+        <a href="/politics" target="_blank">更多>></a>
         <div></div>
       </li>
       <li>
         <h4 style="color: #c4cb6d;">科技</h4>
-        <a href="科技.html" target="_blank">更多>></a>
+        <a href="/science" target="_blank">更多>></a>
         <div></div>
       </li>
       <li>
         <h4 style="color: #f27fdb;">娱乐</h4>
-        <a href="娱乐.html" target="_blank">更多>></a>
+        <a href="/entertainment" target="_blank">更多>></a>
         <div></div>
       </li>
     </ul>
     <ul class="context">
       <li>
-        <h4 style="color: #91dcfa;">游戏</h4>
-        <a href="游戏.html" target="_blank">更多>></a>
+        <h4 style="color: #91dcfa;">体育</h4>
+        <a href="/sports" target="_blank">更多>></a>
         <div></div>
       </li>
       <li>
-        <h4 style="color: #a779fb;">健康</h4>
-        <a href="健康.html" target="_blank">更多>></a>
+        <h4 style="color: #a779fb;">军事</h4>
+        <a href="/military" target="_blank">更多>></a>
         <div></div>
       </li>
       <li>
-        <h4 style="color: #9cf194;">其他</h4>
-        <a href="其他.html" target="_blank">更多>></a>
+        <h4 style="color: #9cf194;">教育</h4>
+        <a href="/education" target="_blank">更多>></a>
         <div></div>
       </li>
     </ul>

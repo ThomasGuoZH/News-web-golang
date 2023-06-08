@@ -27,6 +27,6 @@ export default {
     display: block;
     width: 1200px;
     background-color: aliceblue;
-    margin: 0 250px;
+    margin: 0 auto;
 }
 </style>
