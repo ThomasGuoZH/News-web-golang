@@ -66,6 +66,7 @@ h2 {
 }
 
 .nav {
+    margin-top: -7px;
     text-decoration: none;
     background-color: white;
 }

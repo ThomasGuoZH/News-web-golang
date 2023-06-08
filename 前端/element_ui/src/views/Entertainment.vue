@@ -19,16 +19,19 @@
             </div>
         </span>
         <sidebox />
+        <getarticle>1234rrr</getarticle>
     </div>
 </template>
 <script>
 import login_register from '../components/login_register.vue'
 import sidebox from '../components/sidebox.vue'
+import getarticle from '../components/pagecomponents/article.vue'
 export default {
     name: 'entertainment',
     components: {
         login_register,
         sidebox,
+        getarticle
     }
 }
 </script>
@@ -67,6 +70,7 @@ h2 {
 }
 
 .nav {
+    margin-top: -7px;
     text-decoration: none;
     background-color: white;
 }

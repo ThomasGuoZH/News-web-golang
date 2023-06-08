@@ -37,7 +37,7 @@
       </span>
       <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
       <a href="#" class="next" onclick="changenext()"> &gt; </a>
-                                                        </div> -->
+                                                            </div> -->
 
     <!-- vue输入文章 -->
     <sidebox />
@@ -135,6 +135,7 @@ h2 {
 }
 
 .nav {
+  margin-top: -7px;
   text-decoration: none;
   background-color: white;
 }

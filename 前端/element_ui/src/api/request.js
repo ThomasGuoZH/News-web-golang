@@ -1,53 +1,21 @@
 import http from './http'
+import qs from 'qs'
+import axios from 'axios';
+const ERR_OK = 0;
 /** 
  * get方法，对应get请求 
  * @param {String} url [请求的url地址] 
- * @param {Object} params [请求时携带的参数] 
+ * @param {Object} params []
  */
-//请求新闻标题
-export function getarticleTitleapi(url) {
-    return function (params) {
-        return new Promise((resolve, reject) => {
-            axios.get(url + 'channel=' + params)
-                .then(res => {
-                    resolve(res.result.list.title);
-                })
-                .catch(err => {
-                    reject(err.list)
-                })
-        });
-    }
-
-}
-//请求新闻正文
-export function getarticleContentapi(url) {
-    return function (params) {
-        return new Promise((resolve, reject) => {
-            axios.get(url + 'channel=' + params)
-                .then(res => {
-                    resolve(res.result.list.content);
-                })
-                .catch(err => {
-                    reject(err.list)
-                })
-        });
-    }
-
-}
-//请求新闻照片地址
-export function getarticlePicapi(url) {
-    return function (params) {
-        return new Promise((resolve, reject) => {
-            axios.get(url + 'channel=' + params)
-                .then(res => {
-                    resolve(res.result.list.pic);
-                })
-                .catch(err => {
-                    reject(err.list)
-                })
-        });
-    }
-
+//请求新闻数据
+export function articleAPI(url) {
+    return async function (num, channel) {
+        return axios.get(url + '&num=' + num + '&channel=' + channel)
+            .then(res => {
+                return res.data.result.list;
+            })
+            .catch((e) => { return e });
+    };
 }
 
 //version 2 另一种请求方法
