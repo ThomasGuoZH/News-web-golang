@@ -7,7 +7,7 @@ import Other from '../views/Other.vue'
 import Health from '../views/Health.vue'
 import Science from '../views/Science.vue'
 import Entertainment from '../views/Entertainment.vue'
-
+import personal_center from '../views/personal_center.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +51,14 @@ const routes = [
     name: 'science',
     component: Science
   },
+  {
+    path:'/personal_center/myMessage',
+    name: 'personal_center',
+    component: personal_center
+  },
+  {
+
+  }
 
 ]
 

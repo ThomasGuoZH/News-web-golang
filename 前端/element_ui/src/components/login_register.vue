@@ -18,6 +18,16 @@
             <el-form-item v-show="!isLogin" label="邮箱" prop="email">
               <el-input v-model="form.email"></el-input>
             </el-form-item>
+            <el-form-item v-show="!isLogin" label="性别" prop="sex">
+              <el-radio-group v-model="form.sex">
+                <el-radio label="man">男</el-radio>
+                <el-radio label="woman">女</el-radio>
+                <el-radio label="secret">保密</el-radio>
+              </el-radio-group>
+            </el-form-item>
+            <el-form-item v-show="!isLogin" label="电话号码" prop="phone">
+              <el-input v-model="form.phoner"></el-input>
+            </el-form-item>
             <el-form-item>
               <el-checkbox v-model="form.remember">记住密码</el-checkbox>
             </el-form-item>
@@ -35,9 +45,6 @@
   
 <script>
 export default {
-  // data:{
-  //   dTitle,
-  // },
   data() {
     return {
       dialogFormVisible: false,
@@ -48,6 +55,8 @@ export default {
         password: '',
         confirmPassword: '',
         email: '',
+        sex:'',
+        phone:'',
         remember: false
       },
       rules: {
@@ -64,6 +73,12 @@ export default {
         email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: '请选择性别', trigger: 'blur' }
+        ],
+        phone: [
+          { required: true, message: '请输入电话号码', trigger: 'blur' }
         ]
       }
     }

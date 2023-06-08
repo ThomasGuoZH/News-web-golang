@@ -7,6 +7,7 @@
 
       <div class="user">
         <login_register />
+        <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link>
       </div>
 
       <div class="nav">
@@ -43,7 +44,6 @@
     <sidebox />
 
     <h3>热点新闻</h3>
-      <carousel :image-list="imageList"></carousel>
     <ul class="context">
       <li>
         <h4 style="color: #f97272;">体育</h4>
