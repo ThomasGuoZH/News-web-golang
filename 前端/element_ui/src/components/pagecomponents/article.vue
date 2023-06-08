@@ -1,7 +1,7 @@
 <template>
     <div id="articleContent">
 
-        <p v-for="item in articlelist">{{ item.weburl }}</p>
+        <p v-for="item in articlelist" v-html="item.content"></p>
 
     </div>
 </template>
@@ -15,7 +15,7 @@ export default {
             articlelist: {},
         };
     },
-    mounted: async function () {
+    created: async function () {
         this.articlelist = await getArticleList(10, '体育')
         console.log(this.articlelist)
     }
@@ -25,7 +25,7 @@ export default {
 <style scoped>
 div {
     margin-top: 100px;
-    width: 400px;
+    width: 1000px;
     height: 300px;
 }
 
