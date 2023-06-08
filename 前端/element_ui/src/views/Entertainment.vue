@@ -19,19 +19,22 @@
             </div>
         </span>
         <sidebox />
-        <getarticle>1234rrr</getarticle>
+        <!-- <getarticle>1234rrr</getarticle> -->
+        <articlepage />
     </div>
 </template>
 <script>
 import login_register from '../components/login_register.vue'
 import sidebox from '../components/sidebox.vue'
 import getarticle from '../components/pagecomponents/article.vue'
+import articlepage from '@/components/pagecomponents/articlepage.vue'
 export default {
     name: 'entertainment',
     components: {
         login_register,
         sidebox,
-        getarticle
+        getarticle,
+        articlepage
     }
 }
 </script>
