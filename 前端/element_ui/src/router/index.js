@@ -8,6 +8,7 @@ import Military from '../views/Military.vue'
 import Science from '../views/Science.vue'
 import Entertainment from '../views/Entertainment.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
+import Newspage from '../views/newspage.vue'
 
 Vue.use(VueRouter)
 
@@ -56,6 +57,41 @@ const routes = [
     name: 'personal_center',
     component: PersonalCenter,
   },
+  {
+    path: '/science/newspage/:title',
+    name: 'scienceNews',
+    component: Newspage,
+  },
+  {
+    path: '/home/newspage/:title',
+    name: 'homenews',
+    component: Newspage
+  },
+  {
+    path: '/sports/newspage/:title',
+    name: 'sportsNews',
+    component: Newspage,
+  },
+  {
+    path: '/education/newspage/:title',
+    name: 'educationNews',
+    component: Newspage
+  },
+  {
+    path: '/politics/newspage/:title',
+    name: 'politicsNews',
+    component: Newspage
+  },
+  {
+    path: '/military/newspage/:title',
+    name: 'militaryNews',
+    component: Newspage
+  },
+  {
+    path: '/entertainment/newspage/:title',
+    name: 'entertainmentNews',
+    component: Newspage
+  }
 ]
 
 const router = new VueRouter({
