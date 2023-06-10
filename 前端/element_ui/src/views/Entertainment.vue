@@ -1,7 +1,7 @@
 <template>
     <div class="entertainment">
         <navigation :items="items">
-            <template v-slot:item-娱乐>
+            <template v-slot:娱乐>
                 <b>{{ items[3].name }}</b>
             </template>
         </navigation>

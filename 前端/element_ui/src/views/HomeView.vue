@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <navigation :items="items">
-      <template v-slot:item-首页>
+      <template v-slot:首页>
         <b>{{ items[0].name }}</b>
       </template>
     </navigation>
@@ -45,7 +45,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in scienceNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/science/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/entertainment/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -69,7 +69,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in sportsNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/sports/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -80,7 +80,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in militaryNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/military/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -91,7 +91,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/education/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>

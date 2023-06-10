@@ -1,7 +1,7 @@
 <template>
     <div class="military">
         <navigation :items="items">
-            <template v-slot:item-军事>
+            <template v-slot:军事>
                 <b>{{ items[5].name }}</b>
             </template>
         </navigation>

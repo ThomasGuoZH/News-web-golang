@@ -58,40 +58,10 @@ const routes = [
     component: PersonalCenter,
   },
   {
-    path: '/science/newspage/:title',
-    name: 'scienceNews',
+    path: '/:channel/newspage/:title',
+    name: 'newspage',
     component: Newspage,
   },
-  {
-    path: '/home/newspage/:title',
-    name: 'homenews',
-    component: Newspage
-  },
-  {
-    path: '/sports/newspage/:title',
-    name: 'sportsNews',
-    component: Newspage,
-  },
-  {
-    path: '/education/newspage/:title',
-    name: 'educationNews',
-    component: Newspage
-  },
-  {
-    path: '/politics/newspage/:title',
-    name: 'politicsNews',
-    component: Newspage
-  },
-  {
-    path: '/military/newspage/:title',
-    name: 'militaryNews',
-    component: Newspage
-  },
-  {
-    path: '/entertainment/newspage/:title',
-    name: 'entertainmentNews',
-    component: Newspage
-  }
 ]
 
 const router = new VueRouter({

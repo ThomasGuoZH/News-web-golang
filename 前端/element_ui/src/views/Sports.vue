@@ -1,7 +1,7 @@
 <template>
     <div class="sports">
         <navigation :items="items">
-            <template v-slot:item-体育>
+            <template v-slot:体育>
                 <b>{{ items[4].name }}</b>
             </template>
         </navigation>

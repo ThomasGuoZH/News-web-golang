@@ -1,8 +1,9 @@
 <template>
     <el-carousel :interval="4000" type="card" height="300px">
         <el-carousel-item v-for="(item, index) in picUrlList" :key="index">
-            <img class="medium" :src="item.pic" router-link to="#">
-            <a href="#" class="头条字体" target="_blank">{{ item.title }}</a>
+            <router-link :to="'/home/newspage/' + item.title" class="route">
+                <img class="medium" :src="item.pic">
+            </router-link>
         </el-carousel-item>
     </el-carousel>
 </template>
@@ -29,19 +30,13 @@ export default {
     margin: auto;
 }
 
-.el-carousel-item img {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
 .medium {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.头条字体 {
+.route h5 {
     display: block;
     text-decoration: none;
     text-align: center;
@@ -50,7 +45,7 @@ export default {
     color: black;
 }
 
-.头条字体 a:hover {
+.route h5 :hover {
     color: blue;
 }
 </style>

@@ -10,8 +10,8 @@
             <ul>
                 <li v-for="(item, index) in items" :key="index">
                     <router-link :to="item.url">
-                        <template v-if="$slots['item-' + item.name]">
-                            <slot :name="'item-' + item.name"></slot>
+                        <template v-if="$slots[item.name]">
+                            <slot :name="item.name"></slot>
                         </template>
                         <template v-else>
                             {{ item.name }}

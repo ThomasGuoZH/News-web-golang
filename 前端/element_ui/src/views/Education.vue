@@ -1,7 +1,7 @@
 <template>
     <div class="education">
         <navigation :items="items">
-            <template v-slot:item-首页>
+            <template v-slot:首页>
                 首页
             </template>
         </navigation>

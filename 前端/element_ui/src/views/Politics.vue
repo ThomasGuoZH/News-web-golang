@@ -1,7 +1,7 @@
 <template>
     <div class="politics">
         <navigation :items="items">
-            <template v-slot:item-时政>
+            <template v-slot:时政>
                 <b>{{ items[1].name }}</b>
             </template>
         </navigation>

@@ -1,7 +1,7 @@
 <template>
     <div class="science">
         <navigation :items="items">
-            <template v-slot:item-科技>
+            <template v-slot:科技>
                 <b>{{ items[2].name }}</b>
             </template>
         </navigation>
