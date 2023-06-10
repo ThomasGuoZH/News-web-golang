@@ -1,5 +1,5 @@
 <template>
-    <el-carousel :interval="4000" type="card" height="300px">
+    <el-carousel :interval="4000" type="card" height="350px">
         <el-carousel-item v-for="(item, index) in picUrlList" :key="index">
             <router-link :to="'/home/newspage/' + item.title" class="route">
                 <img class="medium" :src="item.pic">
@@ -26,7 +26,7 @@ export default {
 <style>
 .el-carousel {
     display: block;
-    width: 800px;
+    width: 900px;
     margin: auto;
 }
 
