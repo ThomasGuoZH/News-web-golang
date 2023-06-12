@@ -9,6 +9,7 @@ import Science from '../views/Science.vue'
 import Entertainment from '../views/Entertainment.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import Newspage from '../views/newspage.vue'
+import changepassword from '../views/personal_changepassword.vue'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
     name: 'newspage',
     component: Newspage,
   },
+   {
+    path:'/changepassword',
+    name:'changepassword',
+    component: changepassword
+  }
 ]
 
 const router = new VueRouter({

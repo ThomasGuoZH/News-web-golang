@@ -6,18 +6,18 @@
             <p>个人中心</p>
           </div>
             <el-menu
-            default-active="1"
+            default-active="$route.path"
             class="el-menu"
             @open="handleOpen"
             @close="handleClose"
             router="true">
-        <el-menu-item index="/personal_center/myMessage">
+        <el-menu-item index="/myMessage">
             <i class="el-icon-user"></i>
             <span slot="title">我的信息</span>
         </el-menu-item>
-        <el-menu-item index="/">
+        <el-menu-item index="/changepassword">
             <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
+            <span slot="title">更改密码</span>
         </el-menu-item>
         <el-menu-item index="3" >
             <i class="el-icon-document"></i>
@@ -43,6 +43,7 @@
         console.log(key, keyPath);
       }
     }
+  
   }
 </script>
 
