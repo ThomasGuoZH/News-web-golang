@@ -57,6 +57,10 @@ export default {
         sex: '',
         phone: '',
       },
+      loginForm: {
+        username: '',
+        password: '',
+      }
     }
   },
   computed: {
@@ -70,19 +74,19 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 16, message: '密码在6到16个字符之间', trigger: 'blur' }
         ],
-        confirmPassword: [
-          { required: !this.isLogin, message: '请确认密码', trigger: 'blur' },
+        confirmPassword: this.isLogin ? [] : [
+          { required: true, message: '请确认密码', trigger: 'blur' },
           { validator: this.validateConfirmPassword, trigger: 'blur' }
         ],
-        email: [
-          { required: !this.isLogin, message: '请输入邮箱', trigger: 'blur' },
+        email: this.isLogin ? [] : [
+          { required: true, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
         ],
-        sex: [
-          { required: !this.isLogin, message: '请选择性别', trigger: 'blur' }
+        sex: this.isLogin ? [] : [
+          { required: true, message: '请选择性别', trigger: 'blur' }
         ],
-        phone: [
-          { required: !this.isLogin, message: '请输入电话号码', trigger: 'blur' },
+        phone: this.isLogin ? [] : [
+          { required: true, message: '请输入电话号码', trigger: 'blur' },
           { min: 11, max: 11, message: '电话号码必须为11位', trigger: 'blur' }
         ]
       };
@@ -95,7 +99,11 @@ export default {
       if (valid) {
         if (this.isLogin) {
           // 发送登录请求
-          this.loginResponse = await userLogin(this.form);
+          console.log(this.isLogin)
+          this.loginForm.username = this.form.username;
+          this.loginForm.password = this.form.password;
+          console.log(this.loginForm);
+          this.loginResponse = await userLogin(this.loginForm);
           if (this.loginResponse.msg === '登录成功!') {
             Message.success(this.loginResponse.msg);
           } else if (this.loginResponse.msg === '用户不存在!') {
@@ -105,6 +113,8 @@ export default {
           }
         } else {
           // 发送注册请求
+          console.log(this.form.username);
+          console.log(this.form.password);
           this.registerResponse = await userRegister(this.form);
           if (this.registerResponse === '注册成功!') {
             Message.success(this.registerResponse);
@@ -138,4 +148,3 @@ export default {
 
 /* 样式 */
 </style>
-  
