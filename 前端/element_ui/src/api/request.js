@@ -34,15 +34,33 @@ export function getarticle(params) {
  * post方法，对应post请求
  * @param {String} url [请求的url地址]
  * @param {Object} params [请求时携带的参数]
- */
-// export function post(url, params) {
-//     return new Promise((resolve, reject) => {
-//         axios.post(url, QS.stringify(params))
+*/
+//用户注册
+export function userRegisterAPI(url) {
+    return async function (form) {
+        return axios.post(url, form)
+            .then(res => {
+                return res.data.msg;
+            })
+            .catch((e) => { return e });
+    };
+}
+//用户登录
+export function userLoginAPI(url) {
+    return async function (form) {
+        return axios.post(url, form)
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
+    };
+}
+// export function userRegisterAPI(url) {
+//     return async function (form) {
+//         return axios.post(url, form)
 //             .then(res => {
-//                 resolve(res.data);
+//                 return res.data;
 //             })
-//             .catch(err => {
-//                 reject(err.data)
-//             })
-//     });
+//             .catch((e) => { return e });
+//     };
 // }
