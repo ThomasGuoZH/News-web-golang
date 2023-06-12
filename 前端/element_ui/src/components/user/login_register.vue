@@ -5,7 +5,6 @@
       <el-row class="log">
         <el-col :span="16">
           <el-form :model="form" :rules="rules" ref="form" label-width="80px">
-
             <el-form-item label="用户名" prop="username">
               <el-input v-model="form.username"></el-input>
             </el-form-item>
@@ -27,9 +26,6 @@
             <el-form-item v-show="!isLogin" label="电话号码" prop="phone">
               <el-input v-model="form.phone"></el-input>
             </el-form-item>
-            <el-form-item>
-              <el-checkbox v-model="form.remember">记住密码</el-checkbox>
-            </el-form-item>
           </el-form>
         </el-col>
       </el-row>
@@ -43,9 +39,13 @@
 </template>
   
 <script>
+import { userRegister, userLogin } from '@/api/user.js'
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
+      registerResponse: '',
+      loginResponse: '',
       dialogFormVisible: false,
       isLogin: true,
       dTitle: '登录',
@@ -56,51 +56,74 @@ export default {
         email: '',
         sex: '',
         phone: '',
-        remember: false
       },
-      rules: {
+    }
+  },
+  computed: {
+    rules() {
+      const rules = {
         username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 2, max: 10, message: '用户名在2到10个字符之间', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 16, message: '密码在6到16个字符之间', trigger: 'blur' }
         ],
         confirmPassword: [
-          { required: true, message: '请确认密码', trigger: 'blur' },
+          { required: !this.isLogin, message: '请确认密码', trigger: 'blur' },
           { validator: this.validateConfirmPassword, trigger: 'blur' }
         ],
         email: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' },
+          { required: !this.isLogin, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
         ],
         sex: [
-          { required: true, message: '请选择性别', trigger: 'blur' }
+          { required: !this.isLogin, message: '请选择性别', trigger: 'blur' }
         ],
         phone: [
-          { required: true, message: '请输入电话号码', trigger: 'blur' }
+          { required: !this.isLogin, message: '请输入电话号码', trigger: 'blur' },
+          { min: 11, max: 11, message: '电话号码必须为11位', trigger: 'blur' }
         ]
-      }
+      };
+      return rules;
     }
   },
   methods: {
-    submitForm() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          if (this.isLogin) {
-            // 发送登录请求
-          } else {
-            // 发送注册请求
+    async submitForm() {
+      const valid = await this.$refs.form.validate();
+      if (valid) {
+        if (this.isLogin) {
+          // 发送登录请求
+          this.loginResponse = await userLogin(this.form);
+          if (this.loginResponse.msg === '登录成功!') {
+            Message.success(this.loginResponse.msg);
+          } else if (this.loginResponse.msg === '用户不存在!') {
+            Message.warning(this.loginResponse.msg)
+          } else if (this.loginResponse.msg === '密码错误!') {
+            Message.warning(this.loginResponse.msg)
           }
         } else {
-          return false
+          // 发送注册请求
+          this.registerResponse = await userRegister(this.form);
+          if (this.registerResponse === '注册成功!') {
+            Message.success(this.registerResponse);
+          } else if (this.registerResponse === '用户名已被使用!') {
+            Message.warning(this.registerResponse)
+          }
         }
-      })
+      }
+      else {
+        return false
+      }
     },
     validateConfirmPassword(rule, value, callback) {
-      if (value !== this.form.password) {
-        callback(new Error('两次输入的密码不一致'))
-      } else {
-        callback()
+      if (!this.isLogin) {
+        if (value !== this.form.password) {
+          callback(new Error('两次输入的密码不一致'))
+        } else {
+          callback()
+        }
       }
     },
   }

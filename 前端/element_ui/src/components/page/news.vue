@@ -25,7 +25,7 @@ export default {
     },
     computed: {
         async fetchNews() {
-            // return await getNewsList(1, '体育');
+            return await getNewsList(1, '体育');
         },
     },
     async mounted() {
