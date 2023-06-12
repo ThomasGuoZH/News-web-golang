@@ -1,11 +1,13 @@
 <template>
-    <el-carousel :interval="4000" type="card" height="350px">
-        <el-carousel-item v-for="(item, index) in picUrlList" :key="index">
-            <router-link :to="'/home/newspage/' + item.title" class="route">
-                <img class="medium" :src="item.pic">
-            </router-link>
-        </el-carousel-item>
-    </el-carousel>
+    <div class="carousel">
+        <el-carousel :interval="4000" type="card" height="350px">
+            <el-carousel-item v-for="(item, index) in picUrlList" :key="index">
+                <router-link :to="'/home/newspage/' + item.title" class="route">
+                    <img class="medium" :src="item.pic">
+                </router-link>
+            </el-carousel-item>
+        </el-carousel>
+    </div>
 </template>
 
 <script>
