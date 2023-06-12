@@ -1,6 +1,9 @@
 package models
 
+import "github.com/jinzhu/gorm"
+
 type Comment struct {
+	gorm.Model
 	NewsTitle string     // 属于哪条新闻
 	author    string     //评论者名字
 	Id        string     //评论id（随机生成）

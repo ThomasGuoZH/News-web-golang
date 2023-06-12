@@ -2,6 +2,7 @@ package router
 
 import (
 	"backend/control"
+	"backend/logic"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +14,7 @@ func UserRouterInit(r *gin.RouterGroup) {
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
 		//userManager.GET("/refresh_token", control.RefreshTokenHandler)
-		//userManager.Use(control.JWTAuthMiddleware)
+		userManager.Use(logic.AuthMiddleware())
 		//{
 		//	userManager.GET("/userinfo", control.UserInfoHandler)
 		//}
@@ -24,7 +25,7 @@ func UserRouterInit(r *gin.RouterGroup) {
 /*func NewsRouterInit(r *gin.RouterGroup) {
 	newsManager := r.Group("/article")
 	{
-		newsManager.POST("/store",control.StoreHandler)
+		newsManager.POST("/store_news",control.StoreHandler)
 		newsManager.GET("/get_news",control.GetNewsHandler)
 	}
 }*/
@@ -34,7 +35,7 @@ func UserRouterInit(r *gin.RouterGroup) {
 //	commentManager := r.Group("/comment")
 //	{
 //		commentManager.GET("/comment_list", control.CommentListHandler)
-//		commentManager.Use(control.JWTAuthMiddleware)
+//		userManager.Use(logic.AuthMiddleware())
 //		{
 //			commentManager.POST("/comment", control.UserCommentHandler)
 //			commentManager.GET("/get_comment", control.GetCommentHandler)

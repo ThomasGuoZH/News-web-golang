@@ -1,4 +1,4 @@
-package control
+package logic
 
 import (
 	"github.com/bwmarrin/snowflake"

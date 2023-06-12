@@ -1,4 +1,4 @@
-package jwtpart
+package logic
 
 import (
 	"time"
@@ -22,7 +22,7 @@ func ReleaseToken(user models.User) (string, error) {
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 			IssuedAt:  time.Now().Unix(),
-			Issuer:    "ShuwenHe",
+			Issuer:    "zhaohaoGuo",
 			Subject:   "user token",
 		},
 	}

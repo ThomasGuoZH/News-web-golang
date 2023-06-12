@@ -1,11 +1,13 @@
 package control
 
 import (
+	"backend/logic"
 	"backend/models"
 	"backend/mysql"
 	"backend/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	//"github.com/go-sql-driver/mysql"
 )
 
@@ -22,7 +24,7 @@ func RegisterHandler(c *gin.Context) {
 			response.Fail(c, nil, "用户名已被使用!")
 		} else if result.Error != nil {
 			// 生成随机唯一id
-			var randomId = GenerateID()
+			var randomId = logic.GenerateID()
 			fmt.Println(randomId)
 			var newUser = models.User{
 				Id:       randomId,
@@ -53,8 +55,13 @@ func LoginHandler(c *gin.Context) {
 			if findUser.Password != userLogin.Password {
 				response.Fail(c, nil, "密码错误!")
 			} else {
-				//发送token
-				response.Success(c, nil, "登录成功!")
+				token, err := logic.ReleaseToken(findUser) // 发放token
+				if err != nil {
+					c.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "System err!"})
+					fmt.Printf("token generate error:%v", err)
+					return
+				}
+				response.Success(c, gin.H{"token": token}, "登录成功!")
 			}
 		}
 	}
