@@ -11,15 +11,15 @@
             <el-row>
           <el-col :span="16">
             <div class="news-list">
-              <div class="news-item" v-for="(item, index) in newsList" :key="index">
+              <div class="news-item" v-for="(news, index) in newsList.slice(6,15)" :key="index">
                 <div class="news-header">
-                  <img :src="item.imgUrl" alt="news-img">
-                  <div class="news-title">{{ item.title }}</div>
+                  <img :src="news.pic" alt="news-img">
+                  <div class="news-title">{{ news.title }}</div>
                 </div>
-                <div class="news-content">{{ item.content }}</div>
+                <div class="news-content" v-html="news.content"></div>
                 <div class="news-footer">
-                  <span class="news-time">{{ item.time }}</span>
-                  <el-button type="text" class="news-more">查看详情</el-button>
+                  <span class="news-time">{{ news.time }}</span>
+                  <router-link :to="'/politics/newspage/' + news.title" target="_blank"><el-button type="text" class="news-more">查看详情</el-button></router-link>
                 </div>
               </div>
             </div>
@@ -30,8 +30,8 @@
                 <div class="side-title">热门新闻</div>
                 <div class="side-content">
                   <ul>
-                    <li v-for="(item, index) in hotNewsList" :key="index">
-                      <router-link :to="{ path: '/news/' + item.id }">{{ item.title }}</router-link>
+                    <li v-for="(item, index) in newsList.slice(0,3)" :key="index">
+                      <router-link :to="{ path: '/politics/newspage/' + item.id }">{{ item.title }}</router-link>
                     </li>
                   </ul>
                 </div>
@@ -40,8 +40,8 @@
                 <div class="side-title">推荐新闻</div>
                 <div class="side-content">
                   <ul>
-                    <li v-for="(item, index) in recommendNewsList" :key="index">
-                      <router-link :to="{ path: '/news/' + item.id }">{{ item.title }}</router-link>
+                    <li v-for="(item, index) in newsList.slice(3,6)" :key="index">
+                      <router-link :to="{ path: '/politics/newspage/' + item.id }">{{ item.title }}</router-link>
                     </li>
                   </ul>
                 </div>
@@ -56,6 +56,7 @@
 import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
+import { getNewsList } from '@/api/getNewsList'
 export default {
     name: 'politics',
     components: {
@@ -73,57 +74,12 @@ export default {
                 { name: '体育', url: '/sports' },
                 { name: '军事', url: '/military' },
                 { name: '教育', url: '/education' }],
-            newsList: [
-                {
-                id: 1,
-                title: '新闻标题1',
-                content: '新闻内容1',
-                imgUrl: 'https://picsum.photos/400/300?random=1',
-                time: '2021-01-01'
-                },
-                {
-                id: 2,
-                title: '新闻标题2',
-                content: '新闻内容2',
-                imgUrl: 'https://picsum.photos/400/300?random=2',
-                time: '2021-01-02'
-                },
-                {
-                id: 3,
-                title: '新闻标题3',
-                content: '新闻内容3',
-                imgUrl: 'https://picsum.photos/400/300?random=3',
-                time: '2021-01-03'
-                }],
-            hotNewsList: [
-                {
-                id: 1,
-                title: '热门新闻1'
-                },
-                {
-                id: 2,
-                title: '热门新闻2'
-                },
-                {
-                id: 3,
-                title: '热门新闻3'
-                }],
-            recommendNewsList: [
-                {
-                id: 1,
-                title: '推荐新闻1'
-                },
-                {
-                id: 2,
-                title: '推荐新闻2'
-                },
-                {
-                id: 3,
-                title: '推荐新闻3'
-                }],
-            
+            newsList: [],
         }
-    }
+    },
+    mounted: async function () {
+    this.newsList = await getNewsList(15, '政治');
+  }
 }
 </script>
 <style>
