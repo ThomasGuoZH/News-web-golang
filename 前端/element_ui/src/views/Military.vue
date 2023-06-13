@@ -7,19 +7,23 @@
         </navigation>
         <sidebox />
         <backtotop />
+        <h3 style="color:black">军事新闻</h3>
+        <comment />
     </div>
 </template>
 <script>
 import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
+import comment from '@/components/page/comment.vue'
 export default {
     name: 'military',
     components: {
-        navigation,
-        sidebox,
-        backtotop,
-    },
+    navigation,
+    sidebox,
+    backtotop,
+    comment,
+},
     data() {
         return {
             items: [
