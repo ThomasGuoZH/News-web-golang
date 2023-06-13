@@ -10,13 +10,13 @@
     <h3 style="color:black">体育新闻</h3>
     <div class="carousel-container">
       <el-carousel :autoplay="true" :interval="5000" height="480px">
-        <el-carousel-item v-for="news in sliderNews" :key="news.id">
-          <a :href="news.url" target="_blank">
-            <img class="slider-image" :src="news.image" alt="Slider Image">
-          </a>
+        <el-carousel-item v-for="(news,index) in sportsNewslist.slice(0,4)" :key="index">
+          <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+            <img class="slider-image" :src="news.pic" alt="Slider Image">
+          </router-link>
           <div class="slider-caption">
             <h3>{{ news.title }}</h3>
-            <p>{{ news.summary }}</p>
+            <p>{{ news.content }}</p>
           </div>
         </el-carousel-item>
       </el-carousel>
@@ -30,18 +30,19 @@
       <div class="news-container">
         <!-- 列表模式 -->
         <div v-if="viewMode === 'list'" class="news-lists">
-          <div class="news-list" v-for="news in newsList" :key="news.id">
+          <div class="news-list" v-for="(news,index) in sportsNewslist.slice(4,sportsNewslist.length)" :key="index">
             <div class="news-item">
               <div class="news-thumbnail">
-                <a :href="news.url" target="_blank">
-                  <img class="thumbnail-image" :src="news.image" alt="News Thumbnail">
-                </a>
+                <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+                  <img class="thumbnail-image" :src="news.pic" alt="News Thumbnail">
+                </router-link>
               </div>
               <div class="news-details">
-                <a :href="news.url" target="_blank">
+                <router-link :to="'/sports/newspage/' + news.title" target="_blank">
                   <h4>{{ news.title }}</h4>
-                  <p>{{ news.summary }}</p>
-                </a>
+                  <div class="news-src">{{news.src}}</div>
+                  <div class="news-time">{{ news.time }}</div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -49,16 +50,16 @@
 
         <!-- 卡片模式 -->
         <div v-else-if="viewMode === 'card'" class="news-cards">
-          <div class="news-card" v-for="(news, index) in newsList" :key="news.id">
+          <div class="news-card" v-for="(news,index) in sportsNewslist.slice(4,sportsNewslist.length)" :key="index">
             <div class="card-image">
-              <a :href="news.url" target="_blank">
-                <img class="card-thumbnail" :src="news.image" alt="News Thumbnail">
-              </a>
+              <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+                <img class="card-thumbnail" :src="news.pic" alt="News Thumbnail">
+              </router-link>
             </div>
             <div class="card-details">
-              <a :href="news.url" target="_blank">
+              <router-link :to="'/sports/newspage/' + news.title" target="_blank">
                 <h4>{{ news.title }}</h4>
-              </a>
+              </router-link>
             </div>
           </div>
         </div>
@@ -72,6 +73,7 @@ import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
 import carousel from '@/components/layout/carousel.vue';
+import { getNewsList } from '@/api/getNewsList'
 export default {
   name: 'sports',
   components: {
@@ -91,93 +93,22 @@ export default {
         { name: '体育', url: '/sports' },
         { name: '军事', url: '/military' },
         { name: '教育', url: '/education' }],
-      sliderNews: [
-        {
-          id: 1,
-          title: 'Slider News 1',
-          summary: 'Summary of slider news 1',
-          image: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_1280.jpg',
-          url: 'path/to/slider-news-1-page'
-        },
-        {
-          id: 2,
-          title: 'Slider News 2',
-          summary: 'Summary of slider news 2',
-          image: 'https://cdn.pixabay.com/photo/2017/07/24/19/57/tiger-2535888_1280.jpg',
-          url: 'path/to/slider-news-2-page'
-        },
-        {
-          id: 3,
-          title: 'Slider News 1',
-          summary: 'Summary of slider news 1',
-          image: 'https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877_1280.jpg',
-          url: 'path/to/slider-news-1-page'
-        },
-        {
-          id: 4,
-          title: 'Slider News 2',
-          summary: 'Summary of slider news 2',
-          image: 'https://cdn.pixabay.com/photo/2017/07/24/19/57/tiger-2535888_1280.jpg',
-          url: 'path/to/slider-news-2-page'
-        },
-        // 添加更多轮播新闻项...
-      ],
-      newsList: [
-        {
-          id: 1,
-          title: 'News 1',
-          summary: 'Summary of news 1111111111111111111111111111111111111111111111111111111111111111111111111',
-          image: 'https://cdn.pixabay.com/photo/2023/05/30/15/43/koala-8028992_1280.jpg',
-          url: 'path/to/news-1-page'
-        },
-        {
-          id: 2,
-          title: 'News 2',
-          summary: 'Summary of news 2',
-          image: 'https://cdn.pixabay.com/photo/2020/04/23/18/41/light-5083606_1280.jpg',
-          url: 'path/to/news-2-page'
-        },
-        {
-          id: 3,
-          title: 'News 3',
-          summary: 'Summary of news 11111111111',
-          image: 'https://cdn.pixabay.com/photo/2016/07/11/20/34/lost-places-1510592_1280.jpg',
-          url: 'path/to/news-1-page'
-        },
-        {
-          id: 4,
-          title: 'News 4',
-          summary: 'Summary of news 2',
-          image: 'https://cdn.pixabay.com/photo/2023/06/01/12/06/snow-8033482_1280.jpg',
-          url: 'path/to/news-2-page'
-        },
-        {
-          id: 5,
-          title: 'News 5',
-          summary: 'Summary of news 2',
-          image: 'https://cdn.pixabay.com/photo/2023/06/07/18/14/giraffes-8047856_1280.jpg',
-          url: 'path/to/news-2-page'
-        },
-         {
-          id: 6,
-          title: 'News 6',
-          summary: 'Summary of news 2',
-          image: 'https://cdn.pixabay.com/photo/2023/05/24/14/43/cat-8015038_1280.jpg',
-          url: 'path/to/news-2-page'
-        },
-        // 添加更多新闻项...
-      ]
+        sportsNewslist: [],
+      
     };
   },
   methods: {
     changeViewMode(mode) {
       this.viewMode = mode;
     }
+  },
+  mounted: async function () {
+    this.sportsNewslist = await getNewsList(12, '体育');
   }
 };
 </script>
   
-<style>
+<style scoped>
 .slider-image {
   width: 100%;
   height: 100%;
@@ -218,6 +149,9 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width:1200px;
+  background-color: rgb(235, 237, 252);
+  margin:auto;
 }
 
 .news-lists {
@@ -232,7 +166,7 @@ a {
 
 .news-item {
   display: flex;
-  width: 900px;
+  width: 100%;
   padding: 10px;
 }
 
@@ -253,23 +187,29 @@ a {
   flex: 1;
   width: 60%;
 }
-
+.news-src{
+  display: inline;
+  float:left;
+  margin-top: 85px;
+}
+.news-time{
+  display: inline;
+  float:right;
+  font-size: 15px;
+  margin-top: 90px;
+}
 .news-details h4 {
   font-size: 20px;
   margin-bottom: 5px;
   color: black;
 }
 
-.news-details p {
-  font-size: 16px;
-  color: #666;
-}
 
 .news-cards {
   /* flex-basis: 100%; */
   display: flex;
   flex-wrap: wrap;
-  width: 960px;
+  width: 100%;
   justify-content: flex-start;
   align-items: flex-start;
 }

@@ -11,7 +11,7 @@
             <el-row>
           <el-col :span="16">
             <div class="news-list">
-              <div class="news-item" v-for="(news, index) in newsList.slice(6,15)" :key="index">
+              <div class="news-item" v-for="(news, index) in newsList.slice(6,14)" :key="index">
                 <div class="news-header">
                   <img :src="news.pic" alt="news-img">
                   <div class="news-title">{{ news.title }}</div>
@@ -19,12 +19,12 @@
                 <div class="news-content" v-html="news.content"></div>
                 <div class="news-footer">
                   <span class="news-time">{{ news.time }}</span>
-                  <router-link :to="'/politics/newspage/' + news.title" target="_blank"><el-button type="text" class="news-more">查看详情</el-button></router-link>
+                  <router-link :to="'/politics/newspage/' + news.title" target="_blank"><el-button type="text" id="news-more">查看详情</el-button></router-link>
                 </div>
               </div>
             </div>
           </el-col>
-          <el-col :span="7" offset="1">
+          <el-col :span="6" offset="2">
             <div class="side-bar">
               <div class="side-item">
                 <div class="side-title">热门新闻</div>
@@ -82,7 +82,7 @@ export default {
   }
 }
 </script>
-<style>
+<style >
 body {
     background-color: rgb(229, 242, 245);
 }
@@ -103,8 +103,9 @@ body {
 }
 
 .news-item {
-  width: 48%;
+  width: 47%;
   margin-bottom: 20px;
+  display: block;
 }
 
 .news-header {
@@ -146,7 +147,7 @@ body {
 
 .news-footer {
   margin-top: 10px;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
 }
@@ -156,9 +157,11 @@ body {
   color: #999;
 }
 
-.news-more {
+#news-more {
+  float: right;
   font-size: 12px;
   color: #409EFF;
+  margin-left:300px;
 }
 
 .side-bar {
