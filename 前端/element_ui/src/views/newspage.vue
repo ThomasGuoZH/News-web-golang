@@ -10,17 +10,20 @@
       </el-page-header>
     </div>
 
-    <!-- <news /> -->
+    <news />
+    <comment />
   </div>
 </template>
   
 <script>
 import navigation from "../components/layout/nav.vue"
 import news from "../components/page/news.vue"
+import comment from "../components/page/comment.vue"
 export default {
   components: {
     navigation,
     news,
+    comment,
   },
   data() {
     return {
@@ -45,14 +48,13 @@ export default {
       } else if (this.channel === 'science') {
         return '科技';
       } else if (this.channel === 'politics') {
-        console.log(1);
         return '时政';
       } else if (this.channel === 'sports') {
-        return 4;
+        return '体育';
       } else if (this.channel === 'military') {
-        return 5;
+        return '军事';
       } else if (this.channel === 'entertainment') {
-        return 3;
+        return '娱乐';
       }
     },
     channelname() {
