@@ -151,6 +151,20 @@ export default {
           image: 'https://cdn.pixabay.com/photo/2023/06/01/12/06/snow-8033482_1280.jpg',
           url: 'path/to/news-2-page'
         },
+        {
+          id: 5,
+          title: 'News 5',
+          summary: 'Summary of news 2',
+          image: 'https://cdn.pixabay.com/photo/2023/06/07/18/14/giraffes-8047856_1280.jpg',
+          url: 'path/to/news-2-page'
+        },
+         {
+          id: 6,
+          title: 'News 6',
+          summary: 'Summary of news 2',
+          image: 'https://cdn.pixabay.com/photo/2023/05/24/14/43/cat-8015038_1280.jpg',
+          url: 'path/to/news-2-page'
+        },
         // 添加更多新闻项...
       ]
     };
@@ -224,7 +238,7 @@ a {
 
 .news-thumbnail {
   width: 30%;
-  height: 126px;
+  height: 144px;
   overflow: hidden;
   margin-right: 20px;
 }
@@ -254,15 +268,19 @@ a {
 .news-cards {
   /* flex-basis: 100%; */
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   width: 960px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .news-card {
-  flex-basis: 25%;
+  flex-basis: 22.9%;
   margin-bottom: 20px;
   padding: 10px;
   margin-right: 10px;
+  margin-left: 10px;
+  box-sizing: border-box;
 }
 
 .card-image {
