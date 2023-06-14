@@ -2,7 +2,6 @@
     <div>
         <div v-if="user.loggedIn">
             <p>欢迎 {{ user.username }}，您已登录</p>
-            <img :src="user.avatar" alt="用户头像">
             <button @click="logout">退出登录</button>
             <el-link href="/personal_center/message" target="_blank">个人中心</el-link>
         </div>
