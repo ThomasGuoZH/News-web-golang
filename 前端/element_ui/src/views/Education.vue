@@ -1,27 +1,24 @@
 <template>
-    <div class="entertainment">
+    <div class="education">
         <navigation :items="items">
-            <template v-slot:娱乐>
-                <b>{{ items[3].name }}</b>
+            <template v-slot:首页>
+                首页
             </template>
         </navigation>
         <sidebox />
-        <!-- <newspage /> -->
         <backtotop />
     </div>
 </template>
 <script>
 import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
-// import newspage from './newspage.vue'
 import navigation from '../components/layout/nav.vue'
 export default {
-    name: 'entertainment',
+    name: 'education',
     components: {
         navigation,
         sidebox,
-        backtotop,
-        // newspage,
+        backtotop
     },
     data() {
         return {
@@ -37,7 +34,6 @@ export default {
     }
 }
 </script>
-
 <style>
 body {
     background-color: rgb(229, 242, 245);

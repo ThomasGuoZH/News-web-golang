@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Pe from '../views/PE.vue'
-import Game from '../views/Game.vue'
-import Other from '../views/Other.vue'
-import Health from '../views/Health.vue'
+import Sports from '../views/Sports.vue'
+import Education from '../views/Education.vue'
+import Politics from '../views/Politics.vue'
+import Military from '../views/Military.vue'
 import Science from '../views/Science.vue'
 import Entertainment from '../views/Entertainment.vue'
-
+import PersonalCenter from '../views/PersonalCenter.vue'
+import Newspage from '../views/newspage.vue'
+import changepassword from '../views/personal_changepassword.vue'
 
 Vue.use(VueRouter)
 
@@ -22,36 +24,50 @@ const routes = [
     component: HomeView,
   },
   {
-    path: '/pe',
-    name: 'pe',
-    component: Pe
+    path: '/politics',
+    name: 'politics',
+    component: Politics,
   },
   {
-    path: '/health',
-    name: 'health',
-    component: Health
+    path: '/military',
+    name: 'military',
+    component: Military,
   },
   {
-    path: '/other',
-    name: 'other',
-    component: Other
+    path: '/education',
+    name: 'education',
+    component: Education,
   },
   {
-    path: '/game',
-    name: 'game',
-    component: Game
+    path: '/sports',
+    name: 'sports',
+    component: Sports,
   },
   {
     path: '/entertainment',
     name: 'entertainment',
-    component: Entertainment
+    component: Entertainment,
   },
   {
     path: '/science',
     name: 'science',
-    component: Science
+    component: Science,
   },
-
+  {
+    path: '/personal_center/myMessage',
+    name: 'personal_center',
+    component: PersonalCenter,
+  },
+  {
+    path: '/:channel/newspage/:title',
+    name: 'newspage',
+    component: Newspage,
+  },
+   {
+    path:'/changepassword',
+    name:'changepassword',
+    component: changepassword
+  }
 ]
 
 const router = new VueRouter({
