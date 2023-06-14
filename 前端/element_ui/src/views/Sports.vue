@@ -10,7 +10,7 @@
     <h3 style="color:black">体育新闻</h3>
     <div class="carousel-container">
       <el-carousel :autoplay="true" :interval="5000" height="480px">
-        <el-carousel-item v-for="(news,index) in sportsNewslist.slice(0,4)" :key="index">
+        <el-carousel-item v-for="(news, index) in sportsNewslist.slice(0, 4)" :key="index">
           <router-link :to="'/sports/newspage/' + news.title" target="_blank">
             <img class="slider-image" :src="news.pic" alt="Slider Image">
           </router-link>
@@ -30,7 +30,7 @@
       <div class="news-container">
         <!-- 列表模式 -->
         <div v-if="viewMode === 'list'" class="news-lists">
-          <div class="news-list" v-for="(news,index) in sportsNewslist.slice(4,sportsNewslist.length)" :key="index">
+          <div class="news-list" v-for="(news, index) in sportsNewslist.slice(4, sportsNewslist.length)" :key="index">
             <div class="news-item">
               <div class="news-thumbnail">
                 <router-link :to="'/sports/newspage/' + news.title" target="_blank">
@@ -40,7 +40,7 @@
               <div class="news-details">
                 <router-link :to="'/sports/newspage/' + news.title" target="_blank">
                   <h4>{{ news.title }}</h4>
-                  <div class="news-src">{{news.src}}</div>
+                  <div class="news-src">{{ news.src }}</div>
                   <div class="news-time">{{ news.time }}</div>
                 </router-link>
               </div>
@@ -50,7 +50,7 @@
 
         <!-- 卡片模式 -->
         <div v-else-if="viewMode === 'card'" class="news-cards">
-          <div class="news-card" v-for="(news,index) in sportsNewslist.slice(4,sportsNewslist.length)" :key="index">
+          <div class="news-card" v-for="(news, index) in sportsNewslist.slice(4, sportsNewslist.length)" :key="index">
             <div class="card-image">
               <router-link :to="'/sports/newspage/' + news.title" target="_blank">
                 <img class="card-thumbnail" :src="news.pic" alt="News Thumbnail">
@@ -93,8 +93,8 @@ export default {
         { name: '体育', url: '/sports' },
         { name: '军事', url: '/military' },
         { name: '教育', url: '/education' }],
-        sportsNewslist: [],
-      
+      sportsNewslist: [],
+
     };
   },
   methods: {
@@ -103,7 +103,7 @@ export default {
     }
   },
   mounted: async function () {
-    this.sportsNewslist = await getNewsList(12, '体育');
+    // this.sportsNewslist = await getNewsList(12, '体育');
   }
 };
 </script>
@@ -149,9 +149,9 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width:1200px;
+  width: 1200px;
   background-color: rgb(235, 237, 252);
-  margin:auto;
+  margin: auto;
 }
 
 .news-lists {
@@ -187,17 +187,20 @@ a {
   flex: 1;
   width: 60%;
 }
-.news-src{
+
+.news-src {
   display: inline;
-  float:left;
+  float: left;
   margin-top: 85px;
 }
-.news-time{
+
+.news-time {
   display: inline;
-  float:right;
+  float: right;
   font-size: 15px;
   margin-top: 90px;
 }
+
 .news-details h4 {
   font-size: 20px;
   margin-bottom: 5px;

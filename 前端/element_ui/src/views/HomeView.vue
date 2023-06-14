@@ -7,25 +7,7 @@
     </navigation>
     <h3 style="color:red">头条新闻</h3>
     <carousel />
-    <!-- <div class="middle" id="photo" value="1">
-      <h4>今日头条</h4>
-      <img src="../assets/image/1.png" alt="" id="img">
-      <p class="头条字体"><a href="https://fans.sports.qq.com/post.htm?id=1766742676465516666&mid=69#1_allWithElite"
-          class="review" id="t1" target="_blank">东决:绿军大胜热火总分1-3 塔图姆33+11+7破纪录巴特勒29分</a></p>
-      <span class="radio">
-        <input type="radio" name="select" onclick="changeview(1)" checked="checked">
-        <input type="radio" name="select" onclick="changeview(2)">
-        <input type="radio" name="select" onclick="changeview(3)">
-        <input type="radio" name="select" onclick="changeview(4)">
-        <input type="radio" name="select" onclick="changeview(5)">
-      </span>
-      <a href="#" class="prev" onclick="changeprev()"> &lt; </a>
-      <a href="#" class="next" onclick="changenext()"> &gt; </a>
-                                                                                                                                                                                                                                                            </div> -->
-
-    <!-- vue输入文章 -->
     <sidebox />
-
     <h3>热点新闻</h3>
     <ul class="newslist">
       <li>
@@ -141,7 +123,7 @@ export default {
     };
   },
   mounted: async function () {
-    this.politicsNewslist = await getNewsList(8, '政治');
+    // this.politicsNewslist = await getNewsList(8, '政治');
     // this.scienceNewslist = await getNewsList(8, '科技');
     // this.sportsNewslist = await getNewsList(8, '体育');
     // this.militaryNewslist = await getNewsList(8, '军事');
@@ -160,8 +142,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
-
 
 .middle {
   width: 500px;
