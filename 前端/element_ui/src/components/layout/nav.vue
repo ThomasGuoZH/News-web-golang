@@ -2,7 +2,7 @@
     <span class="top">
         <h2>新闻论坛</h2>
         <div class="user">
-            <login_register />
+            <User />
             <!-- <is_login /> 还未修改，后面可以把登陆注册的组件一起合并了 -->
             <!-- <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link> -->
         </div>
@@ -23,10 +23,10 @@
     </span>
 </template>
 <script>
-import login_register from '../user/login_register.vue'
+import User from '../user/user.vue'
 export default {
     components: {
-        login_register,
+        User,
     },
     props: {
         items: {
