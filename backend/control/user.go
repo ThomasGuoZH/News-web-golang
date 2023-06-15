@@ -61,32 +61,17 @@ func LoginHandler(c *gin.Context) {
 					fmt.Printf("token generate error:%v", err)
 					return
 				}
-				response.Success(c, gin.H{"token": token}, "登录成功!")
+				response.Success(c, gin.H{
+					"token":    token,
+					"userId":   fmt.Sprintf("%d", findUser.Id),
+					"username": findUser.UserName,
+					"sex":      findUser.Sex,
+					"email":    findUser.Email,
+					"phone":    findUser.Phone,
+				}, "登录成功!")
 			}
 		}
 	}
-
-}
-
-/*if user.ID == 0 {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"code": 422, "msg": "User not exist!"})
-		return
-	}
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil { // 判断密码是否正确
-		c.JSON(http.StatusBadRequest, gin.H{"code": 400, "msg": "password err!"})
-	}
-	token, err := jwtpart.ReleaseToken(user) // 发放token
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "System err!"})
-		log.Printf("token generate error:%v", err)
-		return
-	}
-	response.Success(c, gin.H{"token": token}, "Login success!")
-}*/
-
-// 刷新token
-func RefreshTokenHandler() {
-
 }
 
 // 获得用户信息

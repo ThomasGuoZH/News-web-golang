@@ -12,7 +12,7 @@ import (
 // 存储新闻文章
 func StoreHandler(c *gin.Context) {
 	var news *models.News
-	if err := c.ShouldBind(&news); err != nil {
+	if err := c.ShouldBindJSON(&news); err != nil {
 		response.Fail(c, nil, "新闻存储失败")
 	} else {
 		var newNews = models.News{
@@ -30,12 +30,12 @@ func StoreHandler(c *gin.Context) {
 
 // 获取文章
 func GetNewsHandler(c *gin.Context) {
-	var gnews *models.GetNews
-	if err := c.ShouldBind(&gnews); err != nil {
+	var getNews *models.GetNews
+	if err := c.ShouldBindJSON(&getNews); err != nil {
 		response.Fail(c, nil, "新闻获取失败，未提供正确的Title")
 	} else {
 		var findNews models.News
-		result := mysql.DB.Where("Title=?", gnews.Title).First(&findNews)
+		result := mysql.DB.Where("title=?", getNews.Title).First(&findNews)
 		if result.Error != nil {
 			response.Fail(c, nil, "新闻不存在!")
 		} else {

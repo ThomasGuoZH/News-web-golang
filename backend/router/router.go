@@ -14,7 +14,6 @@ func UserRouterInit(r *gin.RouterGroup) {
 	{
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
-		//userManager.GET("/refresh_token", control.RefreshTokenHandler)
 		userManager.Use(logic.AuthMiddleware())
 		//{
 		//	userManager.GET("/userinfo", control.UserInfoHandler)
@@ -24,7 +23,7 @@ func UserRouterInit(r *gin.RouterGroup) {
 
 // 新闻路由组
 func NewsRouterInit(r *gin.RouterGroup) {
-	newsManager := r.Group("/article")
+	newsManager := r.Group("/news")
 	{
 		newsManager.POST("/store_news", control.StoreHandler)
 		newsManager.GET("/get_news", control.GetNewsHandler)
@@ -66,7 +65,7 @@ func SetupRouter() *gin.Engine {
 	router.Use(cors.New(config))
 	api := router.Group("api")
 	UserRouterInit(api)
-	//NewsRouterInit(api)
+	NewsRouterInit(api)
 	//CommentRouterInit(api)
 	return router
 }

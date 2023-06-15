@@ -15,5 +15,5 @@ func (News) TableName() string {
 }
 
 type GetNews struct {
-	Title string `json:"title" db:"title" binding:"required"`
+	Title string `json:"title" binding:"required"`
 }

@@ -2,7 +2,6 @@ package logic
 
 import (
 	"github.com/bwmarrin/snowflake"
-	"strconv"
 )
 
 var node *snowflake.Node
@@ -16,6 +15,6 @@ func init() {
 }
 
 // 生成唯一ID
-func GenerateID() string {
-	return strconv.FormatInt(node.Generate().Int64(), 10)
+func GenerateID() uint64 {
+	return uint64(node.Generate().Int64())
 }
