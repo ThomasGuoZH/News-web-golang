@@ -54,7 +54,7 @@ const routes = [
     component: Science,
   },
   {
-    path: '/personal_center/myMessage',
+    path: '/personal_center/myMessage/:userid',
     name: 'personal_center',
     component: PersonalCenter,
   },
@@ -63,9 +63,9 @@ const routes = [
     name: 'newspage',
     component: Newspage,
   },
-   {
-    path:'/changepassword',
-    name:'changepassword',
+  {
+    path: '/personal_center/changepassword/:userid',
+    name: 'changepassword',
     component: changepassword
   }
 ]
