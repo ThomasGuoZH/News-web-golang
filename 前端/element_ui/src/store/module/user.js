@@ -1,0 +1,72 @@
+import { userLogin } from "@/api/user";
+import { Message } from 'element-ui'
+
+const defaultCurrentUser = {
+    id: '',
+    username: '',
+    password: '',
+    sex: '',
+    email: '',
+    phone: '',
+    token: '',
+    loggedIn: false
+}
+export default {
+    namespaced: true,
+    state: {
+        currentUser: defaultCurrentUser
+    },
+    mutations: {
+        setCurrentUser(state, { userId, username, sex, email, phone, token }) {
+            state.currentUser = {
+                id: userId,
+                username: username,
+                sex: sex,
+                email: email,
+                phone: phone,
+                token: token,
+                loggedIn: true
+            }
+            console.log(state.currentUser);
+            localStorage.setItem(`currentUser_${userId}`, JSON.stringify(state.currentUser))
+        },
+        removeCurrentUser(state) {
+            const userId = state.currentUser.userId;
+            state.currentUser = defaultCurrentUser;
+            localStorage.removeItem(`currentUser_${userId}`);
+        }
+    },
+    actions: {
+        async login({ commit }, { username, password }) {
+            const loginForm = { username, password };
+            const loginResponse = await userLogin(loginForm);
+            if (loginResponse.msg === '登录成功!') {
+                Message.success(loginResponse.msg);
+                const token = loginResponse.data.token;
+                const userId = loginResponse.data.userId;
+                const sex = loginResponse.data.sex;
+                const email = loginResponse.data.email;
+                const phone = loginResponse.data.phone;
+                const username = loginResponse.data.username;
+                commit('setCurrentUser', { userId, username, sex, email, phone, token });
+            } else if (loginResponse.msg === '用户不存在!') {
+                Message.warning(loginResponse.msg)
+            } else if (loginResponse.msg === '密码错误!') {
+                Message.warning(loginResponse.msg)
+            }
+        },
+        logout({ commit }) {
+            Message.success("注销成功");
+            commit('removeCurrentUser');
+        },
+        async loadCurrentUser({ commit }, userId) {
+            const currentUserKey = `currentuser_${userId}`;
+            const currentUser = JSON.parse(localStorage.getItem(currentUserKey));
+            if (currentUser) {
+                commit("setCurrentUser", currentUser);
+            }
+        },
+    }
+}
+
+
