@@ -87,7 +87,6 @@
 import carousel from '../components/layout/carousel.vue'
 import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
-import is_login from '@/components/user/is_login.vue'
 import navigation from '../components/layout/nav.vue'
 import { getNewsList } from '@/api/getNewsList'
 export default {
@@ -102,7 +101,6 @@ export default {
     carousel,
     sidebox,
     backtotop,
-    is_login
   },
   data() {
     return {
@@ -123,7 +121,7 @@ export default {
     };
   },
   mounted: async function () {
-    // this.politicsNewslist = await getNewsList(8, '政治');
+    this.politicsNewslist = await getNewsList(8, '政治');
     // this.scienceNewslist = await getNewsList(8, '科技');
     // this.sportsNewslist = await getNewsList(8, '体育');
     // this.militaryNewslist = await getNewsList(8, '军事');
