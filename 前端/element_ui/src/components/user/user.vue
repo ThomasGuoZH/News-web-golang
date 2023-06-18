@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="user">
         <div v-if="currentUser.loggedIn">
-            <p>你好，{{ currentUser.username }}，您已登录</p>
+            <p>您好，{{ currentUser.username }}，您已登录</p>
             <button @click="logout">退出登录</button>
-            <router-link :to="'/personal_center/myMessage/' + currentUser.id" target="_blank">个人中心</router-link>
+            <router-link :to="'/personal_center/myMessage/' + currentUser.id" target="_blank">
+                <img src="../../assets/icons/user.svg" alt="个人中心">
+            </router-link>
         </div>
         <div v-else>
             <div class="login_register">
@@ -145,12 +147,21 @@ export default {
     },
 };
 </script>
-<style >
+<style scoped>
+.user {
+    font-family: 'sihan-regular',sans-serif;
+}
+
 .log {
     position: relative;
     left: 120px;
 }
 .login_register {
     margin-top: 5px;
+}
+.user img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 </style>

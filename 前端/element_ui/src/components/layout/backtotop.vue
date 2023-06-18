@@ -1,7 +1,9 @@
 <template>
   <transition>
     <div class="back-to-top" @click="toTop">
-      <el-button type="info" round class="back-to-top" @click="toTop">回到顶端</el-button>
+      <el-button class="button" @click="toTop">
+        <img src="../../assets/icons/arrow-up.svg" alt="回到顶端"> 
+      </el-button>
     </div>
   </transition>
 </template>
@@ -23,18 +25,25 @@ export default {
 .back-to-top {
   cursor: pointer;
   position: fixed;
-  right: 10px;
-  top: 650px;
+  right: 25px;
+  bottom: 50px;
   z-index: 999;
-  /* background-image: url('../assets/images/to-top04.svg');
+}
 
-        /* height: 100px;
-        width: 100px;
-        background-color: #89b4c2;
-        box-shadow: 0 0 6px rgba(0,0,0, .12);
-        text-align: center;
-        line-height: 40px;
-        color: #1989fa; */
+.button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.back-to-top img {
+  height: 25px;
+  width: 25px;
 }
 
 .animate__animated {

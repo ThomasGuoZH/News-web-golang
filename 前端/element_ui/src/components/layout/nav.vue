@@ -63,14 +63,14 @@ h2 {
 }
 
 .user {
-    margin-top: 15px;
+    margin-top: 5px;
     color: #ffffff;
     text-align: right;
     margin-right: 20px;
 }
 
 .nav {
-    margin-top: -7px;
+    margin-top: -12px;
     text-decoration: none;
     background-color: white;
     font-family: 'common-black',sans-serif;
@@ -81,6 +81,7 @@ h2 {
     list-style: none;
     margin-top: 20px; 
     border-bottom: black solid 1px;
+    border-top: black solid 1px;
 }
 
 .nav li {
