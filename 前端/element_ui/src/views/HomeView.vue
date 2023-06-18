@@ -5,13 +5,13 @@
         <b>{{ items[0].name }}</b>
       </template>
     </navigation>
-    <h3 style="color:red">头条新闻</h3>
+    <h3 style="color:brown">头条新闻</h3>
     <carousel />
     <sidebox />
     <h3>热点新闻</h3>
     <ul class="newslist">
       <li>
-        <h4 style="color: #f97272;">时政</h4>
+        <h4 style="color: black;">时政</h4>
         <router-link to="/politics" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -22,7 +22,7 @@
         </div>
       </li>
       <li>
-        <h4 style="color: #c4cb6d;">科技</h4>
+        <h4 style="color: black;">科技</h4>
         <router-link to="/science" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -33,7 +33,7 @@
         </div>
       </li>
       <li>
-        <h4 style="color: #f27fdb;">娱乐</h4>
+        <h4 style="color: black;">娱乐</h4>
         <router-link to="/entertainment" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -46,7 +46,7 @@
     </ul>
     <ul class="newslist">
       <li>
-        <h4 style="color: #91dcfa;">体育</h4>
+        <h4 style="color: black;">体育</h4>
         <router-link to="/sports" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -57,7 +57,7 @@
         </div>
       </li>
       <li>
-        <h4 style="color: #a779fb;">军事</h4>
+        <h4 style="color: black;">军事</h4>
         <router-link to="/military" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -68,7 +68,7 @@
         </div>
       </li>
       <li>
-        <h4 style="color: #9cf194;">教育</h4>
+        <h4 style="color: black;">教育</h4>
         <router-link to="/education" target="_blank" class="more">更多>></router-link>
         <div>
           <ul>
@@ -122,11 +122,11 @@ export default {
   },
   mounted: async function () {
     this.politicsNewslist = await getNewsList(8, '政治');
-    // this.scienceNewslist = await getNewsList(8, '科技');
-    // this.sportsNewslist = await getNewsList(8, '体育');
-    // this.militaryNewslist = await getNewsList(8, '军事');
-    // this.educationNewslist = await getNewsList(8, '教育');
-    // this.entertainmentNewslist = await getNewsList(8, '娱乐');
+    this.scienceNewslist = await getNewsList(8, '科技');
+    this.sportsNewslist = await getNewsList(8, '体育');
+    this.militaryNewslist = await getNewsList(8, '军事');
+    this.educationNewslist = await getNewsList(8, '教育');
+    this.entertainmentNewslist = await getNewsList(8, '娱乐');
   }
 }
 
@@ -191,7 +191,7 @@ h3 {
   margin: 50px 0px 25px 0px;
   text-align: center;
   font-size: 25px;
-  color: blueviolet;
+  color: brown;
 }
 
 .newslist {
@@ -199,6 +199,7 @@ h3 {
   height: 600px;
   margin: auto;
   list-style: none;
+  font-family: 'common-black',sans-serif;
 }
 
 .newslist li {

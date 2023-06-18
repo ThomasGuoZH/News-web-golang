@@ -7,7 +7,7 @@
         </navigation>
         <sidebox class="sidebox" />
         <backtotop />
-        <h3 style="color:black;margin-top:50px">科技新闻</h3>
+        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">科技新闻</h3>
         <div class="main">
             <el-row gutter="20">
                 <el-col span="16">
@@ -103,13 +103,17 @@ export default {
         }
     },
     mounted: async function () {
-        // this.scienceNewslist = await getNewsList(12, '科技');
+        this.scienceNewslist = await getNewsList(12, '科技');
     }
 }
 
 </script>
 
 <style scoped>
+.science {
+    font-family: 'common-regular',sans-serif;
+}
+
 .sidebox {
     position: fixed;
     left: 50%;

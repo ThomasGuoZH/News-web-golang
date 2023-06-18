@@ -76,8 +76,8 @@ export default {
 </script>
 <style>
 .routeback {
-  margin-top: -30px;
-  color: white;
+  margin-top: 30px;
+  font-family: 'common-black',sans-serif;
 }
 </style>
   

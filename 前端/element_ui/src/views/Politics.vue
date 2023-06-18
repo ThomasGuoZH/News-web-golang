@@ -7,7 +7,7 @@
     </navigation>
     <sidebox />
     <backtotop />
-    <h3 style="color:black">时政新闻</h3>
+    <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">时政新闻</h3>
     <div class="main">
       <el-row>
         <el-col :span="16">
@@ -80,11 +80,15 @@ export default {
     }
   },
   mounted: async function () {
-    // this.newsList = await getNewsList(15, '政治');
+    this.newsList = await getNewsList(15, '政治');
   }
 }
 </script>
-<style >
+<style scoped>
+.politics {
+    font-family: 'common-regular',sans-serif;
+}
+
 body {
   background-color: rgb(229, 242, 245);
 }

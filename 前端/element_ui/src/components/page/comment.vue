@@ -177,6 +177,8 @@ export default {
   margin: auto;
   width: 60%;
   padding: 20px;
+  font-family: 'sihan-regular',sans-serif;
+  margin-bottom: 50px;
 }
 
 .comment {

@@ -7,7 +7,7 @@
         </navigation>
         <sidebox />
         <backtotop />
-        <h3 style="color:black;margin-top:50px">教育新闻</h3>
+        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">教育新闻</h3>
         <div class="main">
             <el-row gutter="20">
                 <el-col span="16">
@@ -103,7 +103,7 @@ export default {
         }
     },
     mounted: async function () {
-        // this.educationNewslist = await getNewsList(12, '娱乐');
+        this.educationNewslist = await getNewsList(12, '娱乐');
     }
 }
 
@@ -121,6 +121,10 @@ export default {
     background-color: #b9f1f1;
     text-align: center;
     border-radius: 10%;
+}
+
+.education {
+    font-family: 'common-regular',sans-serif;
 }
 
 .el-col {

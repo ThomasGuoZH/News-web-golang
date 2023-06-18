@@ -1,7 +1,9 @@
 <template>
     <div class="news">
         <h1>{{ article[0].title }}</h1>
+        <div class="time-src">
         <p>{{ article[0].time }} {{ article[0].src }}</p>
+        </div>
         <div class="picture">
             <img :src="article[0].pic" alt="image" style="text-align:center;">
         </div>
@@ -39,13 +41,13 @@ export default {
     max-width: 800px;
     margin: 30px auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
 }
 
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
     text-align: center;
+    font-family: 'sihan-heavy',sans-serif;
 }
 
 p {
@@ -53,6 +55,7 @@ p {
     margin-bottom: 2px;
     color: #888;
     text-align: center;
+    font-family: 'sihan-light',sans-serif;
 }
 
 img {
@@ -66,5 +69,6 @@ img {
     line-height: 1.6;
     text-indent: 2em;
     font-weight: 500px;
+    font-family: 'sihan-regular',sans-serif;
 }
 </style>

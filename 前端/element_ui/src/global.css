@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'common-regular';
+  src:url(./assets/fonts/common/Alibaba_PuHuiTi_2.0_55_Regular_55_Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'commen-black';
+  src: url(./assets/fonts/common/Alibaba_PuHuiTi_2.0_115_Black_115_Black.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'sihan-regular';
+    src: url(./assets/fonts/sihan/SourceHanSerifSC-Regular.otf) format('opentype');
+}
+@font-face {
+    font-family: 'sihan-heavy';
+    src: url(./assets/fonts/sihan/SourceHanSerifSC-Heavy.otf) format('opentype');
+}
+@font-face {
+  font-family: 'sihan-light';
+  src: url(./assets/fonts/sihan/SourceHanSerifSC-Light.otf) format('opentype');
+}

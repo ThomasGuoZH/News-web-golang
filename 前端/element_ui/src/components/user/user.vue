@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="currentUser.loggedIn">
-            <p>欢迎 {{ currentUser.username }}，您已登录</p>
+            <p>你好，{{ currentUser.username }}，您已登录</p>
             <button @click="logout">退出登录</button>
             <router-link :to="'/personal_center/myMessage/' + currentUser.id" target="_blank">个人中心</router-link>
         </div>
@@ -149,5 +149,8 @@ export default {
 .log {
     position: relative;
     left: 120px;
+}
+.login_register {
+    margin-top: 5px;
 }
 </style>

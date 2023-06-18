@@ -7,7 +7,7 @@
         </navigation>
         <sidebox />
         <backtotop />
-        <h3 style="color:black">娱乐新闻</h3>
+        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">娱乐新闻</h3>
         <div class="main">
             <el-row>
                 <el-col :span="16">
@@ -83,12 +83,16 @@ export default {
         }
     },
     mounted: async function () {
-        // this.newsList = await getNewsList(15, '娱乐');
+        this.newsList = await getNewsList(15, '娱乐');
     }
 }
 </script>
 
 <style >
+.entertainment {
+    font-family: 'common-regular',sans-serif;
+}
+
 body {
     background-color: rgb(229, 242, 245);
 }

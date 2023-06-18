@@ -1,10 +1,12 @@
 <template>
     <span class="top">
-        <h2>新闻论坛</h2>
-        <div class="user">
-            <User />
-            <!-- <is_login /> 还未修改，后面可以把登陆注册的组件一起合并了 -->
-            <!-- <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link> -->
+        <div class="title-user">
+          <h2>新闻论坛</h2>
+          <div class="user">
+              <User />
+              <!-- <is_login /> 还未修改，后面可以把登陆注册的组件一起合并了 -->
+              <!-- <el-link href="/personal_center/myMessage" target="_blank">个人中心</el-link> -->
+          </div>
         </div>
         <div class="nav">
             <ul>
@@ -42,8 +44,13 @@ export default {
     color: #ffffff;
     /* 调背景样式 */
     display: block;
-    height: 108px;
+    height: 72px;
     border-collapse: collapse;
+}
+
+.title-user {
+  display: flex;
+  justify-content: space-between;
 }
 
 h2 {
@@ -51,10 +58,12 @@ h2 {
     padding: 15px 0 0 30px;
     text-align: left;
     font-size: 30px;
+    font-family: 'sihan-heavy',sans-serif;
     /* 加样式 */
 }
 
 .user {
+    margin-top: 15px;
     color: #ffffff;
     text-align: right;
     margin-right: 20px;
@@ -64,13 +73,14 @@ h2 {
     margin-top: -7px;
     text-decoration: none;
     background-color: white;
+    font-family: 'common-black',sans-serif;
 }
 
 .nav ul {
     display: flex;
     list-style: none;
-    margin-top: 20px;
-    border-bottom: black solid 3px;
+    margin-top: 20px; 
+    border-bottom: black solid 1px;
 }
 
 .nav li {

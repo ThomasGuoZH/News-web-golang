@@ -7,12 +7,13 @@
     </navigation>
     <sidebox />
     <backtotop />
-    <h3 style="color:black">体育新闻</h3>
+    <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">体育新闻</h3>
     <div class="carousel-container">
       <el-carousel :autoplay="true" :interval="5000" height="480px">
         <el-carousel-item v-for="(news, index) in sportsNewslist.slice(0, 4)" :key="index">
           <router-link :to="'/sports/newspage/' + news.title" target="_blank">
             <img class="slider-image" :src="news.pic" alt="Slider Image">
+            <div class="news-title">{{ news.title }}</div>
           </router-link>
           <div class="slider-caption">
             <h3>{{ news.title }}</h3>
@@ -103,12 +104,16 @@ export default {
     }
   },
   mounted: async function () {
-    // this.sportsNewslist = await getNewsList(12, '体育');
+    this.sportsNewslist = await getNewsList(12, '体育');
   }
 };
 </script>
   
 <style scoped>
+.sports {
+    font-family: 'common-regular',sans-serif;
+}
+
 .slider-image {
   width: 100%;
   height: 100%;

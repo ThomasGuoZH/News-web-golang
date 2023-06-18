@@ -6,6 +6,7 @@ import './plugins/element.js'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 import VueAxios from 'vue-axios';
+import './global.css';
 
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false

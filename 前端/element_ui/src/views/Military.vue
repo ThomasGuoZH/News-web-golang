@@ -7,7 +7,7 @@
         </navigation>
         <sidebox />
         <backtotop />
-        <h3 style="color:black">军事新闻</h3>
+        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">军事新闻</h3>
         <div class="carousel-container">
             <el-carousel :autoplay="true" :interval="5000" height="480px">
                 <el-carousel-item v-for="(news, index) in Newslist.slice(0, 4)" :key="index">
@@ -101,7 +101,7 @@ export default {
         }
     },
     mounted: async function () {
-        // this.Newslist = await getNewsList(12, '军事');
+        this.Newslist = await getNewsList(12, '军事');
     }
 }
 </script>
@@ -110,6 +110,10 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.military {
+    font-family: 'common-regular',sans-serif;
 }
 
 .carousel-container {
