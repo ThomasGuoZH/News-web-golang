@@ -15,7 +15,7 @@ func (User) TableName() string {
 	return "user"
 }
 
-// RegisterForm 登录请求参数
+// RegisterForm 注册请求参数
 type RegisterForm struct {
 	UserName        string `form:"username"`
 	Password        string `form:"password"`
@@ -29,4 +29,21 @@ type RegisterForm struct {
 type LoginForm struct {
 	UserName string `form:"username"`
 	Password string `form:"password"`
+}
+
+// ChangeInfoForm 更改信息请求参数(需要Id)
+type ChangeInfoForm struct {
+	Id       string `form:"id"`
+	UserName string `form:"username"`
+	Sex      string `form:"sex"`
+	Email    string `form:"email"`
+	Phone    string `form:"phone"`
+}
+
+// ChangePwdForm 更改密码请求参数(需要Id)
+type ChangePwdForm struct {
+	Id              string `form:"id"`
+	OldPassword     string `form:"oldPassword"`
+	NewPassword     string `form:"newPassword"`
+	ConfirmPassword string `form:"confirmPassword"`
 }

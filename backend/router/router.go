@@ -14,6 +14,8 @@ func UserRouterInit(r *gin.RouterGroup) {
 	{
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
+		userManager.POST("/change_info", control.ChangeInfoHandler)
+		userManager.POST("/change_password", control.ChangePwdHandler)
 		userManager.Use(logic.AuthMiddleware())
 		//{
 		//	userManager.GET("/userinfo", control.UserInfoHandler)
