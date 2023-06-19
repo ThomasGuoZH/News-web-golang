@@ -1,10 +1,10 @@
 <template>
     <div class="set">
         <el-row>
-            <el-col span="6">
+            <el-col :span="6">
                 <personal_nav />
             </el-col>
-            <el-col span="18">
+            <el-col :span="18">
                 <myMessage />
             </el-col>
         </el-row>

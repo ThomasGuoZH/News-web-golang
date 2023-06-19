@@ -8,6 +8,8 @@ Vue.prototype.$axios = axios
 import VueAxios from 'vue-axios';
 import './global.css';
 
+store.dispatch('user/loadCurrentUser');
+
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 // 配置请求的根路径

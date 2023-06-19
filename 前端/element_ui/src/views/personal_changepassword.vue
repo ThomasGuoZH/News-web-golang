@@ -1,8 +1,12 @@
 <template>
     <div class="set">
         <el-row>
-            <el-col span="6"><personal_nav/></el-col>
-            <el-col span="18"><Changepassword/></el-col>
+            <el-col :span="6">
+                <personal_nav />
+            </el-col>
+            <el-col :span="18">
+                <Changepassword />
+            </el-col>
         </el-row>
     </div>
 </template>
@@ -20,11 +24,9 @@ export default {
 
 
 <style>
-.set{
+.set {
     display: block;
-    width:1200px;
+    width: 1200px;
     background-color: aliceblue;
     margin: 0 auto;
-}
-
-</style>
+}</style>

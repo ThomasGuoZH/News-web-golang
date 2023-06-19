@@ -28,12 +28,11 @@ export default {
                 loggedIn: true
             }
             console.log(state.currentUser);
-            localStorage.setItem(`currentUser_${userId}`, JSON.stringify(state.currentUser))
+            localStorage.setItem(`currentUser`, JSON.stringify(state.currentUser))
         },
         removeCurrentUser(state) {
-            const userId = state.currentUser.userId;
             state.currentUser = defaultCurrentUser;
-            localStorage.removeItem(`currentUser_${userId}`);
+            localStorage.removeItem(`currentUser`);
         }
     },
     actions: {
@@ -59,8 +58,8 @@ export default {
             Message.success("注销成功");
             commit('removeCurrentUser');
         },
-        async loadCurrentUser({ commit }, userId) {
-            const currentUserKey = `currentuser_${userId}`;
+        async loadCurrentUser({ commit }) {
+            const currentUserKey = `currentuser`;
             const currentUser = JSON.parse(localStorage.getItem(currentUserKey));
             if (currentUser) {
                 commit("setCurrentUser", currentUser);

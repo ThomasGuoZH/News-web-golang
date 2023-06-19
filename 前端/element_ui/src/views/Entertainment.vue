@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :span="6" offset="2">
+                <el-col :span="6" :offset="2">
                     <div class="side-bar">
                         <div class="side-item">
                             <div class="side-title">热门新闻</div>
