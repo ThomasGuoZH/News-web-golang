@@ -3,7 +3,7 @@
         <div v-if="currentUser.loggedIn">
             <p>您好，{{ currentUser.username }}，您已登录</p>
             <button @click="logout">退出登录</button>
-            <router-link :to="'/personal_center/myMessage/' + currentUser.id" target="_blank">
+            <router-link :to="'/personal_center/myMessage/'">
                 <img src="../../assets/icons/user.svg" alt="个人中心">
             </router-link>
         </div>
@@ -143,25 +143,27 @@ export default {
         }
     },
     created() {
-        this.$store.dispatch('user/loadCurrentUser', this.currentUser.id);
+        this.$store.dispatch('user/loadCurrentUser');
     },
 };
 </script>
 <style scoped>
 .user {
-    font-family: 'sihan-regular',sans-serif;
+    font-family: 'sihan-regular', sans-serif;
 }
 
 .log {
     position: relative;
     left: 120px;
 }
+
 .login_register {
     margin-top: 5px;
 }
+
 .user img {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
 }
 </style>

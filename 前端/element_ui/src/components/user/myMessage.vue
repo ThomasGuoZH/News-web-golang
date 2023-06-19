@@ -56,18 +56,18 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 16, message: '密码在6到16个字符之间', trigger: 'blur' }
         ],
-        confirmPassword: this.isLogin ? [] : [
+        confirmPassword: [
           { required: true, message: '请确认密码', trigger: 'blur' },
           { validator: this.validateConfirmPassword, trigger: 'blur' }
         ],
-        email: this.isLogin ? [] : [
+        email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
         ],
-        sex: this.isLogin ? [] : [
+        sex: [
           { required: true, message: '请选择性别', trigger: 'blur' }
         ],
-        phone: this.isLogin ? [] : [
+        phone: [
           { required: true, message: '请输入电话号码', trigger: 'blur' },
           { min: 11, max: 11, message: '电话号码必须为11位', trigger: 'blur' }
         ]
