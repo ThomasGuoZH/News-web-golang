@@ -16,7 +16,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in politicsNewslist" :key="index" class="newstitle">
-              <router-link :to="'/politics/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/politics/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -27,7 +27,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in scienceNewslist" :key="index" class="newstitle">
-              <router-link :to="'/science/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/science/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -38,7 +38,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
-              <router-link :to="'/entertainment/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/entertainment/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -51,7 +51,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in sportsNewslist" :key="index" class="newstitle">
-              <router-link :to="'/sports/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/sports/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -62,7 +62,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in militaryNewslist" :key="index" class="newstitle">
-              <router-link :to="'/military/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/military/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -73,7 +73,7 @@
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
-              <router-link :to="'/education/newspage/' + news.title" target="_blank">{{ news.title }}</router-link>
+              <router-link :to="'/education/newspage/' + news.title">{{ news.title }}</router-link>
             </li>
           </ul>
         </div>
@@ -199,7 +199,7 @@ h3 {
   height: 600px;
   margin: auto;
   list-style: none;
-  font-family: 'common-black',sans-serif;
+  font-family: 'common-black', sans-serif;
 }
 
 .newslist li {
