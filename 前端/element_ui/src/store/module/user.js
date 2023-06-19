@@ -1,4 +1,4 @@
-import { userLogin } from "@/api/user";
+import { userLogin, changeInfo, changePassword } from "@/api/user";
 import { Message } from 'element-ui'
 
 const defaultCurrentUser = {
@@ -58,6 +58,21 @@ export default {
             Message.success("注销成功");
             commit('removeCurrentUser');
         },
+        async changeInfo({ commit }, form, token) {
+            const res = await changeInfo(form, token);
+            commit('setCurrentUser', {
+                username: res.data.username,
+                sex: res.data.sex,
+                email: res.data.email,
+                phone: res.data.phone,
+            });
+            if (res.msg == '保存成功！') {
+                Message.success(res.msg);
+            } else if (res.mag == '用户名已存在') {
+                Message.warning(res.msg);
+            }
+        },
+        // async changePassword({commit},form)
         async loadCurrentUser({ commit }) {
             const currentUserKey = `currentuser`;
             const currentUser = JSON.parse(localStorage.getItem(currentUserKey));

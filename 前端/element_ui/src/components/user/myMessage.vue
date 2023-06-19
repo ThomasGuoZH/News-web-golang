@@ -3,10 +3,9 @@
     <el-container>
       <el-header>基本信息</el-header>
       <el-main>
-
         <el-form :model="form" :rules="rules" ref="form" label-width="100px">
           <el-form-item label="账户ID">
-            <el-input v-model="form.id"></el-input>
+            <el-textarea v-model="form.id">{{ form.id }}</el-textarea>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
             <el-input v-model="form.name"></el-input>
@@ -35,17 +34,19 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  data() {
+    return {
+      form: {
+        id: '',
+        username: '',
+        sex: '',
+        email: '',
+        phone: '',
+      },
+    }
+  },
   computed: {
     ...mapState('user', ['currentUser']),
-    form() {
-      return {
-        id: this.currentUser.id,
-        name: this.currentUser.username,
-        sex: this.currentUser.sex,
-        email: this.currentUser.email,
-        phone: this.currentUser.phone,
-      }
-    },
     rules() {
       const rules = {
         username: [
@@ -80,7 +81,11 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           // 提交表单数据
-          this.$emit('submit', this.form)
+          console.log(this.form);
+          this.$store.dispatch('user/changeInfo', {
+            form: this.form,
+            token: this.currentUser.token,
+          })
         } else {
           return false
         }
@@ -89,6 +94,13 @@ export default {
   },
   created() {
     this.$store.dispatch('user/loadCurrentUser');
+    this.form = {
+      id: this.currentUser.id,
+      name: this.currentUser.username,
+      sex: this.currentUser.sex,
+      email: this.currentUser.email,
+      phone: this.currentUser.phone,
+    };
   },
 }
 </script>
