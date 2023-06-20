@@ -58,17 +58,19 @@ export default {
             Message.success("注销成功");
             commit('removeCurrentUser');
         },
-        async changeInfo({ commit }, form, token) {
+        async changeInfo({ commit }, { form, token }) {
             const res = await changeInfo(form, token);
-            commit('setCurrentUser', {
-                username: res.data.username,
-                sex: res.data.sex,
-                email: res.data.email,
-                phone: res.data.phone,
-            });
-            if (res.msg == '保存成功！') {
+            if (res.msg == '保存成功!') {
                 Message.success(res.msg);
-            } else if (res.mag == '用户名已存在') {
+                commit('setCurrentUser', {
+                    username: res.data.username,
+                    sex: res.data.sex,
+                    email: res.data.email,
+                    phone: res.data.phone,
+                });
+            } else if (res.msg == '用户名已存在') {
+                Message.warning(res.msg);
+            } else if (res.msg == '用户信息不能相同') {
                 Message.warning(res.msg);
             }
         },

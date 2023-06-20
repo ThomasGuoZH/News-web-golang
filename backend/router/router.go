@@ -14,12 +14,11 @@ func UserRouterInit(r *gin.RouterGroup) {
 	{
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
-		userManager.POST("/change_info", control.ChangeInfoHandler)
-		userManager.POST("/change_password", control.ChangePwdHandler)
 		userManager.Use(logic.AuthMiddleware())
-		//{
-		//	userManager.GET("/userinfo", control.UserInfoHandler)
-		//}
+		{
+			userManager.POST("/change_info", control.ChangeInfoHandler)
+			userManager.POST("/change_password", control.ChangePwdHandler)
+		}
 	}
 }
 
@@ -64,6 +63,10 @@ func SetupRouter() *gin.Engine {
 	config.AllowOrigins = []string{"http://localhost:8080", "http://localhost:8081", "http://localhost:8082", "http://localhost:8083",
 		"http://localhost:8084", "http://localhost:8085"} // 允许访问的域名
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"} // 允许的HTTP方法
+	// 配置 CORS 策略
+	config.AllowOrigins = []string{"http://localhost:8081"}
+	config.AllowHeaders = []string{"Authorization", "Content-Type"}
+	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE"}
 	router.Use(cors.New(config))
 	api := router.Group("api")
 	UserRouterInit(api)

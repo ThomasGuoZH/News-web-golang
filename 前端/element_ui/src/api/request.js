@@ -58,13 +58,11 @@ export function userLoginAPI(url) {
 //修改信息
 export function changeInfoAPI(url) {
     return async function (form, token) {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        }
         try {
-            const res = await axios.get(url, form, config);
+            const res = await axios.post(url, form, { headers });
             return res.data;
         } catch (e) {
             return e;
@@ -74,13 +72,11 @@ export function changeInfoAPI(url) {
 //修改密码
 export function changePasswordAPI(url) {
     return async function (form, token) {
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
+        const headers = {
+            'Authorization': `Bearer ${token}`
+        }
         try {
-            const res = await axios.get(url, form, config);
+            const res = await axios.post(url, form, { headers });
             return res.data.msg;
         } catch (e) {
             return e;

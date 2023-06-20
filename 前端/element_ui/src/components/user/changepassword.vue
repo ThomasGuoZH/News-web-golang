@@ -18,7 +18,7 @@
             </el-form-item></el-col>
           <el-col :span="1" :offset="8">
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">保存</el-button>
+              <el-button type="primary" @click="onSubmit">修改</el-button>
             </el-form-item></el-col>
         </el-form>
       </el-main>
@@ -28,21 +28,26 @@
   
 <script>
 import { mapState } from 'vuex'
+import { changePassword } from '@/api/user'
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
+      res: '',
       form: {
+        id: '',
         oldPassword: '',
         newPassword: '',
         confirmPassword: ''
       },
       rules: {
         oldPassword: [
-          { required: true, message: '请输入旧密码', trigger: 'blur' }
+          { required: true, message: '请输入旧密码', trigger: 'blur' },
+          { min: 6, message: '旧密码长度至少为6位', trigger: 'blur' }
         ],
         newPassword: [
           { required: true, message: '请输入新密码', trigger: 'blur' },
-          { min: 6, message: '密码长度至少为6', trigger: 'blur' }
+          { min: 6, message: '新密码长度至少为6', trigger: 'blur' }
         ],
         confirmPassword: [
           { required: true, message: '请再次输入密码', trigger: 'blur' },
@@ -63,15 +68,23 @@ export default {
         callback()
       }
     },
-    onSubmit() {
-      this.$refs.form.validate(valid => {
-        if (valid) {
-          // 提交表单数据
-          console.log(this.form)
-        } else {
-          return false
+    async onSubmit() {
+      const valid = await this.$refs.form.validate();
+      if (valid) {
+        // 提交表单数据
+        this.form.id = this.currentUser.id;
+        this.res = await changePassword(this.form, this.currentUser.token);
+        console.log(this.res);
+        if (this.res == '旧密码错误!') {
+          Message.warning(this.res);
+        } else if (this.res == '新旧密码不能相同') {
+          Message.warning(this.res);
+        } else if (this.res == '密码修改成功!') {
+          Message.success(this.res);
         }
-      })
+      } else {
+        return false
+      }
     }
   },
   created() {

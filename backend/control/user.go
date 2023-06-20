@@ -76,11 +76,7 @@ func LoginHandler(c *gin.Context) {
 	}
 }
 
-// 获得用户信息
-func UserInfoHandler() {
-
-}
-
+// 修改用户信息
 func ChangeInfoHandler(c *gin.Context) {
 	var newInfo models.ChangeInfoForm
 	if err := c.ShouldBind(&newInfo); err != nil {
@@ -119,6 +115,7 @@ func ChangeInfoHandler(c *gin.Context) {
 	}, "保存成功!")
 }
 
+// 修改密码
 func ChangePwdHandler(c *gin.Context) {
 	var newPwd models.ChangePwdForm
 	if err := c.ShouldBind(&newPwd); err != nil {
@@ -142,9 +139,5 @@ func ChangePwdHandler(c *gin.Context) {
 	}
 	findUser.Password = newPwd.NewPassword
 	mysql.DB.Save(&findUser)
-	response.Success(c, gin.H{
-		"username": findUser.UserName,
-		"sex":      findUser.Sex,
-		"email":    findUser.Email,
-		"phone":    findUser.Phone}, "密码修改成功!")
+	response.Success(c, nil, "密码修改成功!")
 }

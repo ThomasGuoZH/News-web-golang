@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!-- <div class="routeback">
+      <el-button class='back' @click="routeBack">
+        <img src="../../assets/icons/back.svg" alt="返回">
+      </el-button>
+    </div> -->
     <el-row class="tac">
       <el-col>
         <div class="t_title">
@@ -36,13 +41,41 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
-    }
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        vm.pathFromUrl = from.fullPath;
+        vm.channel = to.params.channel;
+      })
+    },
   }
 
 }
 </script>
 
 <style>
+.routeback {
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+.back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.back img {
+  height: 25px;
+  width: 25px;
+}
+
 .t_title {
   height: 60px;
   text-align: center;

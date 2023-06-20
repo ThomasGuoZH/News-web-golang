@@ -8,7 +8,7 @@
             <el-textarea v-model="form.id">{{ form.id }}</el-textarea>
           </el-form-item>
           <el-form-item label="姓名" prop="name">
-            <el-input v-model="form.name"></el-input>
+            <el-input v-model="form.username"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="sex">
             <el-radio-group v-model="form.sex">
@@ -81,7 +81,6 @@ export default {
       this.$refs.form.validate(valid => {
         if (valid) {
           // 提交表单数据
-          console.log(this.form);
           this.$store.dispatch('user/changeInfo', {
             form: this.form,
             token: this.currentUser.token,
@@ -96,7 +95,7 @@ export default {
     this.$store.dispatch('user/loadCurrentUser');
     this.form = {
       id: this.currentUser.id,
-      name: this.currentUser.username,
+      username: this.currentUser.username,
       sex: this.currentUser.sex,
       email: this.currentUser.email,
       phone: this.currentUser.phone,
