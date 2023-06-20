@@ -3,7 +3,7 @@
         <div v-if="currentUser.loggedIn">
             <p>您好，{{ currentUser.username }}，您已登录</p>
             <button @click="logout">退出登录</button>
-            <router-link :to="'/personal_center/myMessage/'">
+            <router-link :to="'/personal_center/myInfo/'">
                 <img src="../../assets/icons/user.svg" alt="个人中心">
             </router-link>
         </div>

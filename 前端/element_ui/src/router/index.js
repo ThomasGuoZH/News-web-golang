@@ -54,7 +54,7 @@ const routes = [
     component: Science,
   },
   {
-    path: '/personal_center/myMessage',
+    path: '/personal_center/myInfo',
     name: 'personal_center',
     component: PersonalCenter,
   },
