@@ -84,9 +84,9 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 .politics {
-    font-family: 'common-regular',sans-serif;
+  font-family: 'common-regular', sans-serif;
 }
 
 body {
