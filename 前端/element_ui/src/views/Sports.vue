@@ -5,13 +5,12 @@
         <b>{{ items[4].name }}</b>
       </template>
     </navigation>
-    <sidebox />
     <backtotop />
-    <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">体育新闻</h3>
+    <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">体育新闻</h3>
     <div class="carousel-container">
       <el-carousel :autoplay="true" :interval="5000" height="480px">
         <el-carousel-item v-for="(news, index) in sportsNewslist.slice(0, 4)" :key="index">
-          <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+          <router-link :to="'/sports/newspage/' + news.title">
             <img class="slider-image" :src="news.pic" alt="Slider Image">
             <div class="news-title">{{ news.title }}</div>
           </router-link>
@@ -34,16 +33,17 @@
           <div class="news-list" v-for="(news, index) in sportsNewslist.slice(4, sportsNewslist.length)" :key="index">
             <div class="news-item">
               <div class="news-thumbnail">
-                <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+                <router-link :to="'/sports/newspage/' + news.title">
                   <img class="thumbnail-image" :src="news.pic" alt="News Thumbnail">
                 </router-link>
               </div>
               <div class="news-details">
-                <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+                <router-link :to="'/sports/newspage/' + news.title">
                   <h4>{{ news.title }}</h4>
+                </router-link>
                   <div class="news-src">{{ news.src }}</div>
                   <div class="news-time">{{ news.time }}</div>
-                </router-link>
+                
               </div>
             </div>
           </div>
@@ -112,6 +112,8 @@ export default {
 <style scoped>
 .sports {
     font-family: 'common-regular',sans-serif;
+    background-color: #F9F7F7;
+    padding-bottom: 5%;
 }
 
 .slider-image {
@@ -154,8 +156,8 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 1200px;
-  background-color: rgb(235, 237, 252);
+  width: 1000px;
+  background-color: #DBE2EF;
   margin: auto;
 }
 

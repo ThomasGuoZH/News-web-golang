@@ -40,7 +40,7 @@ export default {
 </script>
 <style>
 .top {
-    background-color: #333333;
+    background-color: #112D4E;
     color: #ffffff;
     /* 调背景样式 */
     display: block;

@@ -5,11 +5,10 @@
                 <b>{{ items[2].name }}</b>
             </template>
         </navigation>
-        <sidebox class="sidebox" />
         <backtotop />
-        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">科技新闻</h3>
+        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">科技新闻</h3>
         <div class="main">
-            <el-row gutter="20">
+            <el-row gutter="18">
                 <el-col span="16">
                     <div class="news-box">
                         <el-col span="24">
@@ -112,18 +111,8 @@ export default {
 <style scoped>
 .science {
     font-family: 'common-regular',sans-serif;
-}
-
-.sidebox {
-    position: fixed;
-    left: 50%;
-    margin-left: 650px;
-    top: 200px;
-    width: 100px;
-    height: 200px;
-    background-color: #b9f1f1;
-    text-align: center;
-    border-radius: 10%;
+    background-color: #F9F7F7;
+    padding-bottom: 5%;
 }
 
 .el-col {
@@ -138,17 +127,19 @@ export default {
 .main {
     width: 1200px;
     margin: 20px auto 0;
-    background-color: rgb(247, 239, 239);
+    background-color: #DBE2EF;
+    padding-top: 10px;
+    padding-right: 5px;
 }
 
 .m1-1 {
     height: 200px;
-    background-color: aquamarine;
+    background-color: #DBE2EF;
 }
 
 .m2 {
     height: 820px;
-    background-color: bisque;
+    background-color:#3F72AF;
 }
 
 .news-carousel {
@@ -221,13 +212,18 @@ export default {
     background-color: #d3dce6;
 }
 
+.news-item2 ul {
+    padding: 5px;;
+}
+
 .news-item2 li {
     list-style: none;
     position: relative;
     overflow: hidden;
     width: 366px;
     display: block;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
+    margin-right: 5px;
 }
 
 .news-item2 div {
@@ -240,10 +236,11 @@ export default {
 }
 
 .news-title1 {
-    color: #475669
+    color: black
 }
 
 .news-time {
+    color: rgb(61, 61, 61);
     position: absolute;
     bottom: 5px;
     left: 200px;

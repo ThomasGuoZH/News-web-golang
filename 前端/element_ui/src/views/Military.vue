@@ -5,9 +5,8 @@
                 <b>{{ items[5].name }}</b>
             </template>
         </navigation>
-        <sidebox />
         <backtotop />
-        <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">军事新闻</h3>
+        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">军事新闻</h3>
         <div class="carousel-container">
             <el-carousel :autoplay="true" :interval="5000" height="480px">
                 <el-carousel-item v-for="(news, index) in Newslist.slice(0, 4)" :key="index">
@@ -33,16 +32,16 @@
                     <div class="news-list" v-for="(news, index) in Newslist.slice(4, Newslist.length)" :key="index">
                         <div class="news-item">
                             <div class="news-thumbnail">
-                                <router-link :to="'/military/newspage/' + news.title" target="_blank">
+                                <router-link :to="'/military/newspage/' + news.title">
                                     <img class="thumbnail-image" :src="news.pic" alt="News Thumbnail">
                                 </router-link>
                             </div>
                             <div class="news-details">
-                                <router-link :to="'/military/newspage/' + news.title" target="_blank">
+                                <router-link :to="'/military/newspage/' + news.title" >
                                     <h4>{{ news.title }}</h4>
+                                </router-link>    
                                     <div class="news-src">{{ news.src }}</div>
                                     <div class="news-time">{{ news.time }}</div>
-                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -52,12 +51,12 @@
                 <div v-else-if="viewMode === 'card'" class="news-cards">
                     <div class="news-card" v-for="(news, index) in Newslist.slice(4, Newslist.length)" :key="index">
                         <div class="card-image">
-                            <router-link :to="'/military/newspage/' + news.title" target="_blank">
+                            <router-link :to="'/military/newspage/' + news.title">
                                 <img class="card-thumbnail" :src="news.pic" alt="News Thumbnail">
                             </router-link>
                         </div>
                         <div class="card-details">
-                            <router-link :to="'/military/newspage/' + news.title" target="_blank">
+                            <router-link :to="'/military/newspage/' + news.title">
                                 <h4>{{ news.title }}</h4>
                             </router-link>
                         </div>
@@ -114,6 +113,8 @@ export default {
 
 .military {
     font-family: 'common-regular',sans-serif;
+    background-color: #F9F7F7;
+    padding-bottom: 5%;
 }
 
 .carousel-container {
@@ -150,8 +151,8 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 1200px;
-    background-color: rgb(235, 237, 252);
+    width: 1000px;
+    background-color: #DBE2EF;
     margin: auto;
 }
 

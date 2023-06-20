@@ -7,7 +7,6 @@
     </navigation>
     <h3 style="color:brown">头条新闻</h3>
     <carousel />
-    <sidebox />
     <h3>热点新闻</h3>
     <ul class="newslist">
       <li>
@@ -131,9 +130,11 @@ export default {
 }
 
 </script>
-<style>
-body {
-  background-color: rgb(229, 242, 245);
+<style scoped>
+
+ .home{
+  background-color: #F9F7F7;
+  padding-bottom: 2%;
 }
 
 * {
@@ -212,8 +213,8 @@ h3 {
   margin: 20px 0px 5px 20px;
   margin-top: 5px;
   text-align: center;
-  background-color: rgb(253, 238, 215);
-  border-radius: 5%;
+  background-color: #DBE2EF;
+  border-radius: 3%;
 }
 
 .newslist li h4 {
@@ -232,7 +233,8 @@ h3 {
   width: 380px;
   margin: -20px 0px 0px 30px;
   padding-bottom: 2px;
-  border-bottom: 3px solid #785bf5;
+  border-bottom: 2px solid #3F72AF;
+  color: #3F72AF;
   text-align: right;
   text-decoration: none;
 }
@@ -254,12 +256,12 @@ h3 {
 }
 
 .newstitle a {
-  font-size: 14px;
+  font-size: 16px;
   display: block;
   margin: 0px 40px;
   width: 80%;
   text-decoration: none;
-  color: #333;
+  color: black;
   margin: auto 2px;
 }
 

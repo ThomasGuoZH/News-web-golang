@@ -5,9 +5,8 @@
         <b>{{ items[1].name }}</b>
       </template>
     </navigation>
-    <sidebox />
     <backtotop />
-    <h3 style="color:black;margin-top:50px;height: 45px;font-family: 'common-black',sans-serif;">时政新闻</h3>
+    <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">时政新闻</h3>
     <div class="main">
       <el-row>
         <el-col :span="16">
@@ -86,28 +85,22 @@ export default {
 </script>
 <style>
 .politics {
-  font-family: 'common-regular', sans-serif;
+    font-family: 'common-regular',sans-serif;
+    background-color: #F9F7F7;
+    padding-bottom: 5%;
 }
-
-body {
-  background-color: rgb(229, 242, 245);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .main {
   width: 1200px;
   margin: 20px auto 0;
-  background-color: rgb(247, 239, 239);
+  background-color: #DBE2EF;
 }
 
 .news-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 5%;
+  margin-left: 5%;
 }
 
 .news-item {
@@ -168,13 +161,13 @@ body {
 #news-more {
   float: right;
   font-size: 12px;
-  color: #409EFF;
+  color: #3F72AF;
   margin-left: 300px;
 }
 
 .side-bar {
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: #e5e3e3;
 }
 
 .side-item {
