@@ -64,7 +64,8 @@ func SetupRouter() *gin.Engine {
 		"http://localhost:8084", "http://localhost:8085"} // 允许访问的域名
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"} // 允许的HTTP方法
 	// 配置 CORS 策略
-	config.AllowOrigins = []string{"http://localhost:8081"}
+	config.AllowOrigins = []string{"http://localhost:8080", "http://localhost:8081", "http://localhost:8082", "http://localhost:8083",
+		"http://localhost:8084", "http://localhost:8085"}
 	config.AllowHeaders = []string{"Authorization", "Content-Type"}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE"}
 	router.Use(cors.New(config))
