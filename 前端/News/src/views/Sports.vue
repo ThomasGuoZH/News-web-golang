@@ -6,7 +6,8 @@
       </template>
     </navigation>
     <backtotop />
-    <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">体育新闻</h3>
+    <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">
+      体育新闻</h3>
     <div class="carousel-container">
       <el-carousel :autoplay="true" :interval="5000" height="480px">
         <el-carousel-item v-for="(news, index) in sportsNewslist.slice(0, 4)" :key="index">
@@ -41,9 +42,9 @@
                 <router-link :to="'/sports/newspage/' + news.title">
                   <h4>{{ news.title }}</h4>
                 </router-link>
-                  <div class="news-src">{{ news.src }}</div>
-                  <div class="news-time">{{ news.time }}</div>
-                
+                <div class="news-src">{{ news.src }}</div>
+                <div class="news-time">{{ news.time }}</div>
+
               </div>
             </div>
           </div>
@@ -75,6 +76,7 @@ import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
 import carousel from '@/components/layout/carousel.vue';
 import { getNewsList } from '@/api/getNewsList'
+import { storeNews } from '@/api/news'
 export default {
   name: 'sports',
   components: {
@@ -105,15 +107,17 @@ export default {
   },
   mounted: async function () {
     this.sportsNewslist = await getNewsList(12, '体育');
+    const res = await storeNews(this.sportsNewslist);
+    console.log(res);
   }
 };
 </script>
   
 <style scoped>
 .sports {
-    font-family: 'common-regular',sans-serif;
-    background-color: #F9F7F7;
-    padding-bottom: 5%;
+  font-family: 'common-regular', sans-serif;
+  background-color: #F9F7F7;
+  padding-bottom: 5%;
 }
 
 .slider-image {

@@ -6,7 +6,8 @@
             </template>
         </navigation>
         <backtotop />
-        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">军事新闻</h3>
+        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">
+            军事新闻</h3>
         <div class="carousel-container">
             <el-carousel :autoplay="true" :interval="5000" height="480px">
                 <el-carousel-item v-for="(news, index) in Newslist.slice(0, 4)" :key="index">
@@ -37,11 +38,11 @@
                                 </router-link>
                             </div>
                             <div class="news-details">
-                                <router-link :to="'/military/newspage/' + news.title" >
+                                <router-link :to="'/military/newspage/' + news.title">
                                     <h4>{{ news.title }}</h4>
-                                </router-link>    
-                                    <div class="news-src">{{ news.src }}</div>
-                                    <div class="news-time">{{ news.time }}</div>
+                                </router-link>
+                                <div class="news-src">{{ news.src }}</div>
+                                <div class="news-time">{{ news.time }}</div>
                             </div>
                         </div>
                     </div>
@@ -72,6 +73,7 @@ import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
 import comment from '@/components/page/comment.vue'
 import { getNewsList } from '@/api/getNewsList'
+import { storeNews } from '@/api/news'
 export default {
     name: 'military',
     components: {
@@ -101,6 +103,8 @@ export default {
     },
     mounted: async function () {
         this.Newslist = await getNewsList(12, '军事');
+        const res = await storeNews(this.newsList);
+        console.log(res);
     }
 }
 </script>
@@ -112,7 +116,7 @@ export default {
 }
 
 .military {
-    font-family: 'common-regular',sans-serif;
+    font-family: 'common-regular', sans-serif;
     background-color: #F9F7F7;
     padding-bottom: 5%;
 }
