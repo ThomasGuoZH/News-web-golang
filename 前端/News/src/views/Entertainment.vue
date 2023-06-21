@@ -92,7 +92,7 @@ export default {
 
 </script>
 
-<style >
+<style>
 .entertainment {
     font-family: 'common-regular', sans-serif;
     background-color: #F9F7F7;
