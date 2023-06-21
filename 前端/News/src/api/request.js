@@ -96,7 +96,7 @@ export function storeNewsAPI(url) {
             }
         })
             .then(res => {
-                return res.data;
+                return res.data.msg;
             })
             .catch((e) => { return e });
     };
@@ -105,10 +105,11 @@ export function storeNewsAPI(url) {
 //名字找文章
 export function getNewsAPI(url) {
     return async function (title) {
-        return axios.post(url, title
-        )
+        return axios.get(url, {
+            params: { title: title }
+        })
             .then(res => {
-                return res.data;
+                return res.data.data;
             })
             .catch((e) => { return e });
     };
