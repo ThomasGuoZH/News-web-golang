@@ -6,7 +6,8 @@
             </template>
         </navigation>
         <backtotop />
-        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">教育新闻</h3>
+        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">
+            教育新闻</h3>
         <div class="main">
             <el-row gutter="18">
                 <el-col span="16">
@@ -81,6 +82,7 @@ import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
 import { getNewsList } from '@/api/getNewsList'
+import { storeNews } from '@/api/news'
 export default {
     name: 'education',
     components: {
@@ -103,15 +105,17 @@ export default {
     },
     mounted: async function () {
         this.educationNewslist = await getNewsList(12, '娱乐');
+        const res = await storeNews(this.educationNewslist);
+        console.log(res);
     }
 }
 
 
 
 </script>
-<style scoped>
+<style>
 .science {
-    font-family: 'common-regular',sans-serif;
+    font-family: 'common-regular', sans-serif;
     background-color: #F9F7F7;
     padding-bottom: 5%;
 }
@@ -152,7 +156,7 @@ export default {
 
 .m2 {
     height: 820px;
-    background-color:#3F72AF;
+    background-color: #3F72AF;
 }
 
 .news-carousel {
@@ -226,7 +230,8 @@ export default {
 }
 
 .news-item2 ul {
-    padding: 5px;;
+    padding: 5px;
+    ;
 }
 
 .news-item2 li {
