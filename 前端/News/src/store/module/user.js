@@ -63,10 +63,12 @@ export default {
             if (res.msg == '保存成功!') {
                 Message.success(res.msg);
                 commit('setCurrentUser', {
+                    userId: res.data.userId,
                     username: res.data.username,
                     sex: res.data.sex,
                     email: res.data.email,
                     phone: res.data.phone,
+                    token: res.data.token,
                 });
             } else if (res.msg == '用户名已存在') {
                 Message.warning(res.msg);
