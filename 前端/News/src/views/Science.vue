@@ -9,10 +9,10 @@
         <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">
             科技新闻</h3>
         <div class="main">
-            <el-row gutter="18">
-                <el-col span="16">
+            <el-row :gutter="18">
+                <el-col :span="16">
                     <div class="news-box">
-                        <el-col span="24">
+                        <el-col :span="24">
                             <div class="news-carousel">
                                 <el-carousel height="500px" :interval="5000">
                                     <el-carousel-item v-for=" (news, index) in scienceNewslist.slice(0, 4)" :key="index">
@@ -26,7 +26,7 @@
                                 </el-carousel>
                             </div>
                         </el-col>
-                        <el-col span="12">
+                        <el-col :span="12">
                             <div class="m1-1">
                                 <div class="news-item1">
                                     <router-link :to="'/science/newspage/' + scienceNewslist[4].title">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </el-col>
-                        <el-col span="12">
+                        <el-col :span="12">
                             <div class="m1-1">
                                 <div class="news-item1">
                                     <router-link :to="'/science/newspage/' + scienceNewslist[5].title">
@@ -48,19 +48,19 @@
                         </el-col>
                     </div>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                     <div class="side">
-                        <el-col span="24">
+                        <el-col :span="24">
                             <div class="m2">
                                 <div class="news-item2">
                                     <ul>
                                         <li v-for="(news, index) in scienceNewslist.slice(6, 12)" :key="index">
                                             <el-row>
                                                 <router-link :to="'/science/newspage/' + news.title">
-                                                    <el-col span="13">
+                                                    <el-col :span="13">
                                                         <img :src="news.pic" alt="news-img">
                                                     </el-col>
-                                                    <el-col span="11">
+                                                    <el-col :span="11">
                                                         <div class="news-title1">{{ news.title }}</div>
                                                     </el-col>
                                                 </router-link>
