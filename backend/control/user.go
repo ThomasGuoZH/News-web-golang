@@ -107,11 +107,19 @@ func ChangeInfoHandler(c *gin.Context) {
 		return
 	}
 	mysql.DB.Save(&updateUser)
+	token, err := logic.ReleaseToken(findUser) // 发放token
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"code": 500, "msg": "System err!"})
+		fmt.Printf("token generate error:%v", err)
+		return
+	}
 	response.Success(c, gin.H{
+		"userId":   newInfo.Id,
 		"username": newInfo.UserName,
 		"sex":      newInfo.Sex,
 		"email":    newInfo.Email,
 		"phone":    newInfo.Phone,
+		"token":    token,
 	}, "保存成功!")
 }
 

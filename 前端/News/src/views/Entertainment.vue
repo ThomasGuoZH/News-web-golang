@@ -6,7 +6,8 @@
             </template>
         </navigation>
         <backtotop />
-        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">娱乐新闻</h3>
+        <h3 style="color:black;margin-top:50px;text-align: center; font-size: 25px;font-family: 'common-black',sans-serif;">
+            娱乐新闻</h3>
         <div class="main">
             <el-row>
                 <el-col :span="16">
@@ -19,8 +20,8 @@
                             <div class="news-content" v-html="news.content"></div>
                             <div class="news-footer">
                                 <span class="news-time">{{ news.time }}</span>
-                                <router-link :to="'/entertainment/newspage/' + news.title" target="_blank"><el-button
-                                        type="text" id="news-more">查看详情</el-button></router-link>
+                                <router-link :to="'/entertainment/newspage/' + news.title"><el-button type="text"
+                                        id="news-more">查看详情</el-button></router-link>
                             </div>
                         </div>
                     </div>
@@ -60,6 +61,7 @@ import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
 import { getNewsList } from '@/api/getNewsList'
+import { storeNews } from '@/api/news'
 export default {
     name: 'entertainment',
     components: {
@@ -83,13 +85,16 @@ export default {
     },
     mounted: async function () {
         this.newsList = await getNewsList(15, '娱乐');
+        const res = await storeNews(this.newsList);
+        console.log(res);
     }
 }
+
 </script>
 
-<style >
+<style>
 .entertainment {
-    font-family: 'common-regular',sans-serif;
+    font-family: 'common-regular', sans-serif;
     background-color: #F9F7F7;
     padding-bottom: 5%;
 }
