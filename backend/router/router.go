@@ -32,17 +32,18 @@ func NewsRouterInit(r *gin.RouterGroup) {
 }
 
 // 评论路由组
-//func CommentRouterInit(r *gin.RouterGroup) {
-//	commentManager := r.Group("/comment")
-//	{
-//		commentManager.GET("/comment_list", control.CommentListHandler)
-//		userManager.Use(logic.AuthMiddleware())
-//		{
-//			commentManager.POST("/comment", control.UserCommentHandler)
-//			commentManager.GET("/get_comment", control.GetCommentHandler)
-//		}
-//	}
-//}
+func CommentRouterInit(r *gin.RouterGroup) {
+	commentManager := r.Group("/comment")
+	{
+		//commentManager.GET("/comment_list", control.CommentListHandler)
+		//userManager.Use(logic.AuthMiddleware())
+		{
+			commentManager.POST("/parent_comment", control.UserParentCommentHandler)
+			commentManager.POST("/child_comment", control.UserChildCommentHandler)
+			//commentManager.GET("/get_comment", control.GetCommentHandler)
+		}
+	}
+}
 
 //点赞路由组
 /*func LikeRouterInit(r *gin.RouterGroup) {
@@ -72,6 +73,6 @@ func SetupRouter() *gin.Engine {
 	api := router.Group("api")
 	UserRouterInit(api)
 	NewsRouterInit(api)
-	//CommentRouterInit(api)
+	CommentRouterInit(api)
 	return router
 }
