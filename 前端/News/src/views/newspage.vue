@@ -8,12 +8,12 @@
 
     <div class="toolbar" align="center">
       <!-- <div class="routeback"> -->
-        <!-- 返回键 -->
-        <el-button class="square-button" @click="routeBack">
-          <img src="../assets/icons/back.svg" alt="返回">
-        </el-button>
+      <!-- 返回键 -->
+      <el-button class="square-button" @click="routeBack">
+        <img src="../assets/icons/back.svg" alt="返回">
+      </el-button>
       <!-- </div> -->
-      <div class="favorite"  align="center">
+      <div class="favorite" align="center">
         <!-- 收藏键 -->
         <el-button class="square-button" @click="toggleFavorite">
           <i :class="isFavorite ? 'el-icon-star-on' : 'el-icon-star-off'"></i>
@@ -93,7 +93,7 @@ import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
 import axios from "axios";
-import { parentComment, childComment, getCommentList, like ,saveFavoriteStatus, loadFavoriteStatus} from "../api/comments"
+import { parentComment, childComment, getCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -277,13 +277,6 @@ export default {
       comment.showReplyInput = false;
     },
 
-    async likes(comment) {
-      if (this.currentUser.username == "") {
-        Message.warning("请登录后再点赞！");
-        return;
-      }
-    },
-
     async loadFavoriteStatusFromDatabase() {
       try {
         const result = await loadFavoriteStatus(this.news.title);
@@ -317,7 +310,6 @@ export default {
       console.log(likes);
       const res = await like(likes, this.currentUser.token)
       console.log(res.msg);
-
       this.getComments();
     },
 
@@ -516,7 +508,7 @@ img {
   padding: 0;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   background-color: #fff;
 }
 
