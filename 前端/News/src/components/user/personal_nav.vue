@@ -1,17 +1,12 @@
 <template>
   <div>
-    <!-- <div class="routeback">
-      <el-button class='back' @click="routeBack">
-        <img src="../../assets/icons/back.svg" alt="返回">
-      </el-button>
-    </div> -->
     <el-row class="tac">
       <el-col>
         <div class="t_title">
           <p>个人中心</p>
         </div>
-        <el-menu default-active="$route.path" class="el-menu" @open="handleOpen" @close="handleClose" :router="true">
-          <el-menu-item index="/personal_center/myMessage">
+        <el-menu :default-active="$route.path"  class="el-menu" @open="handleOpen" @close="handleClose" :router="true">
+          <el-menu-item index="/personal_center/myInfomation">
             <i class="el-icon-user"></i>
             <span slot="title">我的信息</span>
           </el-menu-item>
@@ -19,13 +14,21 @@
             <i class="el-icon-menu"></i>
             <span slot="title">更改密码</span>
           </el-menu-item>
-          <el-menu-item index="3">
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+            <el-menu-item index="/personal_center/MyMessage/mycomment">
+              <i class="el-icon-chat-dot-round"></i>
+              <span slot="title">我的评论</span>
+            </el-menu-item>
+            <el-menu-item index="/personal_center/MyMessage/myreply">
+              <i class="el-icon-chat-dot-square"></i>
+              <span slot="title">回复我的</span>
+            </el-menu-item>
+            <el-menu-item index="/personal_center/MyMessage/likes">
+              <i class="el-icon-coin"></i>
+              <span slot="title">收到的赞</span>
+            </el-menu-item>
+          <el-menu-item index="/personal_center/MyLikes">
+            <i class="el-icon-star-off"></i>
+            <span slot="title">我的收藏</span>
           </el-menu-item>
         </el-menu>
       </el-col>
@@ -38,9 +41,11 @@ export default {
   methods: {
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
+
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -48,6 +53,11 @@ export default {
         vm.channel = to.params.channel;
       })
     },
+  },
+  data() {
+    return {
+
+    };
   }
 
 }
@@ -83,5 +93,9 @@ export default {
 
 .t_title p {
   padding: 20px 0;
+}
+.item{
+  margin-top: -5px;
+  margin-left:10px;
 }
 </style>

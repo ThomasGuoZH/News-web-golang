@@ -10,7 +10,10 @@ import Entertainment from '../views/Entertainment.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import Newspage from '../views/newspage.vue'
 import changepassword from '../views/personal_changepassword.vue'
-
+import MyLikes from '../views/Personal_likes.vue'
+import MyComment from '../views/MyMessage_comment.vue'
+import MyReply from '../views/MyMessage_reply.vue'
+import Likes from '../views/MyMessage_likes.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -54,7 +57,7 @@ const routes = [
     component: Science,
   },
   {
-    path: '/personal_center/myMessage',
+    path: '/personal_center/myInfomation',
     name: 'personal_center',
     component: PersonalCenter,
   },
@@ -67,7 +70,29 @@ const routes = [
     path: '/personal_center/changepassword',
     name: 'changepassword',
     component: changepassword
+  },
+  {
+    path: '/personal_center/MyLikes',
+    name: 'MyLikes',
+    component: MyLikes
+  },
+
+  {
+    path: '/personal_center/MyMessage/mycomment',
+    name: 'MyComment',
+    component: MyComment
+  },
+  {
+    path: '/personal_center/MyMessage/myreply',
+    name: 'MyReply',
+    component: MyReply
+  },
+  {
+    path: '/personal_center/MyMessage/likes',
+    name: 'Likes',
+    component: Likes
   }
+
 ]
 
 const router = new VueRouter({

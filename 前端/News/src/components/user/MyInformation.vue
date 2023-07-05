@@ -1,3 +1,4 @@
+
 <template>
   <div class="personal-center">
     <el-container>
@@ -7,7 +8,7 @@
           <el-form-item label="账户ID">
             <el-textarea v-model="form.id">{{ form.id }}</el-textarea>
           </el-form-item>
-          <el-form-item label="姓名" prop="name">
+          <el-form-item label="姓名" prop="username">
             <el-input v-model="form.username"></el-input>
           </el-form-item>
           <el-form-item label="性别" prop="sex">

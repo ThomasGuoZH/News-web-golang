@@ -1,5 +1,5 @@
 <template>
-    <div class="personalcenter">
+    <div class="MyMessage_reply">
         <div class="routeback">
         <el-button class= 'back' @click="routeBack" >
             <img src="../assets/icons/back.svg" alt="返回">
@@ -11,7 +11,7 @@
                     <personal_nav />
                 </el-col>
                 <el-col :span="18">
-                    <info />
+                    <myreply />
                 </el-col>
             </el-row>
         </div>
@@ -20,17 +20,11 @@
 
 <script>
 import personal_nav from '../components/user/personal_nav.vue';
-import info from '../components/user/MyInformation.vue';
+import myreply from '../components/user/MyReply.vue';
 export default {
-    data() {
-    return {
-      channel: '',
-      pathFromUrl: '',
-    }
-  },
     components: {
         personal_nav,
-        info
+        myreply
     },
     methods: {
     routeBack() {
@@ -38,8 +32,9 @@ export default {
       window.close();
     }
   },
- }
+}
 </script>
+
 
 <style scoped>
 .set {
