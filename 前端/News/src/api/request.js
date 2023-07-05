@@ -115,9 +115,6 @@ export function getNewsAPI(url) {
     };
 }
 
-
-
-
 //发布父评论
 export function parentCommentAPI(url) {
     return async function (parentComment, token) {
@@ -146,8 +143,8 @@ export function childCommentAPI(url) {
     };
 }
 
-// 获取评论列表
-export function getCommentsListAPI(url) {
+// 获取新闻评论列表
+export function getNewsCommentsListAPI(url) {
     return async function (title) {
         return axios.get(url, {
             params: { title: title }
@@ -170,5 +167,58 @@ export function LikesAPI(url) {
             .then(res => {
                 return res.data;
             }).catch((e) => { return e });
+    };
+}
+
+
+//收藏新闻
+export function favouriteAPI(url) {
+    return async function (favourite, token) {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        return axios.post(url, favourite, { headers })
+            .then(res => {
+                return res.data;
+            }).catch((e) => { return e });
+    };
+}
+
+
+//获得个人评论列表
+export function getPersonalCommentsListAPI(url) {
+    return async function (author) {
+        return axios.get(url, {
+            params: { author: author }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
+    };
+}
+//获取个人点赞列表
+export function getLikesListAPI(url) {
+    return async function (author) {
+        return axios.get(url, {
+            params: { author: author }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
+    };
+}
+//获得个人回复列表
+export function getRepliesListAPI(url) {
+    return async function (author) {
+        return axios.get(url, {
+            params: { author: author }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
     };
 }

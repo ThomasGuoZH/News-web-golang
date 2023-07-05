@@ -45,7 +45,7 @@
           <div class="comment-content">{{ comment.content }}</div>
           <div class="comment-time">发表于 {{ comment.time }}</div>
           <div class="comment-actions">
-            <el-button type="text" @click="likes(reply)">
+            <el-button type="text" @click="likes(comment)">
               <div class="likes-container">
                 <img :src="comment.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
                 <span class="likes-count">{{ comment.likes }}赞</span>
@@ -75,11 +75,11 @@
             <div class="comment-actions">
               <el-button type="text" @click="likes(reply)">
                 <div class="likes-container">
-                  <img :src="reply.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
+                  <img src="reply.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
                   <span class="likes-count">{{ reply.likes }}赞</span>
                 </div>
               </el-button>
-          </div>
+            </div>
           </div>
         </div>
 
@@ -100,8 +100,7 @@
 import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
-import axios from "axios";
-import { parentComment, childComment, getCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
+import { parentComment, childComment, getNewsCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -135,7 +134,7 @@ export default {
           author: "Thomas",
           content: "沙发！",
           likes: 5,
-          liked: false,
+          liked: '',
           time: "2023-07-03 16:24:54",
           replies: [
             {
@@ -212,23 +211,21 @@ export default {
       this.$router.push({ path: this.pathFromUrl });
       window.close();
     },
-
-    getComments() {
-      axios.get("/comments").then((res) => {
-        if (Array.isArray(res.data)) {
-          this.comments = res.data.map((comment) => ({
-            ...comment,
-            showReplyInput: false,
-            replyContent: "",
-          }));
-        } else {
-          // 处理错误情况，比如服务器返回的数据不是数组
-          console.error("Invalid response data:", res.data);
-        }
-      }).catch((error) => {
-        // 处理请求错误
-        console.error("Failed to get comments:", error);
-      });
+    async getComments() {
+      const res = await getNewsCommentList(this.$route.params.title)
+      console.log(res.data.comments);
+      console.log(res.msg);
+      let newCommentsList = []
+      if (res.code === 200 && Array.isArray(res.data.comments)) {
+        newCommentsList = res.data.comments.map((comment) => ({
+          ...comment,
+        }));
+      }
+      this.comments = [
+        ...this.comments,
+        ...newCommentsList
+      ]
+      console.log(this.comments)
     },
 
     async addComment() {
@@ -322,7 +319,8 @@ export default {
       console.log(likes);
       const res = await like(likes, this.currentUser.token)
       console.log(res.msg);
-      this.getComments();
+      comment.likes = res.data.likes;
+      console.log(comment.likes);
     },
 
     showReplyInput(comment) {
@@ -350,7 +348,8 @@ export default {
       this.saveFavoriteStatusToDatabase();
     },
   },
-  mounted() {
+  async mounted() {
+    this.news = await this.fetchNews;
     this.handleScroll(); // 初始化位置
     this.loadFavoriteStatusFromDatabase();
   },

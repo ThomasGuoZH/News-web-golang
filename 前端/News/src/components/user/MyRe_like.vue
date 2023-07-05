@@ -6,17 +6,17 @@
         <div class="main_stage">
           <div v-for="(item, index) in rlikes" :key="item.id"
             :class="{ 'rlikes-Item': true, 'last-Item': index === rlikes.length - 1 }">
-            <el-row>
-              <el-col :span="16">
-                <div class="rlikes-name"><strong>{{ item.name }}</strong>赞了我的评论</div>
-                <div class="rlikes-time">{{ item.time }}</div>
-              </el-col>
-              <el-col :span="6" :offset="1">
-                <router-link :to="'/' + item.channel + '/newspage/' + item.title" class="link">
-                  <div class="rlikes-comment">{{ item.mycomment }}</div>
-                </router-link>
-              </el-col>
-            </el-row>
+            <router-link :to="'/' + item.channel + '/newspage/' + item.title" class="link">
+              <el-row>
+                <el-col :span="16">
+                  <div class="rlikes-name"><strong>{{ item.liker }}</strong>赞了我的评论</div>
+                  <div class="rlikes-time">{{ item.time }}</div>
+                </el-col>
+                <el-col :span="6" :offset="1">
+                  <div class="rlikes-comment">{{ item.content }}</div>
+                </el-col>
+              </el-row>
+            </router-link>
           </div>
         </div>
       </el-main>
@@ -25,28 +25,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { getLikesList } from '@/api/personal';
 export default {
   data() {
     return {
-      rlikes: [
-        {
-          id: 1,
-          name: '点赞用户',
-          mycomment: "这是被点赞的评论",
-          time: '2023/07/04',
-          tiele: '',
-          channel: ''
-        },
-        {
-          id: 2,
-          name: "02",
-          mycomment: "doge",
-          time: "2023-07",
-          title: '',
-          channel: ''
-        }
-      ]
+      rlikes: []
     };
+  },
+  computed: {
+    ...mapState('user', ['currentUser']),
+  },
+  methods: {
+    async getLikesList() {
+      const res = await getLikesList(this.currentUser.id);
+      console.log(res);
+      if (res.code === 200 && Array.isArray(res.data.likes)) {
+        this.rlikes = res.data.likes.map((like) => ({
+          ...like,
+        }));
+      }
+      console.log(this.rlikes);
+    }
+  },
+  created() {
+    this.getLikesList();
+    this.$store.dispatch('user/loadCurrentUser');
   }
 }
 </script>

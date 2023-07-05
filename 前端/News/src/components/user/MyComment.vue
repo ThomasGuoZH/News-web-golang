@@ -8,7 +8,7 @@
             :class="{ 'comment-Item': true, 'last-Item': index === comments.length - 1 }">
             <router-link :to="'/' + comment.channel + '/newspage/' + comment.title" class="link">
               <div class="comment-title">{{ comment.title }}</div>
-              <div class="comment-context">{{ comment.context }}</div>
+              <div class="comment-context">{{ comment.content }}</div>
             </router-link>
             <div class="comment-time">{{ comment.time }}</div>
           </div>
@@ -19,26 +19,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { getPersonalCommentList } from '@/api/personal';
 export default {
   data() {
     return {
-      comments: [
-        {
-          id: 1,
-          title: '这是新闻标题',
-          context: '这里是所发评论',
-          time: '2023/07/04',
-          channel: ''
-        },
-        {
-          id: 2,
-          title: "02",
-          context: "0.0",
-          time: "2023-07",
-          channel: ''
-        }
-      ]
+      comments: []
     };
+  },
+  computed: {
+    ...mapState('user', ['currentUser']),
+  },
+  methods: {
+    async getComments() {
+      const user_id = this.currentUser.id
+      const res = await getPersonalCommentList(user_id);
+      console.log(res);
+      if (res.code === 200 && Array.isArray(res.data.comments)) {
+        this.comments = res.data.comments.map((comment) => ({
+          ...comment,
+        }));
+      }
+    },
+  },
+  created() {
+    this.$store.dispatch('user/loadCurrentUser');
+    this.getComments();
   }
 }
 </script>

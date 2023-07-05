@@ -28,19 +28,16 @@ func UserExists(name string) bool {
 	return true
 }
 
+// 获取新闻评论列表
 func CommentListHandler(c *gin.Context) {
-	var commentList *models.CommentList
-	if err := c.ShouldBindJSON(&commentList); err != nil {
-		response.Fail(c, nil, "获取评论失败")
-		return
-	}
-	if !NewsExists(commentList.Title) {
+	title := c.Query("title")
+	if !NewsExists(title) {
 		response.Fail(c, nil, "新闻不存在")
 		return
 	}
 	var comments, subComments []models.Comment
 	// find corresponding comment
-	mysql.DB.Find(&comments, "type=0 AND title=?", commentList.Title)
+	mysql.DB.Find(&comments, "type=0 AND title=?", title)
 	var commentsArr, subCommentsArr []gin.H
 	for _, comment := range comments {
 		// find corresponding sub comment
@@ -50,19 +47,19 @@ func CommentListHandler(c *gin.Context) {
 			subCommentsArr = append(subCommentsArr, gin.H{
 				"author":  subComment.Author,
 				"content": subComment.Content,
-				"id":      subComment.ID,
+				"id":      strconv.FormatInt(int64(subComment.ID), 10),
 				"likes":   subComment.Likes,
 				"time":    subComment.CreatedAt.String()[:19],
 			})
 		}
 		// append comment
 		commentsArr = append(commentsArr, gin.H{
-			"author":      comment.Author,
-			"content":     comment.Content,
-			"id":          comment.ID,
-			"likes":       comment.Likes,
-			"time":        comment.CreatedAt.String()[:19],
-			"sub_comment": subCommentsArr,
+			"author":  comment.Author,
+			"content": comment.Content,
+			"id":      strconv.FormatInt(int64(comment.ID), 10),
+			"likes":   comment.Likes,
+			"time":    comment.CreatedAt.String()[:19],
+			"replies": subCommentsArr,
 		})
 		// clear subComments, subCommentsArr
 		subComments = subComments[0:0]
@@ -140,6 +137,43 @@ func UserChildCommentHandler(c *gin.Context) {
 	}, "评论成功")
 }
 
+// 用户ID对应1级评论列表
+func PersonalCommentsListHandler(c *gin.Context) {
+	idString := c.Query("user_id")
+	if len(idString) == 0 {
+		response.Fail(c, nil, "用户不存在")
+		return
+	}
+	var author string
+	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
+		fmt.Println(1)
+		response.Fail(c, nil, "用户不存在")
+		return
+	} else {
+		var user models.User
+		result := mysql.DB.Where("id=?", id).First(&user)
+		if result.Error != nil {
+			fmt.Println(1)
+			response.Fail(c, nil, "用户不存在")
+			return
+		}
+		author = user.UserName
+	}
+	var comments []models.Comment
+	// find comments with corresponding author
+	mysql.DB.Find(&comments, "type=0 AND author=?", author)
+	var commentsArr []gin.H
+	for _, comment := range comments {
+		commentsArr = append(commentsArr, gin.H{
+			"content": comment.Content,
+			"time":    comment.CreatedAt.String()[:19],
+			"channel": comment.Channel,
+			"title":   comment.Title,
+		})
+	}
+	response.Success(c, gin.H{"comments": commentsArr}, "获取用户评论成功")
+}
+
 // 点赞处理
 func LikeHandler(c *gin.Context) {
 	var like *models.Likes
@@ -171,8 +205,8 @@ func LikeHandler(c *gin.Context) {
 	}
 }
 
-// 用户ID对应1级评论列表
-func PersonalCommentsListHandler(c *gin.Context) {
+// 收到的赞
+func PersonalLikesListHandler(c *gin.Context) {
 	idString := c.Query("user_id")
 	if len(idString) == 0 {
 		response.Fail(c, nil, "用户不存在")
@@ -180,19 +214,31 @@ func PersonalCommentsListHandler(c *gin.Context) {
 	}
 	var author string
 	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
+		fmt.Println(1)
 		response.Fail(c, nil, "用户不存在")
 		return
 	} else {
 		var user models.User
 		result := mysql.DB.Where("id=?", id).First(&user)
 		if result.Error != nil {
+			fmt.Println(1)
 			response.Fail(c, nil, "用户不存在")
 			return
 		}
 		author = user.UserName
 	}
-	var comments []models.Comment
+	var likes []models.Likes
 	// find comments with corresponding author
-	mysql.DB.Find(&comments, "type=0 AND author=?", author)
-	response.Success(c, gin.H{"comments": comments}, "获取用户评论成功")
+	mysql.DB.Find(&likes, "author=?", author)
+	var likesArr []gin.H
+	for _, like := range likes {
+		likesArr = append(likesArr, gin.H{
+			"liker":   like.Liker,
+			"content": like.Content,
+			"time":    like.CreatedAt.String()[:19],
+			"channel": like.Channel,
+			"title":   like.Title,
+		})
+	}
+	response.Success(c, gin.H{"likes": likesArr}, "获取用户评论成功")
 }

@@ -23,30 +23,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      likes: [
-        {
-          id: 1,
-          title: '这是新闻标题',
-          time: '2023/07/04',
-          channel: ''
-        },
-        {
-          id: 2,
-          title: "02",
-          time: "2023-07",
-          channel: ''
-        },
-        {
-          id: 3,
-          title: "03",
-          time: "2023-07",
-          channel: ''
-        }
-      ]
+      likes: []
     };
+  },
+  computed: {
+    ...mapState('user', ['currentUser']),
+  },
+  methods: {
+
+  },
+  created() {
+    this.$store.dispatch('user/loadCurrentUser');
   }
 }
 </script>
