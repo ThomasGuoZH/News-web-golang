@@ -87,6 +87,7 @@ func UserParentCommentHandler(c *gin.Context) {
 	comment.Title = parentComment.Title
 	comment.Content = parentComment.Content
 	comment.Author = parentComment.Author
+	comment.ParentAuthor = comment.Author
 	comment.Channel = parentComment.Channel
 	mysql.DB.Create(&comment)
 	fmt.Println(comment)
@@ -126,6 +127,7 @@ func UserChildCommentHandler(c *gin.Context) {
 	newChild.Channel = comment.Channel
 	newChild.Type = 1
 	newChild.ParentId = uint(parentId)
+	newChild.ParentAuthor = findParent.Author
 	newChild.Likes = 0
 	mysql.DB.Create(&newChild)
 	response.Success(c, gin.H{
@@ -241,4 +243,47 @@ func PersonalLikesListHandler(c *gin.Context) {
 		})
 	}
 	response.Success(c, gin.H{"likes": likesArr}, "获取用户评论成功")
+}
+
+// user_id收到的回复
+func PersonalRepliesListHandler(c *gin.Context) {
+	idString := c.Query("user_id")
+	if len(idString) == 0 {
+		response.Fail(c, nil, "用户不存在")
+		return
+	}
+	var author string
+	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
+		fmt.Println(1)
+		response.Fail(c, nil, "用户不存在")
+		return
+	} else {
+		var user models.User
+		result := mysql.DB.Where("id=?", id).First(&user)
+		if result.Error != nil {
+			fmt.Println(1)
+			response.Fail(c, nil, "用户不存在")
+			return
+		}
+		author = user.UserName
+	}
+	var comments, rawReplies []models.Comment
+	var replies []models.Reply
+	mysql.DB.Find(&comments, "type=0 AND author=?", author)
+	for _, comment := range comments {
+		mysql.DB.Find(&rawReplies, "type=1 AND parent_id=?", comment.ID)
+		for _, i := range rawReplies {
+			replies = append(replies, models.Reply{
+				Author:        i.Author,
+				Channel:       i.Channel,
+				Content:       i.Content,
+				ParentContent: comment.Content,
+				Time:          i.CreatedAt.String()[:19],
+				Title:         i.Title,
+			})
+		}
+	}
+	response.Success(c, gin.H{
+		"replies": replies,
+	}, "获取回复成功")
 }
