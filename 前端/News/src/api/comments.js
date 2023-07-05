@@ -1,14 +1,15 @@
-import { parentCommentAPI, childCommentAPI, getNewsCommentsListAPI, LikesAPI, getLikesListAPI } from "./request";
+import { getNewsCommentsListAPI, tokenAPI } from "./request";
 
-const parentComment = parentCommentAPI('http://127.0.0.1:8080/api/comment/parent_comment')
-const childComment = childCommentAPI('http://127.0.0.1:8080/api/comment/child_comment')
+const parentComment = tokenAPI('http://127.0.0.1:8080/api/comment/parent_comment')
+const childComment = tokenAPI('http://127.0.0.1:8080/api/comment/child_comment')
 const getNewsCommentList = getNewsCommentsListAPI('http://127.0.0.1:8080/api/comment/comment_list')
-const like = LikesAPI('http://127.0.0.1:8080/api/comment/likes')
-const getLikesList = getLikesListAPI('http://127.0.0.1:8080/api/comment/')
+const like = tokenAPI('http://127.0.0.1:8080/api/comment/likes')
+const isLiked = tokenAPI('http://127.0.0.1:8080/api/comment/is_liked')
 
 export {
     parentComment,
     childComment,
     getNewsCommentList,
-    like
+    like,
+    isLiked
 }
