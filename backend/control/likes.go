@@ -16,7 +16,6 @@ func LikeHandler(c *gin.Context) {
 		response.Fail(c, nil, "点赞失败")
 		return
 	}
-	mysql.DB.Create(&like)
 	var findComment models.Comment
 	fmt.Println(like.CommentId)
 	commentId, _ := strconv.Atoi(like.CommentId)
@@ -24,6 +23,13 @@ func LikeHandler(c *gin.Context) {
 	if result.Error != nil {
 		response.Fail(c, nil, "没有找到该评论")
 	} else if result.Error == nil {
+		var likedByUser models.Likes
+		result = mysql.DB.Where("comment_id = ? AND liker = ?", commentId, like.Liker).First(&likedByUser)
+		if result.RowsAffected > 0 {
+			response.Fail(c, nil, "你已经点赞过该评论")
+			return
+		}
+		mysql.DB.Create(&like)
 		fmt.Println(findComment)
 		findComment.Likes++
 		mysql.DB.Save(&findComment)

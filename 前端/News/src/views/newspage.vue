@@ -232,6 +232,7 @@ export default {
         title: this.$route.params.title,
         author: this.currentUser.username,
         content: this.commentContent,
+        channel: this.$route.params.channel,
       };
       console.log(comment);
       const res = await parentComment(comment, this.currentUser.token);
@@ -262,6 +263,7 @@ export default {
         title: this.$route.params.title,
         author: this.currentUser.username,
         content: this.commentContent,
+        channel: this.$route.params.channel,
       };
       const res = await childComment(reply, this.currentUser.token);
       const newReply = {
@@ -307,13 +309,15 @@ export default {
       const likes = {
         title: this.$route.params.title,
         author: comment.author,
-        username: this.currentUser.username,
+        liker: this.currentUser.username,
         content: comment.content,
-        commentId: comment.id
+        commentId: comment.id,
+        channel: this.$route.params.channel,
       };
       console.log(likes);
       const res = await like(likes, this.currentUser.token)
       console.log(res.msg);
+
       this.getComments();
     },
 

@@ -72,12 +72,11 @@ func UserChildCommentHandler(c *gin.Context) {
 	newChild.Likes = 0
 	mysql.DB.Create(&newChild)
 	response.Success(c, gin.H{
-		"author":    newChild.Author,
-		"content":   newChild.Content,
-		"parent_id": strconv.FormatInt(int64(newChild.Model.ID), 10),
-		"id":        strconv.FormatInt(int64(newChild.Model.ID), 10),
-		"likes":     newChild.Likes,
-		"time":      newChild.Model.CreatedAt.String()[:19],
+		"author":  newChild.Author,
+		"content": newChild.Content,
+		"id":      strconv.FormatInt(int64(newChild.Model.ID), 10),
+		"likes":   newChild.Likes,
+		"time":    newChild.Model.CreatedAt.String()[:19],
 	}, "评论成功")
 }
 
