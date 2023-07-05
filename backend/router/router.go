@@ -18,6 +18,8 @@ func UserRouterInit(r *gin.RouterGroup) {
 		{
 			userManager.POST("/change_info", control.ChangeInfoHandler)
 			userManager.POST("/change_password", control.ChangePwdHandler)
+			userManager.POST("/create_fav", control.CreateFavHandler)
+			userManager.POST("/isFaves", control.IsFavHandler)
 		}
 	}
 }
@@ -28,7 +30,6 @@ func NewsRouterInit(r *gin.RouterGroup) {
 	{
 		newsManager.POST("/store_news", control.StoreHandler)
 		newsManager.GET("/get_news", control.GetNewsHandler)
-		newsManager.POST("/create_fav", control.CreateFavHandler)
 	}
 }
 
@@ -42,6 +43,7 @@ func CommentRouterInit(r *gin.RouterGroup) {
 			commentManager.POST("/parent_comment", control.UserParentCommentHandler)
 			commentManager.POST("/child_comment", control.UserChildCommentHandler)
 			commentManager.POST("/likes", control.LikeHandler)
+			commentManager.POST("/is_liked", control.IsLikedHandler)
 		}
 	}
 }
@@ -53,6 +55,7 @@ func PersonalRouterInit(r *gin.RouterGroup) {
 		personalManager.GET("/comments", control.PersonalCommentsListHandler)
 		personalManager.GET("/likes", control.PersonalLikesListHandler)
 		personalManager.GET("/replies", control.PersonalRepliesListHandler)
+		personalManager.GET("/faves", control.GetFavHandler)
 	}
 }
 

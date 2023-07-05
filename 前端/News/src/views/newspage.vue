@@ -45,9 +45,10 @@
           <div class="comment-content">{{ comment.content }}</div>
           <div class="comment-time">发表于 {{ comment.time }}</div>
           <div class="comment-actions">
-            <el-button type="text" @click="likes(reply)">
+            <el-button type="text" @click="likes(comment)">
               <div class="likes-container">
-                <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')" alt="点赞">
+                <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')"
+                  alt="点赞">
                 <span class="likes-count">{{ comment.likes }}赞</span>
               </div>
             </el-button>
@@ -55,12 +56,8 @@
 
           <div class="comment-reply-field">
             <div :class="['reply-input', { 'hidden': !showReplyInputMap[comment.id] }]">
-              <el-input
-                v-model="comment.replyContent"
-                placeholder="回复评论"
-                ref="replyInput"
-                @blur="hideReplyInput(comment)"
-              ></el-input>
+              <el-input v-model="comment.replyContent" placeholder="回复评论" ref="replyInput"
+                @blur="hideReplyInput(comment)"></el-input>
               <el-button type="primary" @click="reply(comment)">回复</el-button>
             </div>
             <div :class="['reply-button', { 'hidden': showReplyInputMap[comment.id] }]">
@@ -69,9 +66,6 @@
               </el-button>
             </div>
           </div>
-
-
-
           <div v-for="reply in comment.replies" :key="reply.id" class="comment-reply">
             <div class="comment-reply-name">{{ reply.author }}:</div>
             <div class="comment-reply-content">{{ reply.content }}</div>
@@ -79,11 +73,12 @@
             <div class="comment-actions">
               <el-button type="text" @click="likes(reply)">
                 <div class="likes-container">
-                  <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')" alt="点赞">
+                  <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')"
+                    alt="点赞">
                   <span class="likes-count">{{ reply.likes }}赞</span>
                 </div>
               </el-button>
-          </div>
+            </div>
           </div>
         </div>
 
@@ -104,8 +99,8 @@
 import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
-import axios from "axios";
-import { parentComment, childComment, getCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
+import { parentComment, childComment, getNewsCommentList, like, isLiked } from "../api/comments"
+import { favourite, isFavs } from "@/api/favourite";
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -218,24 +213,23 @@ export default {
       window.close();
     },
 
-    getComments() {
-      axios.get("/comments").then((res) => {
-        if (Array.isArray(res.data)) {
-          this.comments = res.data.map((comment) => ({
-            ...comment,
-            showReplyInput: false,
-            replyContent: "",
-          }));
-        } else {
-          // 处理错误情况，比如服务器返回的数据不是数组
-          console.error("Invalid response data:", res.data);
-        }
-      }).catch((error) => {
-        // 处理请求错误
-        console.error("Failed to get comments:", error);
-      });
+    async getComments() {
+      const res = await getNewsCommentList(this.$route.params.title)
+      console.log(res.data.comments);
+      console.log(res.msg);
+      let newCommentsList = []
+      if (res.code === 200 && Array.isArray(res.data.comments)) {
+        newCommentsList = res.data.comments.map((comment) => ({
+          ...comment,
+          liked: false,
+        }));
+      }
+      this.comments = [
+        ...this.comments,
+        ...newCommentsList
+      ]
+      console.log(this.comments)
     },
-
     async addComment() {
       if (!this.currentUser.token) {
         Message.warning("请登录后再评论！");
@@ -276,12 +270,14 @@ export default {
         return;
       }
       const reply = {
-        parentId: comment.id,
+        parent_id: comment.id,
+        parent_author: comment.author,
         title: this.$route.params.title,
         author: this.currentUser.username,
         content: this.replyContent,
         channel: this.$route.params.channel,
       };
+      console.log(reply);
       const res = await childComment(reply, this.currentUser.token);
       const newReply = {
         ...res.data,
@@ -292,23 +288,43 @@ export default {
       ];
       this.$set(this.showReplyInputMap, comment.id, false);
       comment.replyContent = "";
-      // comment.showReplyInput = false;
     },
 
     async loadFavoriteStatusFromDatabase() {
       try {
-        const result = await loadFavoriteStatus(this.news.title);
-        this.isFavorite = result.isFavorite;
+        if (this.currentUser) {
+          const fav = {
+            channel: this.$route.params.channel,
+            title: this.$route.params.title,
+            user_id: this.currentUser.id
+          }
+          const res = await isFavs(fav, this.currentUser.token)
+          this.isFavorite = res.data.isFavorite;
+          console.log(this.isFavorite);
+        } else {
+          this.isFavorite = false;
+        }
       } catch (error) {
         console.error('Failed to load favorite status:', error);
       }
     },
 
-    async saveFavoriteStatusToDatabase() {
+    async loadLikedStatusFromDatabase(comment) {
       try {
-        await saveFavoriteStatus(this.news.title, this.isFavorite);
+        const likes = {
+          title: this.$route.params.title,
+          author: comment.author,
+          liker: this.currentUser.username,
+          content: comment.content,
+          commentId: comment.id,
+          channel: this.$route.params.channel,
+        };
+        console.log(likes);
+        const res = await isLiked(likes, this.currentUser.token)
+        console.log(res.msg);
+        comment.liked = res.data.liked;
       } catch (error) {
-        console.error('Failed to save favorite status:', error);
+        console.error('Failed to load favorite status:', error);
       }
     },
 
@@ -328,10 +344,12 @@ export default {
       console.log(likes);
       const res = await like(likes, this.currentUser.token)
       console.log(res.msg);
-      this.getComments();
+      comment.likes = res.data.likes;
+      console.log(comment.likes);
+      comment.liked = res.data.liked;
     },
 
-    
+
     showReplyInput(comment) {
       // comment.showReplyInput = true;
       this.$set(this.showReplyInputMap, comment.id, true);
@@ -347,7 +365,7 @@ export default {
       // comment.showReplyInput = false;
       this.$set(this.showReplyInputMap, comment.id, false);
     },
-    
+
     hideCommentInput() {
       this.$refs.commentInput.$el.blur();
     },
@@ -356,15 +374,38 @@ export default {
       this.commentsVisible = !this.commentsVisible;
     },
 
-    toggleFavorite() {
+    async toggleFavorite() {
       // 切换收藏状态
-      this.isFavorite = !this.isFavorite;
-      this.saveFavoriteStatusToDatabase();
+      if (this.currentUser.username == "") {
+        Message.warning("请登录后再收藏！");
+        return;
+      }
+      const fav = {
+        channel: this.$route.params.channel,
+        title: this.$route.params.title,
+        user_id: this.currentUser.id
+      }
+      const res = await favourite(fav, this.currentUser.token)
+      console.log(res);
+      if (res.code == 200) {
+        this.isFavorite = res.data.isFavorite;
+      }
     },
   },
-  mounted() {
-    this.handleScroll(); // 初始化位置
+  async mounted() {
+    this.news = await this.fetchNews;
     this.loadFavoriteStatusFromDatabase();
+    // 遍历内外层评论调用 loadLikedStatusFromDatabase
+    this.comments.forEach(async (comment) => {
+      // 加载外层评论的 liked 状态
+      await this.loadLikedStatusFromDatabase(comment);
+      if (comment.replies && comment.replies.length > 0) {
+        // 遍历回复并加载回复的 liked 状态
+        comment.replies.forEach(async (reply) => {
+          await this.loadLikedStatusFromDatabase(reply);
+        });
+      }
+    });
   },
   created() {
     this.getComments();

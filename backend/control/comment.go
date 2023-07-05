@@ -176,6 +176,49 @@ func PersonalCommentsListHandler(c *gin.Context) {
 	response.Success(c, gin.H{"comments": commentsArr}, "获取用户评论成功")
 }
 
+// 用户回复
+func PersonalRepliesListHandler(c *gin.Context) {
+	idString := c.Query("user_id")
+	if len(idString) == 0 {
+		response.Fail(c, nil, "用户不存在")
+		return
+	}
+	var parentAuthor string
+	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
+		fmt.Println(1)
+		response.Fail(c, nil, "用户不存在")
+		return
+	} else {
+		var user models.User
+		result := mysql.DB.Where("id=?", id).First(&user)
+		if result.Error != nil {
+			fmt.Println(1)
+			response.Fail(c, nil, "用户不存在")
+			return
+		}
+		parentAuthor = user.UserName
+	}
+	var comments []models.Comment
+	var rawReply models.Comment
+	var repliesArr []gin.H
+	mysql.DB.Find(&comments, "type=1 AND parent_author=?", parentAuthor)
+	for _, comment := range comments {
+		mysql.DB.Find(&rawReply, "type=0 AND parent_id=?", comment.ParentId)
+		repliesArr = append(repliesArr, gin.H{
+			"author":        comment.Author,
+			"channel":       comment.Channel,
+			"content":       comment.Content,
+			"parentContent": rawReply.Content,
+			"time":          comment.CreatedAt.String()[:19],
+			"title":         comment.Title,
+		})
+
+	}
+	response.Success(c, gin.H{
+		"replies": repliesArr,
+	}, "获取回复成功")
+}
+
 // 点赞处理
 func LikeHandler(c *gin.Context) {
 	var like *models.Likes
@@ -203,7 +246,34 @@ func LikeHandler(c *gin.Context) {
 		response.Success(c, gin.H{
 			"likes": findComment.Likes,
 			"time":  findComment.Model.CreatedAt.String()[:19],
+			"liked": true,
 		}, "点赞成功")
+	}
+}
+
+// 判断点赞状态
+func IsLikedHandler(c *gin.Context) {
+	var like *models.Likes
+	if err := c.ShouldBindJSON(&like); err != nil {
+		response.Fail(c, nil, "绑定失败")
+		return
+	}
+	var findComment models.Comment
+	fmt.Println(like.CommentId)
+	commentId, _ := strconv.Atoi(like.CommentId)
+	result := mysql.DB.Where("ID=?", commentId).First(&findComment)
+	if result.Error != nil {
+		response.Fail(c, gin.H{
+			"liked": false,
+		}, "未点赞")
+	} else if result.Error == nil {
+		var likedByUser models.Likes
+		result = mysql.DB.Where("comment_id = ? AND liker = ?", commentId, like.Liker).First(&likedByUser)
+		if result.RowsAffected > 0 {
+			response.Fail(c, gin.H{
+				"liked": true,
+			}, "已点赞")
+		}
 	}
 }
 
@@ -243,47 +313,4 @@ func PersonalLikesListHandler(c *gin.Context) {
 		})
 	}
 	response.Success(c, gin.H{"likes": likesArr}, "获取用户评论成功")
-}
-
-// user_id收到的回复
-func PersonalRepliesListHandler(c *gin.Context) {
-	idString := c.Query("user_id")
-	if len(idString) == 0 {
-		response.Fail(c, nil, "用户不存在")
-		return
-	}
-	var author string
-	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
-		fmt.Println(1)
-		response.Fail(c, nil, "用户不存在")
-		return
-	} else {
-		var user models.User
-		result := mysql.DB.Where("id=?", id).First(&user)
-		if result.Error != nil {
-			fmt.Println(1)
-			response.Fail(c, nil, "用户不存在")
-			return
-		}
-		author = user.UserName
-	}
-	var comments, rawReplies []models.Comment
-	var replies []models.Reply
-	mysql.DB.Find(&comments, "type=0 AND author=?", author)
-	for _, comment := range comments {
-		mysql.DB.Find(&rawReplies, "type=1 AND parent_id=?", comment.ID)
-		for _, i := range rawReplies {
-			replies = append(replies, models.Reply{
-				Author:        i.Author,
-				Channel:       i.Channel,
-				Content:       i.Content,
-				ParentContent: comment.Content,
-				Time:          i.CreatedAt.String()[:19],
-				Title:         i.Title,
-			})
-		}
-	}
-	response.Success(c, gin.H{
-		"replies": replies,
-	}, "获取回复成功")
 }
