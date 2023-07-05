@@ -237,7 +237,7 @@ h3 {
   border-radius: 5%;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .more {

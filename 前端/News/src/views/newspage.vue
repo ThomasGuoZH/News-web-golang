@@ -5,12 +5,22 @@
         <b>{{ channelname }}</b>
       </template>
     </navigation>
-    <backtotop />
-    <div class="routeback">
-      <el-button class='back' @click="routeBack">
-        <img src="../assets/icons/back.svg" alt="返回">
-      </el-button>
+
+    <div class="toolbar" align="center">
+      <!-- <div class="routeback"> -->
+        <!-- 返回键 -->
+        <el-button class="square-button" @click="routeBack">
+          <img src="../assets/icons/back.svg" alt="返回">
+        </el-button>
+      <!-- </div> -->
+      <div class="favorite"  align="center">
+        <!-- 收藏键 -->
+        <el-button class="square-button" @click="toggleFavorite">
+          <i :class="isFavorite ? 'el-icon-star-on' : 'el-icon-star-off'"></i>
+        </el-button>
+      </div>
     </div>
+
     <div class="news">
       <h1>{{ news.title }}</h1>
       <div class="time-src">
@@ -77,13 +87,13 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
 import axios from "axios";
-import { parentComment, childComment, getCommentList, like } from "../api/comments"
+import { parentComment, childComment, getCommentList, like ,saveFavoriteStatus, loadFavoriteStatus} from "../api/comments"
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -100,7 +110,8 @@ export default {
         { name: '娱乐', url: '/entertainment' },
         { name: '体育', url: '/sports' },
         { name: '军事', url: '/military' },
-        { name: '教育', url: '/education' }],
+        { name: '教育', url: '/education' }
+      ],
       channel: '',
       pathFromUrl: '',
       news: {
@@ -108,7 +119,7 @@ export default {
         content: '',
         src: '',
         time: '',
-        pic: '',
+        pic: ''
       },
       comments: [
         {
@@ -141,8 +152,10 @@ export default {
           likes: 3,
           replies: [],
           time: "2023-07-05 22:42:55",
-        }
+        },
       ],
+      isFavorite: false,
+      toolbarTop: 0,
       commentContent: "",
       replyContent: "",
       commentsVisible: true
@@ -179,13 +192,15 @@ export default {
     next(vm => {
       vm.pathFromUrl = from.fullPath;
       vm.channel = to.params.channel;
-    })
+    });
   },
   methods: {
     routeBack() {
-      this.$router.push({ path: this.pathFromUrl })
+      // 返回上一页
+      this.$router.push({ path: this.pathFromUrl });
       window.close();
     },
+
     getComments() {
       axios.get("/comments").then((res) => {
         if (Array.isArray(res.data)) {
@@ -203,6 +218,7 @@ export default {
         console.error("Failed to get comments:", error);
       });
     },
+
     async addComment() {
       if (!this.currentUser.token) {
         Message.warning("请登录后再评论！");
@@ -225,13 +241,13 @@ export default {
         showReplyInput: false,
         replyContent: "",
       };
-
       this.comments = [
         ...this.comments,
         newComment,
       ];
       this.commentContent = "";
     },
+
     async reply(comment) {
       if (!this.currentUser) {
         Message.warning("请登录后再评论！");
@@ -251,7 +267,6 @@ export default {
       const newReply = {
         ...res.data,
       };
-
       this.comments = [
         ...this.comments.replies,
         newReply,
@@ -259,6 +274,31 @@ export default {
       comment.replyContent = "";
       comment.showReplyInput = false;
     },
+
+    async likes(comment) {
+      if (this.currentUser.username == "") {
+        Message.warning("请登录后再点赞！");
+        return;
+      }
+    },
+
+    async loadFavoriteStatusFromDatabase() {
+      try {
+        const result = await loadFavoriteStatus(this.news.title);
+        this.isFavorite = result.isFavorite;
+      } catch (error) {
+        console.error('Failed to load favorite status:', error);
+      }
+    },
+
+    async saveFavoriteStatusToDatabase() {
+      try {
+        await saveFavoriteStatus(this.news.title, this.isFavorite);
+      } catch (error) {
+        console.error('Failed to save favorite status:', error);
+      }
+    },
+
     async likes(comment) {
       if (this.currentUser.username == "") {
         Message.warning("请登录后再点赞！");
@@ -276,26 +316,35 @@ export default {
       console.log(res.msg);
       this.getComments();
     },
+
     showReplyInput(comment) {
       comment.showReplyInput = true;
       this.$nextTick(() => {
         this.$refs.replyInput.$el.focus();
       });
     },
+
     hideReplyInput(comment) {
       comment.showReplyInput = false;
     },
+
     hideCommentInput() {
       this.$refs.commentInput.$el.blur();
     },
+
     toggleComments() {
       this.commentsVisible = !this.commentsVisible;
     },
+
+    toggleFavorite() {
+      // 切换收藏状态
+      this.isFavorite = !this.isFavorite;
+      this.saveFavoriteStatusToDatabase();
+    },
   },
-  async mounted() {
-    console.log(this.fetchNews);
-    this.news = await this.fetchNews;
-    console.log(this.news);
+  mounted() {
+    this.handleScroll(); // 初始化位置
+    this.loadFavoriteStatusFromDatabase();
   },
   created() {
     this.getComments();
@@ -303,29 +352,8 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-.routeback {
-  margin-top: 30px;
-  margin-left: 15px;
-}
-
-.back {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.back img {
-  height: 25px;
-  width: 25px;
-}
-
 .news {
   max-width: 800px;
   margin: 30px auto;
@@ -466,7 +494,39 @@ img {
   margin-bottom: 10px;
   font-size: 12px;
 }
-</style>
-  
 
-  
+.toolbar {
+  display: block;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 3%;
+  transform: translate(-50%, -50%);
+  transition: top 0.3s;
+}
+
+.square-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 10%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  background-color: #fff;
+}
+
+.square-button img {
+  height: 25px;
+  width: 25px;
+}
+
+.favorite {
+  margin-top: 2px;
+}
+
+.favorite i {
+  font-size: 24px;
+  color: #f0ad4e;
+}
+</style>
