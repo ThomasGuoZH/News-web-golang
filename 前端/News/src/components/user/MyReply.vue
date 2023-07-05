@@ -4,19 +4,19 @@
       <el-header>回复我的</el-header>
       <el-main>
         <div class="main_stage">
-          <div v-for="(item, index) in reply" :key="item.id"
-            :class="{ 'reply-Item': true, 'last-Item': index === reply.length - 1 }">
+          <div v-for="(item, index) in replies" :key="item.id"
+            :class="{ 'reply-Item': true, 'last-Item': index === replies.length - 1 }">
             <el-row>
               <el-col :span="16">
-                <div class="reply-name"><strong>{{ item.name }}</strong>回复了我的评论</div>
+                <div class="reply-name"><strong>{{ item.author }}</strong>回复了我的评论</div>
                 <router-link :to="'/' + item.channel + '/newspage/' + item.title" class="link">
-                  <div class="relpy-othercomment">{{ item.othercommet }}</div>
+                  <div class="relpy-othercomment">{{ item.content }}</div>
                 </router-link>
                 <div class="reply-time">{{ item.time }}</div>
               </el-col>
               <el-col :span="6" :offset="1">
                 <router-link :to="'/' + item.channel + '/newspage/' + item.title" class="link">
-                  <div class="reply-comment">{{ item.mycomment }}</div>
+                  <div class="reply-comment">{{ item.parentContent }}</div>
                 </router-link>
               </el-col>
             </el-row>
@@ -29,38 +29,30 @@
 
 <script>
 import { mapState } from 'vuex';
+import { getRepliesList } from '@/api/personal';
 export default {
   data() {
     return {
-      reply: [
-        {
-          id: 1,
-          name: '点赞用户',
-          othercommet: "这是该用户对我评论的评论",
-          mycomment: "这是被点赞的评论",
-          time: '2023/07/04',
-          title: '',
-          channel: ''
-        },
-        {
-          id: 2,
-          name: "02",
-          othercommet: "Oh man",
-          mycomment: "doge",
-          time: "2023-07",
-          title: '',
-          channel: ''
-        }
-      ]
+      replies: []
     };
   },
   computed: {
     ...mapState('user', ['currentUser']),
   },
   methods: {
-
+    async getRepliesList() {
+      const res = await getRepliesList(this.currentUser.id);
+      console.log(res);
+      if (res.code === 200 && Array.isArray(res.data.replies)) {
+        this.replies = res.data.likes.map((reply) => ({
+          ...reply,
+        }));
+      }
+      console.log(this.replies);
+    }
   },
   created() {
+    this.getRepliesList();
     this.$store.dispatch('user/loadCurrentUser');
   }
 }
@@ -79,7 +71,7 @@ export default {
 
 .reply-Item {
   display: block;
-  line-height: 50px;
+  line-height: 30px;
   border-bottom: 1px solid rgba(77, 75, 75, 0.5);
   height: auto;
 }
@@ -89,9 +81,11 @@ export default {
 }
 
 .reply-name {
-  height: 50px;
+  height: 40px;
   text-align: left;
   margin-left: 10px;
+  font-size: 15px;
+  margin-top: 5px;
 }
 
 .relpy-othercomment {
@@ -101,9 +95,10 @@ export default {
 }
 
 .reply-comment {
-  height: auto;
+  line-height: 105px;
+  height: 105px;
   text-align: left;
-  margin-left: 10px;
+  margin-left: 80px;
   color: rgba(152, 171, 171, 0.7);
 }
 
@@ -111,6 +106,6 @@ export default {
   font-size: small;
   height: auto;
   text-align: left;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 </style>

@@ -64,7 +64,7 @@ export default {
 
 .rlikes-Item {
   display: block;
-  line-height: 50px;
+  line-height: 40px;
   border-bottom: 1px solid rgba(77, 75, 75, 0.5);
   height: auto;
 }
@@ -80,7 +80,8 @@ export default {
 }
 
 .rlikes-comment {
-  height: auto;
+  line-height: 90px;
+  height: 90px;
   text-align: left;
   margin-left: 10px;
   color: rgba(152, 171, 171, 0.7);
@@ -88,8 +89,8 @@ export default {
 
 .rlikes-time {
   font-size: small;
-  height: auto;
+  height: 20px;
   text-align: left;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 </style>

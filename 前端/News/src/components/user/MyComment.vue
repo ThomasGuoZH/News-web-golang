@@ -7,7 +7,7 @@
           <div v-for="(comment, index) in comments" :key="comment.id"
             :class="{ 'comment-Item': true, 'last-Item': index === comments.length - 1 }">
             <router-link :to="'/' + comment.channel + '/newspage/' + comment.title" class="link">
-              <div class="comment-title">{{ comment.title }}</div>
+              <div class="comment-title">新闻：{{ comment.title }}</div>
               <div class="comment-context">{{ comment.content }}</div>
             </router-link>
             <div class="comment-time">{{ comment.time }}</div>
@@ -40,6 +40,7 @@ export default {
           ...comment,
         }));
       }
+      console.log(this.comments);
     },
   },
   created() {
@@ -57,7 +58,7 @@ export default {
 
 .comment-Item {
   display: block;
-  height: 120px;
+  height: 90px;
   line-height: 50px;
   border-bottom: 1px solid rgba(77, 75, 75, 0.5);
 }
@@ -90,6 +91,7 @@ export default {
   font-size: small;
   height: auto;
   text-align: left;
-  margin-left: 30px;
+  margin-left: 700px;
+  margin-top: -25px;
 }
 </style>

@@ -4,15 +4,15 @@
       <el-header>我的收藏</el-header>
       <el-main>
         <div class="main_stage">
-          <div v-for="(like, index) in likes" :key="like.id"
-            :class="{ 'likes-Item': true, 'last-Item': index === likes.length - 1 }">
+          <div v-for="(fave, index) in faves" :key="fave.id"
+            :class="{ 'likes-Item': true, 'last-Item': index === faves.length - 1 }">
             <el-row>
               <el-col :span="16">
-                <router-link :to="'/' + like.channel + '/newspage/' + like.title" class="link">
-                  <div class="likes-title">{{ like.title }}</div>
+                <router-link :to="'/' + fave.channel + '/newspage/' + fave.title" class="link">
+                  <div class="likes-title">{{ fave.title }}</div>
                 </router-link></el-col>
-              <el-col :span="4" :offset="2">
-                <div class="likes-time">{{ like.time }}</div>
+              <el-col :span="4" :offset="3">
+                <div class="likes-time">{{ fave.time }}</div>
               </el-col>
             </el-row>
           </div>
@@ -24,19 +24,30 @@
 
 <script>
 import { mapState } from 'vuex';
+import { getFavsList } from '@/api/favourite';
 export default {
   data() {
     return {
-      likes: []
+      faves: []
     };
   },
   computed: {
     ...mapState('user', ['currentUser']),
   },
   methods: {
-
+    async getFavsList() {
+      const res = await getFavsList(this.currentUser.id);
+      console.log(res);
+      if (res.code === 200 && Array.isArray(res.data.favourites)) {
+        this.faves = res.data.favourites.map((fave) => ({
+          ...fave,
+        }));
+      }
+      console.log(this.faves);
+    }
   },
   created() {
+    this.getFavsList();
     this.$store.dispatch('user/loadCurrentUser');
   }
 }
@@ -69,6 +80,7 @@ export default {
 }
 
 .likes-time {
+  white-space: nowrap;
   height: 50px;
   text-align: left;
 }
