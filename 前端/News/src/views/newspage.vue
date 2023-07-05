@@ -45,28 +45,32 @@
           <div class="comment-content">{{ comment.content }}</div>
           <div class="comment-time">发表于 {{ comment.time }}</div>
           <div class="comment-actions">
-            <el-button type="text" @click="likes(comment)">
+            <el-button type="text" @click="likes(reply)">
               <div class="likes-container">
-                <img :src="comment.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
+                <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')" alt="点赞">
                 <span class="likes-count">{{ comment.likes }}赞</span>
               </div>
             </el-button>
           </div>
 
-
-
           <div class="comment-reply-field">
-            <div v-if="comment.showReplyInput" class="reply-input">
-              <el-input v-model="comment.replyContent" placeholder="回复评论" ref="replyInput" @blur="hideReplyInput(comment)"
-                v-if="comment.showReplyInput"></el-input>
+            <div :class="['reply-input', { 'hidden': !showReplyInputMap[comment.id] }]">
+              <el-input
+                v-model="comment.replyContent"
+                placeholder="回复评论"
+                ref="replyInput"
+                @blur="hideReplyInput(comment)"
+              ></el-input>
               <el-button type="primary" @click="reply(comment)">回复</el-button>
             </div>
-            <div v-else class="reply-button">
+            <div :class="['reply-button', { 'hidden': showReplyInputMap[comment.id] }]">
               <el-button type="text" @click="showReplyInput(comment)">
                 回复
               </el-button>
             </div>
           </div>
+
+
 
           <div v-for="reply in comment.replies" :key="reply.id" class="comment-reply">
             <div class="comment-reply-name">{{ reply.author }}:</div>
@@ -75,11 +79,11 @@
             <div class="comment-actions">
               <el-button type="text" @click="likes(reply)">
                 <div class="likes-container">
-                  <img src="reply.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
+                  <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')" alt="点赞">
                   <span class="likes-count">{{ reply.likes }}赞</span>
                 </div>
               </el-button>
-            </div>
+          </div>
           </div>
         </div>
 
@@ -100,7 +104,8 @@
 import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
-import { parentComment, childComment, getNewsCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
+import axios from "axios";
+import { parentComment, childComment, getCommentList, like, saveFavoriteStatus, loadFavoriteStatus } from "../api/comments"
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -134,7 +139,7 @@ export default {
           author: "Thomas",
           content: "沙发！",
           likes: 5,
-          liked: '',
+          liked: false,
           time: "2023-07-03 16:24:54",
           replies: [
             {
@@ -165,6 +170,7 @@ export default {
           time: "2023-07-05 22:42:55",
         },
       ],
+      showReplyInputMap: {},
       isFavorite: false,
       toolbarTop: 0,
       commentContent: "",
@@ -211,21 +217,23 @@ export default {
       this.$router.push({ path: this.pathFromUrl });
       window.close();
     },
-    async getComments() {
-      const res = await getNewsCommentList(this.$route.params.title)
-      console.log(res.data.comments);
-      console.log(res.msg);
-      let newCommentsList = []
-      if (res.code === 200 && Array.isArray(res.data.comments)) {
-        newCommentsList = res.data.comments.map((comment) => ({
-          ...comment,
-        }));
-      }
-      this.comments = [
-        ...this.comments,
-        ...newCommentsList
-      ]
-      console.log(this.comments)
+
+    getComments() {
+      axios.get("/comments").then((res) => {
+        if (Array.isArray(res.data)) {
+          this.comments = res.data.map((comment) => ({
+            ...comment,
+            showReplyInput: false,
+            replyContent: "",
+          }));
+        } else {
+          // 处理错误情况，比如服务器返回的数据不是数组
+          console.error("Invalid response data:", res.data);
+        }
+      }).catch((error) => {
+        // 处理请求错误
+        console.error("Failed to get comments:", error);
+      });
     },
 
     async addComment() {
@@ -271,7 +279,7 @@ export default {
         parentId: comment.id,
         title: this.$route.params.title,
         author: this.currentUser.username,
-        content: this.commentContent,
+        content: this.replyContent,
         channel: this.$route.params.channel,
       };
       const res = await childComment(reply, this.currentUser.token);
@@ -282,8 +290,9 @@ export default {
         ...this.comments.replies,
         newReply,
       ];
+      this.$set(this.showReplyInputMap, comment.id, false);
       comment.replyContent = "";
-      comment.showReplyInput = false;
+      // comment.showReplyInput = false;
     },
 
     async loadFavoriteStatusFromDatabase() {
@@ -319,21 +328,26 @@ export default {
       console.log(likes);
       const res = await like(likes, this.currentUser.token)
       console.log(res.msg);
-      comment.likes = res.data.likes;
-      console.log(comment.likes);
+      this.getComments();
     },
 
+    
     showReplyInput(comment) {
-      comment.showReplyInput = true;
+      // comment.showReplyInput = true;
+      this.$set(this.showReplyInputMap, comment.id, true);
       this.$nextTick(() => {
-        this.$refs.replyInput.$el.focus();
+        if (this.$refs.replyInput && this.$refs.replyInput.$el) {
+          this.$refs.replyInput.$el.focus();
+        }
       });
     },
 
-    hideReplyInput(comment) {
-      comment.showReplyInput = false;
-    },
 
+    hideReplyInput(comment) {
+      // comment.showReplyInput = false;
+      this.$set(this.showReplyInputMap, comment.id, false);
+    },
+    
     hideCommentInput() {
       this.$refs.commentInput.$el.blur();
     },
@@ -348,8 +362,7 @@ export default {
       this.saveFavoriteStatusToDatabase();
     },
   },
-  async mounted() {
-    this.news = await this.fetchNews;
+  mounted() {
     this.handleScroll(); // 初始化位置
     this.loadFavoriteStatusFromDatabase();
   },
@@ -438,6 +451,11 @@ img {
   margin-left: 20px;
   margin-right: 20px;
 }
+
+.hidden {
+  display: none;
+}
+
 
 .comment-reply-name {
   font-weight: bold;
