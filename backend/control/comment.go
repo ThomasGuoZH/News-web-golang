@@ -1,18 +1,76 @@
 package control
 
 import (
+	"backend/logic"
 	"backend/models"
 	"backend/mysql"
 	"backend/response"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"math/rand"
 	"strconv"
 )
 
-// 获取评论列表
-func CommentListHandler() {
+func NewsExists(title string) bool {
+	var news models.News
+	result := mysql.DB.Where("title=?", title).First(&news)
+	if result.Error != nil {
+		return false
+	}
+	return true
+}
 
+func UserExists(name string) bool {
+	var user models.User
+	result := mysql.DB.Where("user_name=?", name).First(&user)
+	if result.Error != nil {
+		return false
+	}
+	return true
+}
+
+func CommentListHandler(c *gin.Context) {
+	var commentList *models.CommentList
+	if err := c.ShouldBindJSON(&commentList); err != nil {
+		response.Fail(c, nil, "获取评论失败")
+		return
+	}
+	if !NewsExists(commentList.Title) {
+		response.Fail(c, nil, "新闻不存在")
+		return
+	}
+	var comments, subComments []models.Comment
+	// find corresponding comment
+	mysql.DB.Find(&comments, "type=0 AND title=?", commentList.Title)
+	var commentsArr, subCommentsArr []gin.H
+	for _, comment := range comments {
+		// find corresponding sub comment
+		mysql.DB.Find(&subComments, "type=1 AND parent_id=?", comment.ID)
+		for _, subComment := range subComments {
+			// append corresponding sub comment
+			subCommentsArr = append(subCommentsArr, gin.H{
+				"author":  subComment.Author,
+				"content": subComment.Content,
+				"id":      subComment.ID,
+				"likes":   subComment.Likes,
+				"time":    subComment.CreatedAt.String()[:19],
+			})
+		}
+		// append comment
+		commentsArr = append(commentsArr, gin.H{
+			"author":      comment.Author,
+			"content":     comment.Content,
+			"id":          comment.ID,
+			"likes":       comment.Likes,
+			"time":        comment.CreatedAt.String()[:19],
+			"sub_comment": subCommentsArr,
+		})
+		// clear subComments, subCommentsArr
+		subComments = subComments[0:0]
+		subCommentsArr = nil
+	}
+	response.Success(c, gin.H{
+		"comments": commentsArr,
+	}, "获取所有评论成功")
 }
 
 // 用户1级评论
@@ -24,7 +82,7 @@ func UserParentCommentHandler(c *gin.Context) {
 		return
 	}
 	var comment models.Comment
-	var randID = uint(rand.Uint32())
+	var randID = logic.GenerateID32()
 	comment.Model.ID = randID
 	comment.ParentId = randID
 	comment.Type = 0
@@ -64,7 +122,7 @@ func UserChildCommentHandler(c *gin.Context) {
 		return
 	}
 	var newChild models.Comment
-	newChild.Model.ID = uint(rand.Uint32())
+	newChild.Model.ID = logic.GenerateID32()
 	newChild.Title = comment.Title
 	newChild.Author = comment.Author
 	newChild.Content = comment.Content
