@@ -71,7 +71,6 @@
 import sidebox from '../components/layout/sidebox.vue'
 import backtotop from '../components/layout/backtotop.vue'
 import navigation from '../components/layout/nav.vue'
-import comment from '@/components/page/comment.vue'
 import { getNewsList } from '@/api/getNewsList'
 import { storeNews } from '@/api/news'
 export default {
@@ -80,7 +79,6 @@ export default {
         navigation,
         sidebox,
         backtotop,
-        comment,
     },
     data() {
         return {

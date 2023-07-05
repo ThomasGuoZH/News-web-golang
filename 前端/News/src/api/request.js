@@ -114,3 +114,61 @@ export function getNewsAPI(url) {
             .catch((e) => { return e });
     };
 }
+
+
+
+
+//发布父评论
+export function parentCommentAPI(url) {
+    return async function (parentComment, token) {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        return axios.post(url, parentComment, { headers })
+            .then(res => {
+                return res.data;
+            }).catch((e) => { return e });
+    };
+}
+
+//发布子评论
+export function childCommentAPI(url) {
+    return async function (reply, token) {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        return axios.post(url, reply, { headers })
+            .then(res => {
+                return res.data;
+            }).catch((e) => { return e });
+    };
+}
+
+// 获取评论列表
+export function getCommentsListAPI(url) {
+    return async function (title) {
+        return axios.get(url, {
+            params: { title: title }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
+    };
+}
+
+//点赞
+export function LikesAPI(url) {
+    return async function (like, token) {
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+        return axios.post(url, like, { headers })
+            .then(res => {
+                return res.data;
+            }).catch((e) => { return e });
+    };
+}

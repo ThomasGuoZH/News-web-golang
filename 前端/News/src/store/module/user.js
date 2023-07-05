@@ -1,4 +1,4 @@
-import { userLogin, changeInfo, changePassword } from "@/api/user";
+import { userLogin, changeInfo } from "@/api/user";
 import { Message } from 'element-ui'
 
 const defaultCurrentUser = {
