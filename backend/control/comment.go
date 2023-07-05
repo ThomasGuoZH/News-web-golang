@@ -32,6 +32,7 @@ func UserParentCommentHandler(c *gin.Context) {
 	comment.Title = parentComment.Title
 	comment.Content = parentComment.Content
 	comment.Author = parentComment.Author
+	comment.Channel = parentComment.Channel
 	mysql.DB.Create(&comment)
 	fmt.Println(comment)
 	response.Success(c, gin.H{
@@ -67,6 +68,7 @@ func UserChildCommentHandler(c *gin.Context) {
 	newChild.Title = comment.Title
 	newChild.Author = comment.Author
 	newChild.Content = comment.Content
+	newChild.Channel = comment.Channel
 	newChild.Type = 1
 	newChild.ParentId = uint(parentId)
 	newChild.Likes = 0
@@ -78,9 +80,4 @@ func UserChildCommentHandler(c *gin.Context) {
 		"likes":   newChild.Likes,
 		"time":    newChild.Model.CreatedAt.String()[:19],
 	}, "评论成功")
-}
-
-// 获取用户个人评论（楼中楼）
-func GetCommentHandler() {
-
 }
