@@ -36,26 +36,28 @@ func CommentRouterInit(r *gin.RouterGroup) {
 	commentManager := r.Group("/comment")
 	{
 		//commentManager.GET("/comment_list", control.CommentListHandler)
-		//userManager.Use(logic.AuthMiddleware())
+		//commentManager.Use(logic.AuthMiddleware())
 		{
 			commentManager.POST("/parent_comment", control.UserParentCommentHandler)
 			commentManager.POST("/child_comment", control.UserChildCommentHandler)
+			commentManager.POST("/likes", control.LikeHandler)
 			//commentManager.GET("/get_comment", control.GetCommentHandler)
 		}
 	}
 }
 
-//点赞路由组
-/*func LikeRouterInit(r *gin.RouterGroup) {
-	likeManager := r.Group("/like")
-	{
-		likeManager.Use(control.JWTAuthMiddleware){
-			likeManager.POST("/like", control.LikeHandler)
-			likeManager.GET("/get_like", control.GetLikeHandler)
-			likeManager.GET("/like_count", control.LikeCountHandler)
-	 	}
-	}
-}*/
+//// 点赞路由组
+//func LikeRouterInit(r *gin.RouterGroup) {
+//	likeManager := r.Group("/likes")
+//	{
+//		//likeManager.Use(logic.AuthMiddleware())
+//		{
+//			likeManager.POST("/like", control.LikeHandler) /*
+//				likeManager.GET("/get_like", control.GetLikeHandler)
+//				likeManager.GET("/like_count", control.LikeCountHandler)*/
+//		}
+//	}
+//}
 
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
@@ -74,5 +76,6 @@ func SetupRouter() *gin.Engine {
 	UserRouterInit(api)
 	NewsRouterInit(api)
 	CommentRouterInit(api)
+	//LikeRouterInit(api)
 	return router
 }

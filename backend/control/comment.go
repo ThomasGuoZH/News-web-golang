@@ -4,6 +4,7 @@ import (
 	"backend/models"
 	"backend/mysql"
 	"backend/response"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"strconv"
@@ -16,23 +17,29 @@ func CommentListHandler() {
 
 // 用户1级评论
 func UserParentCommentHandler(c *gin.Context) {
-	var comment models.Comment
+	var parentComment models.ParentComment
 	//format error
-	if err := c.ShouldBindJSON(&comment); err != nil {
+	if err := c.ShouldBindJSON(&parentComment); err != nil {
 		response.Fail(c, nil, "评论失败")
 		return
 	}
+	var comment models.Comment
 	var randID = uint(rand.Uint32())
 	comment.Model.ID = randID
 	comment.ParentId = randID
 	comment.Type = 0
+	comment.Likes = 0
+	comment.Title = parentComment.Title
+	comment.Content = parentComment.Content
+	comment.Author = parentComment.Author
 	mysql.DB.Create(&comment)
+	fmt.Println(comment)
 	response.Success(c, gin.H{
-		"author":    comment.Author,
-		"content":   comment.Content,
-		"parent_id": strconv.FormatInt(int64(comment.Model.ID), 10),
-		"likes":     "0",
-		"time":      comment.Model.CreatedAt.String()[:19],
+		"author":  comment.Author,
+		"content": comment.Content,
+		"id":      strconv.FormatInt(int64(comment.Model.ID), 10),
+		"likes":   comment.Likes,
+		"time":    comment.Model.CreatedAt.String()[:19],
 	}, "评论成功")
 }
 
@@ -62,12 +69,14 @@ func UserChildCommentHandler(c *gin.Context) {
 	newChild.Content = comment.Content
 	newChild.Type = 1
 	newChild.ParentId = uint(parentId)
+	newChild.Likes = 0
 	mysql.DB.Create(&newChild)
 	response.Success(c, gin.H{
 		"author":    newChild.Author,
 		"content":   newChild.Content,
 		"parent_id": strconv.FormatInt(int64(newChild.Model.ID), 10),
-		"likes":     "0",
+		"id":        strconv.FormatInt(int64(newChild.Model.ID), 10),
+		"likes":     newChild.Likes,
 		"time":      newChild.Model.CreatedAt.String()[:19],
 	}, "评论成功")
 }
