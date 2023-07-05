@@ -57,6 +57,7 @@ export default {
         logout({ commit }) {
             Message.success("注销成功");
             commit('removeCurrentUser');
+            window.location.reload()
         },
         async changeInfo({ commit }, { form, token }) {
             const res = await changeInfo(form, token);
