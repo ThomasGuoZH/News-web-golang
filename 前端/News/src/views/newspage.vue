@@ -45,10 +45,15 @@
           <div class="comment-content">{{ comment.content }}</div>
           <div class="comment-time">发表于 {{ comment.time }}</div>
           <div class="comment-actions">
-            <el-button type="text" icon="el-icon-thumb" @click="likes(comment)">
-              {{ comment.likes }} 赞
+            <el-button type="text" @click="likes(reply)">
+              <div class="likes-container">
+                <img :src="comment.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
+                <span class="likes-count">{{ comment.likes }}赞</span>
+              </div>
             </el-button>
           </div>
+
+
 
           <div class="comment-reply-field">
             <div v-if="comment.showReplyInput" class="reply-input">
@@ -68,10 +73,13 @@
             <div class="comment-reply-content">{{ reply.content }}</div>
             <div class="comment-time">发表于 {{ reply.time }}</div>
             <div class="comment-actions">
-              <el-button type="text" icon="el-icon-thumb" @click="likes(reply)">
-                {{ reply.likes }} 赞
+              <el-button type="text" @click="likes(reply)">
+                <div class="likes-container">
+                  <img :src="reply.liked ? '../assets/icons/liked.svg' : '../assets/icons/like.svg'" alt="点赞">
+                  <span class="likes-count">{{ reply.likes }}赞</span>
+                </div>
               </el-button>
-            </div>
+          </div>
           </div>
         </div>
 
@@ -127,6 +135,7 @@ export default {
           author: "Thomas",
           content: "沙发！",
           likes: 5,
+          liked: false,
           time: "2023-07-03 16:24:54",
           replies: [
             {
@@ -134,6 +143,7 @@ export default {
               author: "John",
               content: "棒",
               likes: 2,
+              liked: false,
               time: "2023-07-04 16:34:54",
             },
             {
@@ -141,6 +151,7 @@ export default {
               author: "用户123",
               content: "厉害",
               likes: 1,
+              liked: false,
               time: "2023-07-05 23:24:54",
             }
           ]
@@ -150,6 +161,7 @@ export default {
           author: "Lisa",
           content: "新闻不错！",
           likes: 3,
+          liked: false,
           replies: [],
           time: "2023-07-05 22:42:55",
         },
@@ -446,21 +458,21 @@ img {
   align-items: center;
 }
 
-.comment-actions .el-button {
-  padding-left: 0;
-  padding-right: 0;
+.comment-actions .likes-container {
+  display: flex;
+  align-items: center;
+}
+
+.comment-actions .likes-container img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.comment-actions .likes-container .likes-count {
   color: #666;
 }
 
-.comment-actions .el-icon-thumb {
-  margin-right: 5px;
-  color: #999;
-}
-
-.comment-actions .el-icon-message {
-  margin-right: 5px;
-  color: #999;
-}
 
 .reply-input {
   margin-bottom: 10px;
@@ -487,7 +499,7 @@ img {
 .comment-time {
   color: #666;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 12px;
 }
 
