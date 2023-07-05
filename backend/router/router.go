@@ -28,6 +28,7 @@ func NewsRouterInit(r *gin.RouterGroup) {
 	{
 		newsManager.POST("/store_news", control.StoreHandler)
 		newsManager.GET("/get_news", control.GetNewsHandler)
+		newsManager.POST("/create_fav", control.CreateFavHandler)
 	}
 }
 
@@ -35,7 +36,7 @@ func NewsRouterInit(r *gin.RouterGroup) {
 func CommentRouterInit(r *gin.RouterGroup) {
 	commentManager := r.Group("/comment")
 	{
-		//commentManager.GET("/comment_list", control.CommentListHandler)
+		commentManager.GET("/comment_list", control.CommentListHandler)
 		//commentManager.Use(logic.AuthMiddleware())
 		{
 			commentManager.POST("/parent_comment", control.UserParentCommentHandler)
@@ -59,6 +60,16 @@ func CommentRouterInit(r *gin.RouterGroup) {
 //	}
 //}
 
+func PersonalRouterInit(r *gin.RouterGroup) {
+	personalManager := r.Group("/personal")
+	{
+		personalManager.GET("/comments", control.PersonalCommentsListHandler)
+		personalManager.GET("/favourites", control.GetFavHandler)
+		//personalManager.POST("/likes", control.PersonalLikesListHandler)
+		//personalManager.POST("/replies", control.PersonalRepliesListHandler)
+	}
+}
+
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	// 添加CORS中间件
@@ -77,5 +88,6 @@ func SetupRouter() *gin.Engine {
 	NewsRouterInit(api)
 	CommentRouterInit(api)
 	//LikeRouterInit(api)
+	PersonalRouterInit(api)
 	return router
 }

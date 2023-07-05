@@ -170,3 +170,29 @@ func LikeHandler(c *gin.Context) {
 		}, "点赞成功")
 	}
 }
+
+// 用户ID对应1级评论列表
+func PersonalCommentsListHandler(c *gin.Context) {
+	idString := c.Query("user_id")
+	if len(idString) == 0 {
+		response.Fail(c, nil, "用户不存在")
+		return
+	}
+	var author string
+	if id, err := strconv.ParseUint(idString, 10, 64); err != nil {
+		response.Fail(c, nil, "用户不存在")
+		return
+	} else {
+		var user models.User
+		result := mysql.DB.Where("id=?", id).First(&user)
+		if result.Error != nil {
+			response.Fail(c, nil, "用户不存在")
+			return
+		}
+		author = user.UserName
+	}
+	var comments []models.Comment
+	// find comments with corresponding author
+	mysql.DB.Find(&comments, "type=0 AND author=?", author)
+	response.Success(c, gin.H{"comments": comments}, "获取用户评论成功")
+}

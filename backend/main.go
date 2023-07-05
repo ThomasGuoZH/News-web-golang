@@ -58,6 +58,7 @@ func Execute() error {
 		mysql.DB.AutoMigrate(&models.News{})
 		mysql.DB.AutoMigrate(&models.Comment{})
 		mysql.DB.AutoMigrate(&models.Likes{})
+		mysql.DB.AutoMigrate(&models.UserFav{})
 
 		defer mysql.DB.Close()
 
