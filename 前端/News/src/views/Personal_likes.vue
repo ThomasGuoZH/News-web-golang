@@ -1,32 +1,32 @@
 <template>
-    <div class="personal_MyLikes">
-        <div class="routeback">
-        <el-button class= 'back' @click="routeBack" >
-            <img src="../assets/icons/back.svg" alt="返回">
-        </el-button>
-        </div>
-        <div class="set">
-            <el-row>
-                <el-col :span="6">
-                    <personal_nav />
-                </el-col>
-                <el-col :span="18">
-                    <likes />
-                </el-col>
-            </el-row>
-        </div>
+  <div class="personal_MyLikes">
+    <div class="routeback">
+      <el-button class='back' @click="routeBack">
+        <img src="../assets/icons/back.svg" alt="返回">
+      </el-button>
     </div>
+    <div class="set">
+      <el-row>
+        <el-col :span="6">
+          <personal_nav />
+        </el-col>
+        <el-col :span="18">
+          <Fav />
+        </el-col>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>
 import personal_nav from '../components/user/personal_nav.vue';
-import likes from '../components/user/MyLikes.vue';
+import Fav from '../components/user/MyFav.vue';
 export default {
-    components: {
-        personal_nav,
-        likes
-    },
-    methods: {
+  components: {
+    personal_nav,
+    Fav
+  },
+  methods: {
     routeBack() {
       this.$router.push({ path: '/' })
       window.close();
@@ -38,11 +38,12 @@ export default {
 
 <style scoped>
 .set {
-    display: block;
-    width: 1200px;
-    background-color: aliceblue;
-    margin: 0 auto;
+  display: block;
+  width: 1200px;
+  background-color: aliceblue;
+  margin: 0 auto;
 }
+
 .routeback {
   margin-top: 15px;
   margin-left: 15px;
@@ -59,6 +60,7 @@ export default {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .back img {
   height: 25px;
   width: 25px;

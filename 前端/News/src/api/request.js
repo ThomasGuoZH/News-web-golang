@@ -188,9 +188,9 @@ export function favouriteAPI(url) {
 
 //获得个人评论列表
 export function getPersonalCommentsListAPI(url) {
-    return async function (author) {
+    return async function (id) {
         return axios.get(url, {
-            params: { author: author }
+            params: { user_id: id }
         })
             .then(res => {
                 return res.data;
@@ -198,11 +198,12 @@ export function getPersonalCommentsListAPI(url) {
             .catch((e) => { return e });
     };
 }
+
 //获取个人点赞列表
 export function getLikesListAPI(url) {
-    return async function (author) {
+    return async function (id) {
         return axios.get(url, {
-            params: { author: author }
+            params: { user_id: id }
         })
             .then(res => {
                 return res.data;
@@ -210,11 +211,12 @@ export function getLikesListAPI(url) {
             .catch((e) => { return e });
     };
 }
+
 //获得个人回复列表
 export function getRepliesListAPI(url) {
-    return async function (author) {
+    return async function (id) {
         return axios.get(url, {
-            params: { author: author }
+            params: { user_id: id }
         })
             .then(res => {
                 return res.data;
