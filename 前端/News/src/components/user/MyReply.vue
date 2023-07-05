@@ -55,7 +55,7 @@ export default {
 
 <style>
 .main_stage{
-  background-color: rgb(50, 214, 255);
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
 }
 .link{

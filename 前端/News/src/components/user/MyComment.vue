@@ -42,7 +42,7 @@ export default {
 
 <style>
 .main_stage{
-  background-color: pink;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
 }
 .comment-Item{
