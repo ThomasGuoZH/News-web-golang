@@ -42,7 +42,6 @@ func CommentRouterInit(r *gin.RouterGroup) {
 			commentManager.POST("/parent_comment", control.UserParentCommentHandler)
 			commentManager.POST("/child_comment", control.UserChildCommentHandler)
 			commentManager.POST("/likes", control.LikeHandler)
-			//commentManager.GET("/get_comment", control.GetCommentHandler)
 		}
 	}
 }
@@ -53,7 +52,7 @@ func PersonalRouterInit(r *gin.RouterGroup) {
 	{
 		personalManager.GET("/comments", control.PersonalCommentsListHandler)
 		personalManager.GET("/likes", control.PersonalLikesListHandler)
-		//personalManager.GET("/replies", control.PersonalRepliesListHandler)
+		personalManager.GET("/replies", control.PersonalRepliesListHandler)
 	}
 }
 
