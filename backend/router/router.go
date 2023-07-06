@@ -14,7 +14,7 @@ func UserRouterInit(r *gin.RouterGroup) {
 	{
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
-		//userManager.Use(logic.AuthMiddleware())
+		userManager.Use(logic.AuthMiddleware())
 		{
 			userManager.POST("/change_info", control.ChangeInfoHandler)
 			userManager.POST("/change_password", control.ChangePwdHandler)
@@ -57,7 +57,7 @@ func PersonalRouterInit(r *gin.RouterGroup) {
 		personalManager.GET("/likes", control.PersonalLikesListHandler)
 		personalManager.GET("/replies", control.PersonalRepliesListHandler)
 		personalManager.GET("/faves", control.GetFavHandler)
-		personalManager.POST("/del_comment", control.DeleteCommentsHandler)
+		personalManager.DELETE("/del_comment", control.DeleteCommentsHandler)
 	}
 }
 
@@ -66,7 +66,7 @@ func SetupRouter() *gin.Engine {
 	// 添加CORS中间件
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:8080", "http://localhost:8081", "http://localhost:8082", "http://localhost:8083",
-		"http://localhost:8084", "http://localhost:8085"}                     // 允许访问的域名
+		"http://localhost:8084", "http://localhost:8085"} // 允许访问的域名
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"} // 允许的HTTP方法
 	// 配置 CORS 策略
 	config.AllowOrigins = []string{"http://localhost:8080", "http://localhost:8081", "http://localhost:8082", "http://localhost:8083",

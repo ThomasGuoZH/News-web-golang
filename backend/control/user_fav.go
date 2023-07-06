@@ -18,7 +18,7 @@ func UserIdExists(id uint64) bool {
 	return true
 }
 
-// 需要channel title user_id
+// 收藏
 func CreateFavHandler(c *gin.Context) {
 	var fav *models.NewUserFav
 	if err := c.ShouldBindJSON(&fav); err != nil {
@@ -109,7 +109,7 @@ func IsFavHandler(c *gin.Context) {
 	}
 }
 
-// 需要channel title user_id
+// 取消收藏
 func DisFavHandler(c *gin.Context) {
 	var fav *models.NewUserFav
 	if err := c.ShouldBindJSON(&fav); err != nil {
@@ -131,7 +131,7 @@ func DisFavHandler(c *gin.Context) {
 	result := mysql.DB.Where("title=? AND user_id=?", fav.Title, id).Delete(&findFav)
 	if result.Error != nil {
 		response.Fail(c, gin.H{
-			"isFavorite": true,
+			"isFavorite": false,
 		}, "未收藏过")
 	} else {
 		response.Success(c, gin.H{

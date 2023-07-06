@@ -319,6 +319,7 @@ func PersonalLikesListHandler(c *gin.Context) {
 // 删除评论ID对应1级评论
 func DeleteCommentsHandler(c *gin.Context) {
 	idString := c.Query("id")
+	fmt.Println(idString)
 	if len(idString) == 0 {
 		response.Fail(c, nil, "评论不存在")
 		return

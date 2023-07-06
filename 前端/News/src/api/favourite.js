@@ -6,9 +6,11 @@ const favourite = tokenAPI('http://127.0.0.1:8080/api/user/create_fav')
 const getFavsList = getPersonalListAPI('http://127.0.0.1:8080/api/personal/faves')
 //判断是否收藏
 const isFavs = tokenAPI('http://127.0.0.1:8080/api/user/isFaves')
-
+//取消收藏
+const disFave = tokenAPI('http://127.0.0.1:8080/api/user/dis_fav')
 export {
     favourite,
     getFavsList,
-    isFavs
+    isFavs,
+    disFave
 }

@@ -1,12 +1,4 @@
-import http from './http'
-import qs from 'qs'
 import axios from 'axios';
-const ERR_OK = 0;
-/** 
- * get方法，对应get请求 
- * @param {String} url [请求的url地址] 
- * @param {Object} params []
- */
 //请求新闻数据
 export function newsAPI(url) {
     return async function (num, channel) {
@@ -17,24 +9,6 @@ export function newsAPI(url) {
             .catch((e) => { return e });
     };
 }
-
-//version 2 另一种请求方法
-/*
-export function getarticle(params) {
-   return request({
-    method: 'GET',
-    params,
-   })
-}
-*/
-
-
-
-/** 
- * post方法，对应post请求
- * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
-*/
 //用户注册
 export function userRegisterAPI(url) {
     return async function (form) {
@@ -83,7 +57,6 @@ export function changePasswordAPI(url) {
         }
     };
 }
-
 //文章存储
 export function storeNewsAPI(url) {
     return async function (item) {
@@ -98,7 +71,6 @@ export function storeNewsAPI(url) {
             .catch((e) => { return e });
     };
 }
-
 //名字找文章
 export function getNewsAPI(url) {
     return async function (title) {
@@ -111,8 +83,6 @@ export function getNewsAPI(url) {
             .catch((e) => { return e });
     };
 }
-
-
 // 获取新闻评论列表
 export function getNewsCommentsListAPI(url) {
     return async function (title) {
@@ -125,8 +95,6 @@ export function getNewsCommentsListAPI(url) {
             .catch((e) => { return e });
     };
 }
-
-
 // 个人主页列表API
 export function getPersonalListAPI(url) {
     return async function (id) {
@@ -139,8 +107,6 @@ export function getPersonalListAPI(url) {
             .catch((e) => { return e });
     };
 }
-
-
 //TokenAPI
 export function tokenAPI(url) {
     return async function (item, token) {
@@ -154,4 +120,15 @@ export function tokenAPI(url) {
             }).catch((e) => { return e });
     };
 }
-
+//删除评论
+export function deleteCommentAPI(url) {
+    return async function (comment_id) {
+        return axios.delete(url, {
+            params: { id: comment_id }
+        })
+            .then(res => {
+                return res.data;
+            })
+            .catch((e) => { return e });
+    };
+}

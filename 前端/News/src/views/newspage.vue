@@ -100,7 +100,7 @@ import navigation from "../components/layout/nav.vue"
 import { getNews } from '@/api/news';
 import backtotop from '../components/layout/backtotop.vue'
 import { parentComment, childComment, getNewsCommentList, like, isLiked } from "../api/comments"
-import { favourite, isFavs } from "@/api/favourite";
+import { favourite, isFavs, disFave } from "@/api/favourite";
 import { mapState } from 'vuex';
 import { Message } from "element-ui";
 export default {
@@ -376,19 +376,36 @@ export default {
 
     async toggleFavorite() {
       // 切换收藏状态
-      if (this.currentUser.username == "") {
-        Message.warning("请登录后再收藏！");
-        return;
+      console.log(this.isfavorite);
+      if (this.isFavorite === false) {
+        if (this.currentUser.username == "") {
+          Message.warning("请登录后再收藏！");
+          return;
+        }
+        const fav = {
+          channel: this.$route.params.channel,
+          title: this.$route.params.title,
+          user_id: this.currentUser.id
+        }
+        console.log(fav);
+        const res = await favourite(fav, this.currentUser.token)
+        console.log(res);
+        if (res.code == 200) {
+          this.isFavorite = res.data.isFavorite;
+        }
       }
-      const fav = {
-        channel: this.$route.params.channel,
-        title: this.$route.params.title,
-        user_id: this.currentUser.id
-      }
-      const res = await favourite(fav, this.currentUser.token)
-      console.log(res);
-      if (res.code == 200) {
-        this.isFavorite = res.data.isFavorite;
+      else if (this.isFavorite === true) {
+        const disFav = {
+          channel: this.$route.params.channel,
+          title: this.$route.params.title,
+          user_id: this.currentUser.id
+        }
+        console.log(disFav);
+        const res = await disFave(disFav, this.currentUser.token)
+        console.log(res);
+        if (res.code == 200) {
+          this.isFavorite = res.data.isFavorite;
+        }
       }
     },
   },
