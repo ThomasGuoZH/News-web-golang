@@ -14,12 +14,13 @@ func UserRouterInit(r *gin.RouterGroup) {
 	{
 		userManager.POST("/register", control.RegisterHandler)
 		userManager.POST("/login", control.LoginHandler)
-		userManager.Use(logic.AuthMiddleware())
+		//userManager.Use(logic.AuthMiddleware())
 		{
 			userManager.POST("/change_info", control.ChangeInfoHandler)
 			userManager.POST("/change_password", control.ChangePwdHandler)
 			userManager.POST("/create_fav", control.CreateFavHandler)
 			userManager.POST("/isFaves", control.IsFavHandler)
+			userManager.POST("/dis_fav", control.DisFavHandler)
 		}
 	}
 }
