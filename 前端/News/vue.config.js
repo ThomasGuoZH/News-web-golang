@@ -8,7 +8,7 @@ module.exports = {
     //以上的ip和端口是我们本机的;下面为需要跨域的
     proxy: { //配置跨域
       '/api': {
-        target: 'https://api.jisuapi.com/news/get?appkey=cc5e3b31d2129d83&start=0', //填写请求的目标地址
+        target: 'https://api.jisuapi.com/news/get?appkey=d03f43c234cd72fb&start=0', //填写请求的目标地址
         changOrigin: true, //允许跨域
         pathRewrite: {
           '^/api': 'newsapi' //请求的时候使用这个api就可以
@@ -26,5 +26,7 @@ module.exports = {
 // 37c8518088eabae4
 // 71f1655f9b3b89e4
 
-//37c8518088eabae4
+
 //d03f43c234cd72fb
+//07a4d895a7394112
+//ceaac56d8c58687d
