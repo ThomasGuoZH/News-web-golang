@@ -33,7 +33,7 @@
               <div class="side-content">
                 <ul>
                   <li v-for="(item, index) in newsList.slice(0, 3)" :key="index">
-                    <router-link :to="{ path: '/politics/newspage/' + item.id }">{{ item.title }}</router-link>
+                    <router-link :to="{ path: '/politics/newspage/' + item.title }">{{ item.title }}</router-link>
                   </li>
                 </ul>
               </div>
@@ -43,7 +43,7 @@
               <div class="side-content">
                 <ul>
                   <li v-for="(item, index) in newsList.slice(3, 6)" :key="index">
-                    <router-link :to="{ path: '/politics/newspage/' + item.id }">{{ item.title }}</router-link>
+                    <router-link :to="{ path: '/politics/newspage/' + item.title }">{{ item.title }}</router-link>
                   </li>
                 </ul>
               </div>
