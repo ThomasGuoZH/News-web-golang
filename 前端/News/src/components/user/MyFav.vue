@@ -1,7 +1,7 @@
 <template>
   <div class="MyLikes">
     <el-container>
-      <el-header>我的收藏</el-header>
+      <el-header style="font-size: 18px;">我的收藏</el-header>
       <el-main>
         <div class="main_stage">
           <div v-for="(fave, index) in faves" :key="fave.id"

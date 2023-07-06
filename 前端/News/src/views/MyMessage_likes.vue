@@ -37,6 +37,9 @@ export default {
 
 
 <style scoped>
+.MyMessage_likes {
+  font-family: 'sihan-regular', sans-serif;
+}
 .set {
     display: block;
     width: 1200px;

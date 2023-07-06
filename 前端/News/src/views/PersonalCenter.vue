@@ -61,11 +61,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: #F9F7F7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .back img {
   height: 25px;
   width: 25px;
+}
+.personalcenter {
+  font-family: 'sihan-regular', sans-serif;
 }
 </style>

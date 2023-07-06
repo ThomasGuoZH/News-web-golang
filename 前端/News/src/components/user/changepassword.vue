@@ -1,24 +1,27 @@
 <template>
   <div class="change-password">
     <el-container>
-      <el-header>修改密码</el-header>
+      <el-header style="font-size: 18px;">修改密码</el-header>
       <el-main>
         <el-form :model="form" :rules="rules" ref="form" label-width="100px" label-position="right">
           <el-col :span="12" :offset="5">
-            <el-form-item label="旧密码" prop="oldPassword">
+            <el-form-item label="旧密码" prop="oldPassword" class="item">
               <el-input type="password" v-model="form.oldPassword" style="width: 300px"></el-input>
             </el-form-item>
 
-            <el-form-item label="新密码" prop="newPassword">
+            <el-form-item label="新密码" prop="newPassword" class="item">
               <el-input type="password" v-model="form.newPassword" style="width: 300px"></el-input>
             </el-form-item>
 
-            <el-form-item label="确认密码" prop="confirmPassword">
+            <el-form-item label="确认密码" prop="confirmPassword" class="item">
               <el-input type="password" v-model="form.confirmPassword" style="width: 300px"></el-input>
             </el-form-item></el-col>
           <el-col :span="1" :offset="8">
             <el-form-item>
-              <el-button type="primary" @click="onSubmit">修改</el-button>
+              <el-button type="primary" @click="onSubmit" style="color: white;
+                background-color: #3F72AF;
+                font-family: 'sihan-regular', sans-serif;
+                border: none;">修改</el-button>
             </el-form-item></el-col>
         </el-form>
       </el-main>
@@ -92,4 +95,8 @@ export default {
   },
 }
 </script>
-<style></style>
+<style>
+.el-form-item .el-form-item__label {
+    font-size: 16px;
+  }
+</style>
