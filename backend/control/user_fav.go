@@ -108,3 +108,34 @@ func IsFavHandler(c *gin.Context) {
 		return
 	}
 }
+
+// 需要channel title user_id
+func DisFavHandler(c *gin.Context) {
+	var fav *models.NewUserFav
+	if err := c.ShouldBindJSON(&fav); err != nil {
+		response.Fail(c, nil, "取消收藏失败")
+		return
+	}
+	if !NewsExists(fav.Title) {
+		response.Fail(c, nil, "新闻不存在")
+		return
+	}
+	id, err := strconv.ParseUint(fav.UserId, 10, 64)
+	if err != nil || !UserIdExists(id) {
+		response.Fail(c, gin.H{
+			"isFavorite": false,
+		}, "用户不存在")
+		return
+	}
+	var findFav models.UserFav
+	result := mysql.DB.Where("title=? AND user_id=?", fav.Title, id).Delete(&findFav)
+	if result.Error != nil {
+		response.Fail(c, gin.H{
+			"isFavorite": true,
+		}, "未收藏过")
+	} else {
+		response.Success(c, gin.H{
+			"isFavorite": false,
+		}, "取消收藏成功")
+	}
+}

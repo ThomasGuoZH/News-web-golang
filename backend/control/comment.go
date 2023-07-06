@@ -167,6 +167,7 @@ func PersonalCommentsListHandler(c *gin.Context) {
 	var commentsArr []gin.H
 	for _, comment := range comments {
 		commentsArr = append(commentsArr, gin.H{
+			"id":      comment.ID,
 			"content": comment.Content,
 			"time":    comment.CreatedAt.String()[:19],
 			"channel": comment.Channel,
@@ -313,4 +314,29 @@ func PersonalLikesListHandler(c *gin.Context) {
 		})
 	}
 	response.Success(c, gin.H{"likes": likesArr}, "获取用户评论成功")
+}
+
+// 删除评论ID对应1级评论
+func DeleteCommentsHandler(c *gin.Context) {
+	idString := c.Query("id")
+	if len(idString) == 0 {
+		response.Fail(c, nil, "评论不存在")
+		return
+	}
+	id, err := strconv.ParseUint(idString, 10, 64)
+	if err != nil {
+		fmt.Println(1)
+		response.Fail(c, nil, "评论不存在")
+		return
+	}
+	var comment models.Comment
+	// find comment
+	result := mysql.DB.Where("id=?", id).First(&comment)
+	if result.Error != nil {
+		response.Fail(c, nil, "评论不存在")
+	} else {
+		var comments []models.Comment
+		mysql.DB.Where("parent_id=?", id).Delete(&comments)
+		response.Success(c, nil, "删除评论成功")
+	}
 }
