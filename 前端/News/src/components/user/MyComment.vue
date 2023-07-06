@@ -6,11 +6,26 @@
         <div class="main_stage">
           <div v-for="(comment, index) in comments" :key="comment.id"
             :class="{ 'comment-Item': true, 'last-Item': index === comments.length - 1 }">
-            <router-link :to="'/' + comment.channel + '/newspage/' + comment.title" class="link">
-              <div class="comment-title">新闻：{{ comment.title }}</div>
-              <div class="comment-context">{{ comment.content }}</div>
-            </router-link>
-            <div class="comment-time">{{ comment.time }}</div>
+            <el-row>
+              <el-col :span="18">
+                <router-link :to="'/' + comment.channel + '/newspage/' + comment.title" class="link">
+                <div class="comment-title">新闻：{{ comment.title }}</div>
+                <div class="comment-context">{{ comment.content }}</div>
+                </router-link>
+              </el-col>
+              <el-col :span="6">
+                <el-row>
+                  <el-col :span="12">
+                    <div class="comment-time">{{ comment.time }}</div>
+                  </el-col>
+                  <el-col :span="12">
+                    <div class="comment-delete">
+                    <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </div>
+                  </el-col>
+                </el-row>
+              </el-col>
+            </el-row>
           </div>
         </div>
       </el-main>
@@ -87,11 +102,15 @@ export default {
   margin-left: 10px;
 }
 
+.comment-delete{
+  margin-top:18px;
+  border-left:1px solid rgb(216, 196, 196);
+}
+
 .comment-time {
   font-size: small;
   height: auto;
   text-align: left;
-  margin-left: 700px;
-  margin-top: -25px;
+  margin-top:48px;
 }
 </style>

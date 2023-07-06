@@ -11,7 +11,7 @@
     <ul class="newslist">
       <li>
         <h4 style="color: black;">时政</h4>
-        <router-link to="/politics" class="more">更多>></router-link>
+        <router-link to="/politics" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in politicsNewslist" :key="index" class="newstitle">
@@ -22,7 +22,7 @@
       </li>
       <li>
         <h4 style="color: black;">科技</h4>
-        <router-link to="/science" class="more">更多>></router-link>
+        <router-link to="/science" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in scienceNewslist" :key="index" class="newstitle">
@@ -33,7 +33,7 @@
       </li>
       <li>
         <h4 style="color: black;">娱乐</h4>
-        <router-link to="/entertainment" class="more">更多>></router-link>
+        <router-link to="/entertainment" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
@@ -46,7 +46,7 @@
     <ul class="newslist">
       <li>
         <h4 style="color: black;">体育</h4>
-        <router-link to="/sports" class="more">更多>></router-link>
+        <router-link to="/sports" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in sportsNewslist" :key="index" class="newstitle">
@@ -57,7 +57,7 @@
       </li>
       <li>
         <h4 style="color: black;">军事</h4>
-        <router-link to="/military" class="more">更多>></router-link>
+        <router-link to="/military" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in militaryNewslist" :key="index" class="newstitle">
@@ -68,7 +68,7 @@
       </li>
       <li>
         <h4 style="color: black;">教育</h4>
-        <router-link to="/education" class="more">更多>></router-link>
+        <router-link to="/education" class="more"><i class="el-icon-more"></i></router-link>
         <div>
           <ul>
             <li v-for="(news, index) in educationNewslist" :key="index" class="newstitle">
