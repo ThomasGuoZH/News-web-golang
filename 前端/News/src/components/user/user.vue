@@ -2,14 +2,14 @@
     <div class="user">
         <div v-if="currentUser.loggedIn">
             <p>您好，{{ currentUser.username }}，您已登录</p>
-            <button @click="logout">退出登录</button>
+            <button @click="logout" class="exit_button">退出登录</button>
             <router-link :to="'/personal_center/myInfomation'">
                 <img src="../../assets/icons/user.svg" alt="个人中心">
             </router-link>
         </div>
         <div v-else>
             <div class="login_register">
-                <el-button @click="dialogFormVisible = true" class="button_style" type="primary" round>登录</el-button>
+                <el-button @click="dialogFormVisible = true" class="button_style" type="primary" >登录</el-button>
                 <el-dialog :title="dTitle" :visible.sync="dialogFormVisible" center>
                     <el-row class="log">
                         <el-col :span="16">
@@ -165,5 +165,19 @@ export default {
     width: 24px;
     height: 24px;
     cursor: pointer;
+}
+
+.button_style {
+    color: white;
+    background-color: #3F72AF;
+    font-family: 'sihan-regular', sans-serif;
+    border: none;
+}
+
+.exit_button {
+    font-family: 'sihan-regular', sans-serif;
+    color: white;
+    background-color: #3F72AF;
+    border: none;
 }
 </style>
