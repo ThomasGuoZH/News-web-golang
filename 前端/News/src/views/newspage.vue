@@ -473,7 +473,7 @@ img {
 }
 
 .comment-function-area {
-  border: 3px solid black;
+  border: 2px solid black;
   background-color: rgb(243, 250, 251);
   border-radius: 3%;
   margin: auto;
