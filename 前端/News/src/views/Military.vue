@@ -101,7 +101,7 @@ export default {
     },
     mounted: async function () {
         this.Newslist = await getNewsList(12, '军事');
-        const res = await storeNews(this.newsList);
+        const res = await storeNews(this.Newslist);
         console.log(res);
     }
 }
