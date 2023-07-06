@@ -2,7 +2,7 @@
     <div class="carousel">
         <el-carousel :interval="4000" height="400px">
             <el-carousel-item v-for="(item, index) in picUrlList" :key="index">
-                <router-link :to="'/home/newspage/' + item.title" class="route">
+                <router-link :to="'/politics/newspage/' + item.title" class="route">
                     <img class="medium" :src="item.pic">
                 </router-link>
             </el-carousel-item>
@@ -19,7 +19,7 @@ export default {
         };
     },
     created: async function () {
-        this.picUrlList = await getNewsList(6, '头条');
+        this.picUrlList = await getNewsList(6, '军事');
         console.log(this.picUrlList);
     }
 }

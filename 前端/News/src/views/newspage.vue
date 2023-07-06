@@ -265,7 +265,7 @@ export default {
         Message.warning("请登录后再评论！");
         return;
       }
-      if (this.replyContent.trim() === "") {
+      if (comment.replyContent.trim() === "") {
         Message.warning("请输入评论内容！");
         return;
       }
@@ -274,7 +274,7 @@ export default {
         parent_author: comment.author,
         title: this.$route.params.title,
         author: this.currentUser.username,
-        content: this.replyContent,
+        content: comment.replyContent,
         channel: this.$route.params.channel,
       };
       console.log(reply);
@@ -282,12 +282,16 @@ export default {
       const newReply = {
         ...res.data,
       };
-      this.comments = [
-        ...this.comments.replies,
+      comment.replies = [
+        ...comment.replies,
         newReply,
       ];
+      await new Promise(resolve => setTimeout(resolve, 0)); // 等待下一个事件循环执行
       this.$set(this.showReplyInputMap, comment.id, false);
-      comment.replyContent = "";
+      if (res.code == 200) {
+        comment.replyContent = "";
+      }
+      await this.getComments();
     },
 
     async loadFavoriteStatusFromDatabase() {
@@ -347,6 +351,7 @@ export default {
       comment.likes = res.data.likes;
       console.log(comment.likes);
       comment.liked = res.data.liked;
+      console.log(comment.liked);
     },
 
 

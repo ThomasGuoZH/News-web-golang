@@ -44,7 +44,7 @@ export default {
       const res = await getRepliesList(this.currentUser.id);
       console.log(res);
       if (res.code === 200 && Array.isArray(res.data.replies)) {
-        this.replies = res.data.likes.map((reply) => ({
+        this.replies = res.data.replies.map((reply) => ({
           ...reply,
         }));
       }

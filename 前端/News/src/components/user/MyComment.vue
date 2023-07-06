@@ -14,16 +14,16 @@
                 </router-link>
               </el-col>
               <el-col :span="7">
-                <el-row>
-                  <el-col :span="14">
-                    <div class="comment-time">{{ comment.time }}</div>
-                  </el-col>
-                  <el-col :span="10">
-                    <div class="comment-delete">
-                      <el-button type="danger" icon="el-icon-delete" @click="deleteComment(comment)" circle></el-button>
-                    </div>
-                  </el-col>
-                </el-row>
+                <!-- <el-row> -->
+                <el-col :span="14">
+                  <div class="comment-time">{{ comment.time }}</div>
+                </el-col>
+                <el-col :span="10">
+                  <div class="comment-delete">
+                    <el-button type="danger" icon="el-icon-delete" @click="deleteComment(comment)" circle></el-button>
+                  </div>
+                </el-col>
+                <!-- </el-row> -->
               </el-col>
             </el-row>
           </div>
@@ -120,7 +120,7 @@ export default {
   font-size: small;
   height: auto;
   text-align: left;
-  margin-top: 48px;
+  margin-top: 40px;
   margin-right: 20px;
 }
 </style>
