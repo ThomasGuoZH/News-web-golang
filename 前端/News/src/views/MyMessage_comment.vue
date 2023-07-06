@@ -37,6 +37,9 @@ export default {
 
 
 <style scoped>
+.MyMessage_comment {
+  font-family: 'sihan-regular', sans-serif;
+}
 .set {
     display: block;
     width: 1200px;

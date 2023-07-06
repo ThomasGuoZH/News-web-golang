@@ -1,7 +1,7 @@
 <template>
   <div class="MyComment">
     <el-container>
-      <el-header>我的评论</el-header>
+      <el-header style="font-size: 18px;">我的评论</el-header>
       <el-main>
         <div class="main_stage">
           <div v-for="(comment, index) in comments" :key="comment.id"

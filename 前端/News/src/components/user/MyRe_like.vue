@@ -1,7 +1,7 @@
 <template>
   <div class="MyRelike">
     <el-container>
-      <el-header>收到的赞</el-header>
+      <el-header style="font-size: 18px;">收到的赞</el-header>
       <el-main>
         <div class="main_stage">
           <div v-for="(item, index) in rlikes" :key="item.id"

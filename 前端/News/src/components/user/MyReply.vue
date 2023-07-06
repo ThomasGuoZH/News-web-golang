@@ -1,7 +1,7 @@
 <template>
   <div class="MyReply">
     <el-container>
-      <el-header>回复我的</el-header>
+      <el-header style="font-size: 18px;">回复我的</el-header>
       <el-main>
         <div class="main_stage">
           <div v-for="(item, index) in replies" :key="item.id"

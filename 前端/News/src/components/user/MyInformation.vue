@@ -2,7 +2,7 @@
 <template>
   <div class="personal-center">
     <el-container>
-      <el-header>基本信息</el-header>
+      <el-header style="font-size: 18px;">基本信息</el-header>
       <el-main>
         <el-form :model="form" :rules="rules" ref="form" label-width="100px">
           <el-form-item label="账户ID">
@@ -24,7 +24,10 @@
             <el-input v-model="form.phone"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">保存</el-button>
+            <el-button type="primary" @click="onSubmit" style="color: white;
+              background-color: #3F72AF;
+              font-family: 'sihan-regular', sans-serif;
+              border: none;">保存</el-button>
           </el-form-item>
         </el-form>
       </el-main>
@@ -127,5 +130,13 @@ export default {
 body>.el-container {
   margin-bottom: 40px;
 }
+
+.el-form-item .el-form-item__label {
+    font-size: 16px;
+  }
+
+  .el-radio-group .el-radio__inner {
+    font-size: 16px;
+  }
 </style>
   
