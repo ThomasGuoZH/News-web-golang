@@ -11,7 +11,7 @@
         <div class="carousel-container">
             <el-carousel :autoplay="true" :interval="5000" height="480px">
                 <el-carousel-item v-for="(news, index) in Newslist.slice(0, 4)" :key="index">
-                    <router-link :to="'/sports/newspage/' + news.title" target="_blank">
+                    <router-link :to="'/sports/newspage/' + news.title">
                         <img class="slider-image" :src="news.pic" alt="Slider Image">
                     </router-link>
                     <div class="slider-caption">
