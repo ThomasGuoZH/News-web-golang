@@ -73,7 +73,7 @@
             <div class="comment-actions">
               <el-button type="text" @click="likes(reply)">
                 <div class="likes-container">
-                  <img :src="comment.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')"
+                  <img :src="reply.liked ? require('../assets/icons/liked.svg') : require('../assets/icons/like.svg')"
                     alt="点赞">
                   <span class="likes-count">{{ reply.likes }}赞</span>
                 </div>
@@ -169,7 +169,6 @@ export default {
       isFavorite: false,
       toolbarTop: 0,
       commentContent: "",
-      replyContent: "",
       commentsVisible: true
     }
   },
