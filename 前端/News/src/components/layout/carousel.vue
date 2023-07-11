@@ -19,7 +19,7 @@ export default {
         };
     },
     created: async function () {
-        this.picUrlList = await getNewsList(6, '军事');
+        this.picUrlList = await getNewsList(6, '头条');
         console.log(this.picUrlList);
     }
 }
