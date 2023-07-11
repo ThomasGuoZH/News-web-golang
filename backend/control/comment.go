@@ -316,7 +316,7 @@ func PersonalLikesListHandler(c *gin.Context) {
 	response.Success(c, gin.H{"likes": likesArr}, "获取用户评论成功")
 }
 
-// 删除评论ID对应1级评论
+// 删除评论ID对应1级评论及所有点赞
 func DeleteCommentsHandler(c *gin.Context) {
 	idString := c.Query("id")
 	fmt.Println(idString)
@@ -338,6 +338,8 @@ func DeleteCommentsHandler(c *gin.Context) {
 	} else {
 		var comments []models.Comment
 		mysql.DB.Where("parent_id=?", id).Delete(&comments)
+		var likes []models.Likes
+		mysql.DB.Where("author=?", comment.Author).Delete(&likes)
 		response.Success(c, nil, "删除评论成功")
 	}
 }
