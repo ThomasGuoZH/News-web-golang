@@ -123,21 +123,21 @@ export default {
     this.politicsNewslist = await getNewsList(8, '政治');
     const politicsRes = await storeNews(this.politicsNewslist);
     console.log(politicsRes);
-    this.scienceNewslist = await getNewsList(8, '科技');
-    const ScienceRes = await storeNews(this.scienceNewslist);
-    console.log(ScienceRes);
-    this.sportsNewslist = await getNewsList(8, '体育');
-    const sportsRes = await storeNews(this.sportsNewslist);
-    console.log(sportsRes);
-    this.militaryNewslist = await getNewsList(8, '军事');
-    const militaryRes = await storeNews(this.militaryNewslist);
-    console.log(militaryRes);
-    this.educationNewslist = await getNewsList(8, '教育');
-    const educationRes = await storeNews(this.educationNewslist);
-    console.log(educationRes);
-    this.entertainmentNewslist = await getNewsList(8, '娱乐');
-    const entertainmentRes = await storeNews(this.entertainmentNewslist);
-    console.log(entertainmentRes);
+    // this.scienceNewslist = await getNewsList(8, '科技');
+    // const ScienceRes = await storeNews(this.scienceNewslist);
+    // console.log(ScienceRes);
+    // this.sportsNewslist = await getNewsList(8, '体育');
+    // const sportsRes = await storeNews(this.sportsNewslist);
+    // console.log(sportsRes);
+    // this.militaryNewslist = await getNewsList(8, '军事');
+    // const militaryRes = await storeNews(this.militaryNewslist);
+    // console.log(militaryRes);
+    // this.educationNewslist = await getNewsList(8, '教育');
+    // const educationRes = await storeNews(this.educationNewslist);
+    // console.log(educationRes);
+    // this.entertainmentNewslist = await getNewsList(8, '娱乐');
+    // const entertainmentRes = await storeNews(this.entertainmentNewslist);
+    // console.log(entertainmentRes);
   }
 }
 

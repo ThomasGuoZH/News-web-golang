@@ -36,12 +36,3 @@ type ChildComment struct {
 	ParentAuthor string `json:"parent_author" binding:"required"`
 	Channel      string `json:"channel" binding:"required"`
 }
-
-type Reply struct {
-	Author        string
-	Channel       string
-	Content       string
-	ParentContent string
-	Time          string
-	Title         string
-}
